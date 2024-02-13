@@ -136,7 +136,6 @@ dmypy.json
 **/tmp
 
 # stop any files that might accidentally expose api key
-**/*.ipynb
 **/*.zip
 
 #never commit anything in this folder for making lambda layers
