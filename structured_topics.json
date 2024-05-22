@@ -1,0 +1,25 @@
+{
+  "Newsletters": [
+    {
+      "Month": "May",
+      "FungiSpeciesOfTheMonth": "Chanterelle",
+      "MushroomRecipe": "Chanterelle Risotto",
+      "FungiInArtCultureHistory": "Mushrooms in Japanese Folklore",
+      "MycologicalResearchTopic": "Novel fungal species discovered"
+    },
+    {
+      "Month": "June",
+      "FungiSpeciesOfTheMonth": "Lion's Mane",
+      "MushroomRecipe": "Lion's Mane Crab Cakes",
+      "FungiInArtCultureHistory": "Mushrooms in Ancient Egyptian Art",
+      "MycologicalResearchTopic": "The neuroprotective effects of Lion's Mane mushrooms",
+    },
+    {
+      "Month": "July",
+      "FungiSpeciesOfTheMonth": "Morel",
+      "MushroomRecipe": "Morel Mushroom Pasta",
+      "FungiInArtCultureHistory": "Morels in Native American Traditions",
+      "MycologicalResearchTopic": "Environmental conditions affecting Morel growth",
+    }
+  ]
+}
