@@ -16,17 +16,16 @@ settings
 
 ### Required Libraries
 
-OpenAI
+OpenAI -
+The OpenAI Python library provides convenient access to the OpenAI REST API from any Python 3.7+ application.
 
-PIL
+PIL - 
+PIL is the Python Imaging Library by Fredrik Lundh and contributors. Python 3.8-3.12
 
-Instagrapi
+pyinaturalist -
+pyinaturalist is a client for the iNaturalist API that makes these data easily accessible in the python programming language. 
+python 3.7-3.11
 
-## All to support the greatest game of all time:
-
-### Bat's Life
-
-https://apps.apple.com/us/app/bats-life/id1584580569
 
 ## Creating lambda layers -
 
