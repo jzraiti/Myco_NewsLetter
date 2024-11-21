@@ -1,6 +1,7 @@
 import requests
-from semantic_headers import get_aws_token
+from backend.ss_token_generation import get_aws_token
 import json
+
 
 def get_semantic_data() -> dict:
     cookies = {
@@ -67,12 +68,31 @@ def get_semantic_data() -> dict:
     return response.json()
 
 
+def extract_relevant_data(article):
+    relevant_data = {
+        "title": article.get("title").get("text"),
+        "authors": [author[0].get("name") for author in article.get("authors", [])],
+        "journal": article.get("journal", {}).get("name"),
+        "pdf_link": article.get("links")[0].get("url"),
+        "summary": article.get("tldr", {}).get("text"),
+        "num_references": article.get("citationStats").get("numReferences"),
+        "num_key_references": article.get("citationStats").get("numKeyReferences"),
+        "publication_year": article.get("year").get("text"),
+    }
+
+    return relevant_data
+
+
 def main():
     # print(get_aws_token())
     response = get_semantic_data()
     response_json = json.dumps(response, indent=2)
-    with open("semantic_data.json", "w") as file:
-        file.write(response_json)
+
+    extracted_data = [
+        extract_relevant_data(article) for article in response.get("results", [])
+    ]
+
+    print(json.dumps(extracted_data, indent=2))
 
 
 if __name__ == "__main__":
