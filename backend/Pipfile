@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 scholarly="*"
 jupyter="*"
+requests="*"
+selenium="*"
+beautifulsoup4="*"
 
 [dev-packages]
 

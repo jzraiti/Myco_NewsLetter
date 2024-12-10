@@ -1,5 +1,5 @@
 import requests
-from backend.ss_token_generation import get_aws_token
+from ss_token_generation import get_aws_token
 import json
 
 
@@ -33,9 +33,9 @@ def get_semantic_data() -> dict:
 
     json_data = {
         "queryString": "mycology",
-        "page": 1,
+        "page": 2,
         "pageSize": 10,
-        "sort": "relevance",
+        "sort": "pub-date",
         "authors": [],
         "coAuthors": [],
         "venues": [],
@@ -77,14 +77,14 @@ def extract_relevant_data(article):
         "summary": article.get("tldr", {}).get("text"),
         "num_references": article.get("citationStats").get("numReferences"),
         "num_key_references": article.get("citationStats").get("numKeyReferences"),
-        "publication_year": article.get("year").get("text"),
+        "publication_date": article.get("pubDate"),
+        "last_updated": article.get("pubUpdateDate"),
     }
 
     return relevant_data
 
 
 def main():
-    # print(get_aws_token())
     response = get_semantic_data()
     response_json = json.dumps(response, indent=2)
 
