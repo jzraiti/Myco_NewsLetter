@@ -1,16 +1,10 @@
 import requests
 from ss_token_generation import get_aws_token
 import json
+import time
 
 
 def get_semantic_data() -> dict:
-    cookies = {
-        "tid": "rBIABmc+cq4UWwAIBA+XAg==",
-        "s2Exp": "new_ab_framework_aa%3D-control%26pdp_citation_and_reference_paper_cues%3D-enable_citation_and_reference_paper_cues%26venues%3D-enable_venues%26reader_link_styling%3D-control%26topics_beta3%3D-topics_beta3%26alerts_aa_test%3D-control%26personalized_author_card_cues%3D-control%26term_understanding%3D-control%26aa_user_based_test%3D-control%26paper_cues%3D-all_paper_cues%26new_ab_framework_mock_ab%3D-control%26aa_stable_hash_session_test%3Dcontrol",
-        "sid": "030875d1-7ac6-462c-9fcd-5261edceb30c",
-        "aws-waf-token": get_aws_token(),
-    }
-
     headers = {
         "accept": "*/*",
         "accept-language": "en-US,en;q=0.9",
@@ -31,9 +25,16 @@ def get_semantic_data() -> dict:
         "x-s2-ui-version": "8c3d74bcd9b3357febf74868a2a34ed576c6fd0b",
     }
 
+    cookies = {
+        "tid": "rBIABmc+cq4UWwAIBA+XAg==",
+        "s2Exp": "new_ab_framework_aa%3D-control%26pdp_citation_and_reference_paper_cues%3D-enable_citation_and_reference_paper_cues%26venues%3D-enable_venues%26reader_link_styling%3D-control%26topics_beta3%3D-topics_beta3%26alerts_aa_test%3D-control%26personalized_author_card_cues%3D-control%26term_understanding%3D-control%26aa_user_based_test%3D-control%26paper_cues%3D-all_paper_cues%26new_ab_framework_mock_ab%3D-control%26aa_stable_hash_session_test%3Dcontrol",
+        "sid": "030875d1-7ac6-462c-9fcd-5261edceb30c",
+        "aws-waf-token": get_aws_token(),
+    }
+
     json_data = {
         "queryString": "mycology",
-        "page": 2,
+        "page": 1,
         "pageSize": 10,
         "sort": "pub-date",
         "authors": [],
@@ -65,7 +66,11 @@ def get_semantic_data() -> dict:
         json=json_data,
     )
 
-    return response.json()
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Failed to fetch page!")
+        return {}
 
 
 def extract_relevant_data(article):
@@ -73,7 +78,7 @@ def extract_relevant_data(article):
         "title": article.get("title").get("text"),
         "authors": [author[0].get("name") for author in article.get("authors", [])],
         "journal": article.get("journal", {}).get("name"),
-        "pdf_link": article.get("links")[0].get("url"),
+        "article_link": article.get("primaryPaperLink").get("url"),
         "summary": article.get("tldr", {}).get("text"),
         "num_references": article.get("citationStats").get("numReferences"),
         "num_key_references": article.get("citationStats").get("numKeyReferences"),
@@ -85,14 +90,16 @@ def extract_relevant_data(article):
 
 
 def main():
-    response = get_semantic_data()
-    response_json = json.dumps(response, indent=2)
+    # while True:
+        response = get_semantic_data()
+        response_json = json.dumps(response, indent=2)
 
-    extracted_data = [
-        extract_relevant_data(article) for article in response.get("results", [])
-    ]
-
-    print(json.dumps(extracted_data, indent=2))
+        extracted_data = [
+            extract_relevant_data(article) for article in response.get("results", [])
+        ]
+        with open("extracted_data.json", "w") as file:
+            json.dump(extracted_data, file, indent=2)
+        time.sleep(1)
 
 
 if __name__ == "__main__":
