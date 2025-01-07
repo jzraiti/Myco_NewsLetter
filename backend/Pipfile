@@ -9,8 +9,15 @@ jupyter="*"
 requests="*"
 selenium="*"
 beautifulsoup4="*"
+openai="*"
+python-dotenv="*"
+google-auth="*"
+google-auth-oauthlib="*"
+google-auth-httplib2="*"
+google-api-python-client="*"
+supabase-py="*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.*"

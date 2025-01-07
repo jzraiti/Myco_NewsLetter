@@ -1,7 +1,7 @@
+from typing import List
 import requests
 from ss_token_generation import get_aws_token
-import json
-import time
+from datetime import datetime
 
 
 def get_semantic_data() -> dict:
@@ -41,8 +41,8 @@ def get_semantic_data() -> dict:
         "coAuthors": [],
         "venues": [],
         "yearFilter": {
-            "min": 2024,
-            "max": 2024,
+            "min": int(datetime.now().year - 1),
+            "max": int(datetime.now().year),
         },
         "requireViewablePdf": False,
         "fieldsOfStudy": [],
@@ -75,13 +75,15 @@ def get_semantic_data() -> dict:
 
 def extract_relevant_data(article):
     relevant_data = {
-        "title": article.get("title").get("text"),
-        "authors": [author[0].get("name") for author in article.get("authors", [])],
-        "journal": article.get("journal", {}).get("name"),
-        "article_link": article.get("primaryPaperLink").get("url"),
+        "title": article.get("title").get("text").strip(),
+        "authors": [
+            author[0].get("name").strip() for author in article.get("authors", [])
+        ],
+        "journal": article.get("journal", {}).get("name") ,
+        "link": article.get("primaryPaperLink").get("url").strip(),
         "summary": article.get("tldr", {}).get("text"),
-        "num_references": article.get("citationStats").get("numReferences"),
-        "num_key_references": article.get("citationStats").get("numKeyReferences"),
+        "references": int(article.get("citationStats").get("numReferences")),
+        "key_references": int(article.get("citationStats").get("numKeyReferences")),
         "publication_date": article.get("pubDate"),
         "last_updated": article.get("pubUpdateDate"),
     }
@@ -89,18 +91,9 @@ def extract_relevant_data(article):
     return relevant_data
 
 
-def main():
-    # while True:
-        response = get_semantic_data()
-        response_json = json.dumps(response, indent=2)
-
-        extracted_data = [
-            extract_relevant_data(article) for article in response.get("results", [])
-        ]
-        with open("extracted_data.json", "w") as file:
-            json.dump(extracted_data, file, indent=2)
-        time.sleep(1)
-
-
-if __name__ == "__main__":
-    main()
+def fetch_and_extract_articles() -> List[dict]:
+    response = get_semantic_data()
+    extracted_data = [
+        extract_relevant_data(article) for article in response.get("results", [])
+    ]
+    return extracted_data
