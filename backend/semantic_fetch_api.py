@@ -2,9 +2,13 @@ from typing import List
 import requests
 from ss_token_generation import get_aws_token
 from datetime import datetime
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 
 
-def get_semantic_data() -> dict:
+def get_semantic_data(search_term: str, page_size: int, page_num: int) -> dict:
+    logging.info(f"Searching articles under [{search_term}]...")
     headers = {
         "accept": "*/*",
         "accept-language": "en-US,en;q=0.9",
@@ -35,7 +39,7 @@ def get_semantic_data() -> dict:
     json_data = {
         "queryString": "mycology",
         "page": 1,
-        "pageSize": 10,
+        "pageSize": 5,
         "sort": "pub-date",
         "authors": [],
         "coAuthors": [],
@@ -79,7 +83,7 @@ def extract_relevant_data(article):
         "authors": [
             author[0].get("name").strip() for author in article.get("authors", [])
         ],
-        "journal": article.get("journal", {}).get("name") ,
+        "journal": article.get("journal", {}).get("name"),
         "link": article.get("primaryPaperLink").get("url").strip(),
         "summary": article.get("tldr", {}).get("text"),
         "references": int(article.get("citationStats").get("numReferences")),
@@ -91,8 +95,12 @@ def extract_relevant_data(article):
     return relevant_data
 
 
-def fetch_and_extract_articles() -> List[dict]:
-    response = get_semantic_data()
+def fetch_and_extract_articles(
+    search_term: str, page_size: int, page_num: int
+) -> List[dict]:
+    response = get_semantic_data(
+        search_term=search_term, page_num=page_num, page_size=page_size
+    )
     extracted_data = [
         extract_relevant_data(article) for article in response.get("results", [])
     ]
