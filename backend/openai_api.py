@@ -1,20 +1,20 @@
-import os
 from openai import OpenAI
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-def generate_grok_paper_summary(title: str, content: str) -> str:
-    GROK_KEY = os.getenv("GROK_KEY")
-    client = OpenAI(api_key=GROK_KEY, base_url="https://api.x.ai/v1")
-
+def generate_gpt_paper_summary(title: str, content: str) -> str:
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    client = OpenAI(api_key=OPENAI_API_KEY)
     completion = client.chat.completions.create(
-        model="grok-2-1212",
+        model="gpt-4o-mini",
+        store=True,
         messages=[
             {
                 "role": "system",
-                "content": "You are a Grok, helpful assistant that is knowledgable about Mycology specialize in generating short sneak peeks of new mycology articles for a newsletter",
+                "content": "You are a ChatGPT, helpful assistant that is knowledgable about Mycology and funguses and specializes in generating short sneak peeks of new mycology articles for a newsletter",
             },
             {
                 "role": "user",
@@ -25,9 +25,8 @@ def generate_grok_paper_summary(title: str, content: str) -> str:
 
     return completion.choices[0].message
 
-
 if __name__ == "__main__":
-    response = generate_grok_paper_summary(
+    response = generate_gpt_paper_summary(
         title="Epidemiological and Mycological Profile of Otomycosis Diagnosed At the Oto-Rhino-Laryngology Department at Batna PHE – ALGERIA",
         content="""Introduction: Fungal otitis or otomycosis is a relatively common pathology. Its prevalence represents according to studies 5 to 30% of all external otitis, most often chronic or subacute and benign. It can also affect the middle ear and even in some serious cases the inner ear. The main objective was to describe the epidemiological and mycological characteristics of fungal otitis and to determine their prevalence.
 Materials and Methods: This study is prospective descriptive, carried out in the parasitology department at the Batna University Hospital, in collaboration with the Otolaryngology department at the PHS Batna, during a period of four months. We included in our study patients with clinical symptoms pointing towards the diagnosis of infectious otitis. Each patient had an ear sample taken using a sterile, dry cotton swab. They are inoculated in suitable mycological media. The cultures are then incubated in an incubator at 27°C and 37°C for 48 hours up to one week. The identification of the different species of filamentous fungi is based on the macroscopic and microscopic aspects of the colonies. The identification of the yeast species was done by the auxacolor gallery. 
