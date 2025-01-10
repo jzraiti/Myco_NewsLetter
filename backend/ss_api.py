@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv
 import os
 import logging
+from datetime import datetime, timedelta
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 load_dotenv()
@@ -16,9 +17,12 @@ def fetch_bulk_articles(num_articles: int, search_term: str) -> list:
     """
     logging.info(f"Fetching {num_articles} articles for '{search_term}'...")
     url = "http://api.semanticscholar.org/graph/v1/paper/search/bulk/"
+    two_weeks_ago = (datetime.now() - timedelta(weeks=2)).strftime("%Y-%m-%d")
+
     query_params = {
         "query": search_term,
-        "sort": "publicationDate:desc",
+        "sort": "citationCount:desc",
+        "publicationDateOrYear": f"{two_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
     }
 
     query_param_list = [
@@ -69,7 +73,7 @@ def fetch_reference_count_by_paper(paper_id: str) -> dict:
     headers = {
         "x-api-key": os.getenv("SEMANTIC_SCHOLAR_API_KEY"),
     }
-    response = requests.get(url=url,headers=headers)
+    response = requests.get(url=url, headers=headers)
 
     if response.status_code == 200:
         data = response.json()
@@ -80,3 +84,8 @@ def fetch_reference_count_by_paper(paper_id: str) -> dict:
             f"Error when fetching references: {response.status_code}\n{response.text}"
         )
         return {}
+
+
+if __name__ == "__main__":
+    articles = fetch_bulk_articles(20, "mycology")
+    print(articles)
