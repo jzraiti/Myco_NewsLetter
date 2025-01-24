@@ -5,25 +5,38 @@ import logging
 from openai import OpenAI
 from jinja2 import Environment, FileSystemLoader
 
-from backend.supabase_utils import supabase_articles_GET, supabase_articles_POST
+from utils.supabase_utils import supabase_articles_GET, supabase_articles_POST
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 dotenv.load_dotenv()
 
+
 def generate_gpt_paper_summary(title: str, content: str) -> str:
+    """Generates a summary of a research paper using GPT-4o-mini.
+
+    Args:
+        title (str): The title of the research paper.
+        content (str): The abstract of the research paper.
+        other_summaries (str): Other summaries generated for redundancy check.
+    """
+
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=OPENAI_API_KEY)
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
-        store=True,
+        temperature=1.2,    
         messages=[
             {
                 "role": "system",
                 "content": "You are a ChatGPT, a helpful assistant that is knowledgable about Mycology and fungi and specializes in generating short sneak peeks of new mycology articles for a mycology newsletter.",
             },
+            # {
+            #     "role": "user",
+            #     "content": f"Write an informational little sneak peek (as an outsider) for this research paper titled {title} with this given abstracted summary: {content}. Limit your answer to 500 characters, and try not to write the summaries in the same style as these summaries: {other_summaries}",
+            # },
             {
                 "role": "user",
-                "content": f"Write an informational little sneak peek for a paper titled {title} with this given abstracted summary: {content}. Limit your answer to 500 characters.",
+                "content": f"Write an informational little sneak peek (as an outsider) for this research paper titled {title} with this given abstracted summary: {content}. Limit your answer to 500 characters.",
             },
         ],
     )
@@ -32,6 +45,12 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
 
 
 def article_selection(data: list) -> dict:
+    """Selects the top 5 articles from the given data and generates summaries for them.
+
+    Args:
+        data (list): The list of articles to process.
+    """
+
     df = pd.DataFrame(data)
 
     # Data cleaning
@@ -40,6 +59,8 @@ def article_selection(data: list) -> dict:
 
     # Sorting by citation count (redundancy check)
     df = df.sort_values(by="citationCount", ascending=False)
+
+
 
     # Post to Supabase to update duplicates
     response = supabase_articles_POST(df.to_dict(orient="records"))
@@ -65,11 +86,20 @@ def article_selection(data: list) -> dict:
 
     # Selecting the top 5 articles and generating summaries
     selected_articles = df.head(5).copy()
+    selected_articles = selected_articles[selected_articles["citationCount"] > 0]
+    if selected_articles < 5:
+        pass # todo
+
+    all_generated_content = ""
     for index, article in selected_articles.iterrows():
         article_dict = article.to_dict()
-        selected_articles.at[index, "llm_summary"] = generate_gpt_paper_summary(
-            title=article_dict["title"], content=article_dict["abstract"]
+        generated_content: str = generate_gpt_paper_summary(
+            title=article_dict["title"],
+            content=article_dict["abstract"],
+            other_summaries=all_generated_content,
         )
+        selected_articles.at[index, "llm_summary"] = generated_content
+        all_generated_content += generated_content + "\n"
 
     # Update the df with summaries and update supabase table
     df.update(selected_articles)
@@ -79,6 +109,7 @@ def article_selection(data: list) -> dict:
             "success": False,
             "error": response.error,
             "message": "Failed to upsert data",
+
         }
 
     # Return 1: all processed articles, 2: top 5 articles

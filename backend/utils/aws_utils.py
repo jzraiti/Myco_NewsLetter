@@ -1,12 +1,13 @@
 import boto3
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from datetime import datetime
 
 def send_email(html_content, recipients):
     ses = boto3.client('ses', region_name='us-east-1')
     for recipient in recipients:
         msg = MIMEMultipart('alternative')
-        msg['Subject'] = "Myco Newsletter"
+        msg['Subject'] = f"Weekly Digest {datetime.now().strftime('%m/%d/%Y')}"
         msg['From'] = "your-email@example.com"
         msg['To'] = recipient
 
