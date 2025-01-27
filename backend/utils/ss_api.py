@@ -16,7 +16,7 @@ def fetch_bulk_articles() -> list:
         search_term (str): The search term to use.
     """
     url = "http://api.semanticscholar.org/graph/v1/paper/search/bulk/"
-    three_weeks_ago = (datetime.now() - timedelta(weeks=3)).strftime("%Y-%m-%d")
+    four_weeks_ago = (datetime.now() - timedelta(weeks=4)).strftime("%Y-%m-%d")
     num_articles = 100
     search_term = "mycology|mushrooms|mushroom"
     logging.info(f"Fetching {num_articles} articles for '{search_term}'...")
@@ -24,7 +24,7 @@ def fetch_bulk_articles() -> list:
     query_params = {
         "query": search_term,
         "sort": "citationCount:desc",
-        "publicationDateOrYear": f"{three_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
+        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
         "fieldsOfStudy": "Environmental Science",
     }
 
@@ -69,7 +69,15 @@ def fetch_bulk_articles() -> list:
                 for field in paper.get("s2FieldsOfStudy", [])
             )
         ]
-        
+        papers = [
+            paper
+            for paper in papers
+            if not any(
+                field.get("category") == "Education"
+                for field in paper.get("s2FieldsOfStudy", [])
+            )
+        ]
+
         logging.info(f"Successfully fetched {num_articles} articles.")
         return papers[:num_articles]
     else:

@@ -53,6 +53,43 @@
         ]
     },
     {
+        "paperId": "fb4b228abd88f576b82a925d08d65ea5be05fdd9",
+        "externalIds": {
+            "DOI": "10.3390/microorganisms13010059",
+            "CorpusId": 275217121
+        },
+        "url": "https://www.semanticscholar.org/paper/fb4b228abd88f576b82a925d08d65ea5be05fdd9",
+        "title": "Spore-Derived Isolates from a Single Basidiocarp of Bioluminescent Omphalotus olivascens Reveal Multifaceted Phenotypic and Physiological Variations",
+        "abstract": "The fungal genus Omphalotus is noted for its bioluminescence and the production of biologically active secondary metabolites. We isolated 47 fungal strains of Omphalotus olivascens germinated from spores of a single mushroom. We first noted a high degree of variation in the outward appearances in radial growth and pigmentation among the cultures. Radial growth rates fell into at least five distinct categories, with only slower-growing isolates obtained compared with the parental dikaryon. Scanning UV-vis spectroscopy of liquid-grown cultures showed variation in pigmentation in both the absorption intensity and peak absorption wavelengths, indicating that some isolates vary from the parental strain in both pigment concentration and composition. Bioluminescence intensity was observed to have isolates with both greater and lesser intensities, while the increased emission in response to caffeic acid was inversely proportional to the unstimulated output. Under UV illumination, the media of the parental strain was observed to be brightly fluorescent, which was not due to the pigment, while the isolates also varied from greater to lesser intensity and in their peak emission. At least three separate fluorescent bands were observed by gel electrophoresis from one of the cultures, while only one was observed in others. In a subset of the cultures, fluorescence intensity varied significantly in response to casamino acids. None of this subset produced an antibiotic effective against Staphylococcus aureus, and only the haploids, but not the parental heterokaryon, produced an antibiotic consistent with illudin M effective against Mycobacterium smegmatis. This same subset produced an anticancer agent that was highly potent against MDA-MB-468 breast cancer tumor cells. We interpret these variations in haploids as significant in altering Omphalotus physiology and its production of secondary metabolites, which may in turn alter their ecology and life cycle, and could be further applied to studying fungal physiologies and facilitate linking them to their genetic underpinnings.",
+        "venue": "Microorganisms",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-01",
+        "authors": [
+            {
+                "authorId": "2338308489",
+                "name": "Rudy Diaz"
+            },
+            {
+                "authorId": "2338301874",
+                "name": "David Bermudes"
+            }
+        ]
+    },
+    {
         "paperId": "f1d9b0ed004f90b119a1841bb2f457899149c7bc",
         "externalIds": {
             "DOI": "10.1002/tqem.70012",
@@ -139,6 +176,55 @@
         ]
     },
     {
+        "paperId": "e7e7946225cad1ca33f03e60fc7c0129642b7c50",
+        "externalIds": {
+            "DOI": "10.30574/gscbps.2024.29.3.0482",
+            "CorpusId": 275112479
+        },
+        "url": "https://www.semanticscholar.org/paper/e7e7946225cad1ca33f03e60fc7c0129642b7c50",
+        "title": "Biosynthesis of silver nanoparticles from Inocutis tamaricis and its antimicrobial and antibiofilm activity",
+        "abstract": "The target of this work was to synthesis of nanoparticle from mushroom Inocutis tamaricis by green method and assesse of its antimicrobial and antibiofilm against both bacteria and fungi.\nAlthough I.tamaricis widespread in Iraqi farms, however there is no more study about applications in medical and artificial fields, on the other hand global threats of biofilm induce and drive us to find a sustainable rectify, for these reasons we worked on this macro-fungi extract as a sustainable source for green antimicrobial.\nThe result of nanoparticle characterizations by different techniques UV-Visible spectrophotometer, FTIR,AFM, XRD and SEM Granted us excellence data that reflect positive harvest of nanoparticle solution to be applied on microbial resistance.\nAfter characterization bioactivity was investigated, the findings showed high antimicrobial activity on the level of microbial cells removing from any environment with high removing efficiency reached about 100% microbes removing. results of ant biofilm showed also hi potential for action against biofilm formation reached more than 76 %.\nAs a general appraise, current nanoparticle consider ideal antimicrobial and antibiofilm agent beside their antitumor and immunomodulating properties serves in future for different medical and artificial fields as large-scale production especially in antimicrobial resistance era.",
+        "venue": "GSC Biological and Pharmaceutical Sciences",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Materials Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Chemistry",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": [
+            {
+                "authorId": "151219738",
+                "name": "S. Sadiq"
+            },
+            {
+                "authorId": "2229818066",
+                "name": "Sara Qahtan Sulaiman"
+            },
+            {
+                "authorId": "2258397645",
+                "name": "M. S. Farhan"
+            }
+        ]
+    },
+    {
         "paperId": "e728afc1892de82ccbf4e1346643c5a41c6b6a76",
         "externalIds": {
             "DOI": "10.3329/ptcb.v34i2.78852",
@@ -176,6 +262,92 @@
             {
                 "authorId": "2268135175",
                 "name": "Nuhu Alam"
+            }
+        ]
+    },
+    {
+        "paperId": "df3990156f8b0d5ae9ea4b8d3137dd2edde870dd",
+        "externalIds": {
+            "DOI": "10.61424/ijans.v2i2.174",
+            "CorpusId": 275327278
+        },
+        "url": "https://www.semanticscholar.org/paper/df3990156f8b0d5ae9ea4b8d3137dd2edde870dd",
+        "title": "SROI Analysis of Social Innovation Programme Bumi Harmoni PT PLN NP UP Paiton",
+        "abstract": "Social investments in Corporate Social Responsibility (CSR) programs, particularly for community development, often require substantial funding to achieve community independence. The Bumi Harmoni program, implemented by PT PLN NP UP Paiton, is one such initiative. This study aims to (1) analyze social innovations, (2) assess the program's impact on carbon sequestration, and (3) evaluate program performance. Data from 2021 to May 2024 were collected through interviews with group leaders, members, and CSR teams. A descriptive qualitative analysis and Social Return on Investment (SROI) methodology were employed. Results reveal social innovations, including seed banks, tree planting, organic waste utilization for maggot cultivation, and oyster mushroom cultivation. These initiatives address organic waste management, improve community economics, and contribute to carbon sequestration. The program achieved carbon sequestration of 357.79 tons of CO2 gg e, with potential for carbon tax conversion. The SROI analysis yielded a value of 1.82, indicating positive social returns. However, challenges may arise in maintaining seed bank health and managing waste utilization processes. The study demonstrates the program's potential to solve environmental and economic issues while generating measurable social impact. Future research could focus on the long-term sustainability and scalability of these initiatives.",
+        "venue": "International journal of applied and natural sciences",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Business",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-31",
+        "authors": [
+            {
+                "authorId": "2309539707",
+                "name": "Farida Ratna Dewi"
+            },
+            {
+                "authorId": "2338711463",
+                "name": "Bramada Winiar Putra"
+            },
+            {
+                "authorId": "2098338808",
+                "name": "Rindang Matoati"
+            },
+            {
+                "authorId": "2175177138",
+                "name": "Nik Zam Nik Wan"
+            },
+            {
+                "authorId": "2338722551",
+                "name": "Wiji Purbaya"
+            }
+        ]
+    },
+    {
+        "paperId": "ded500582eacc4a57d6110dca1467a92f6daad02",
+        "externalIds": {
+            "DOI": "10.20998/2078-5364.2024.4.12",
+            "CorpusId": 275163044
+        },
+        "url": "https://www.semanticscholar.org/paper/ded500582eacc4a57d6110dca1467a92f6daad02",
+        "title": "A \u0421OMPREHENSIVE APPROACH TO PREVENTING MOLD GROWTH OF SOLID ORGANIC WASTE FROM CONFECTIONERY PRODUCTION AS THEIR SUSTAINABLE MANAGEMENT ELEMENT",
+        "abstract": "Waste sustainable management involves both minimizing their quantity by improving technological processes and using waste as resources. A large amount of solid organic waste from confectionery industries contains food elements that can be used as additives in compound feeds production. This reduces compound feeds cost without losing their quality, and also provides for the secondary use of solid organic waste from confectionery industries, which corresponds to the generally accepted waste management hierarchy. The main limiting factor for this waste type using in compound feeds is mold fungi rapid development, which is due, among other things, to an increase in the waste humidity when stored in an open manner at industrial sites. \nThe aim of the work was to research developed integrated approach effectiveness to increase the shelf life without the mold fungi appearance for solid organic waste from confectionery industries. \nThe following research methods were used in the work: field \u2013 to observe the mold fungi development in real storage conditions of solid organic waste from confectionery industries in an open way; laboratory \u2013 to determine the moisture content of waste at different times according to DSTU 4910:2008 and sanitary and mycological waste assessment. \nThe use of the simplest measures to reduce the atmospheric contact precipitation with solid organic waste from confectionery industries \u2013 canopies \u2013 allows us to increase the period until the mold fungi appearance by 20 or more days, depending on the waste composition. Faster mold fungi development is characteristic of waste that contains more than 50 % wafers with fat filling. Solid organic waste from confectionery industries treatment with humic acids alkaline solution obtained from brown coal increases the period until the mold fungi appearance by an average of 50 days. The two methods combination is effective for increasing the shelf life of solid organic waste from confectionery industries before their use in compound feeds. Thus, it is possible to increase the share such waste use in compound feeds. \nThe proposed integrated approach to increasing the shelf life of solid organic waste from confectionery industries allows to increase the waste share that is suitable for secondary use in compound feeds. The humic acids alkaline solutions using as a bactericidal measure for solid organic waste from confectionery industries is justified from the sustainable approach for brown coal using, allows to increase the nutritional value of the final compound feeds and reduces energy costs for mold fungi elimination.",
+        "venue": "Integrated Technologies and Energy Saving",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": [
+            {
+                "authorId": "2337974092",
+                "name": "D. V. Miroshnychenko"
+            },
+            {
+                "authorId": "2337980550",
+                "name": "V. B. Bayrachny"
+            },
+            {
+                "authorId": "2337976859",
+                "name": "O. V. Adashevsky"
             }
         ]
     },
@@ -318,6 +490,210 @@
         ]
     },
     {
+        "paperId": "d67c541d9b11a0ed0d1fcf4d1179504a8e610b6d",
+        "externalIds": {
+            "DOI": "10.4308/hjb.32.2.436-444",
+            "CorpusId": 275430672
+        },
+        "url": "https://www.semanticscholar.org/paper/d67c541d9b11a0ed0d1fcf4d1179504a8e610b6d",
+        "title": "Scrutinize the Taxonomical Identity of Green Edible Russula from Sulawesi (Indonesia)",
+        "abstract": "Russula Pers. (Basidiomycota) is recognized as one of the most widely distributed macrofungi globally. This genus includes several edible species with distinct color variations, such as R. cyanoxantha. However, in Indonesia, knowledge of this species remains limited as colourful mushrooms are often mistakenly considered poisonous. During a fungus expedition in Southeast Sulawesi, we collected a green edible wild mushroom consumed by locals. Our study aimed to verify the taxonomic classification of our specimens through morphological and molecular analysis. The fresh basidiomata were examined based on their macroscopic and microscopic characteristics. Molecular analysis using ITS 1/2 sequences was conducted to construct a phylogenetic tree. Our findings identified the green mushroom as R. cyanoxantha (Schaeff.) Fr. (Synonym: R. lilacina). Morphologically, our specimens can be distinguished from R. virescens by their smooth cap. They differ from R. aeruginea and R. heterophylla by having flexible, persistent gills. Additionally, our R. cyanoxantha specimen BO24636 can be separated from R. dinghuensis and R. subpallidirosea by their forked gills near the stalk. A BLAST comparison revealed a 96% similarity to R. lilacina from Thailand as the closest match. The phylogenetic tree (Maximum Likelihood) placed our specimens within the R. lilacina group (BS value 99%). Our research contributes to the taxonomic understanding of this edible wild green macrofungi in Indonesia, and future studies should explore its nutritional composition.",
+        "venue": "Hayati Journal of Biosciences",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": [
+            {
+                "authorId": "90280831",
+                "name": "O. D. Nurhayat"
+            },
+            {
+                "authorId": "2276860256",
+                "name": "I. P. Putra"
+            },
+            {
+                "authorId": "2271227846",
+                "name": "R. Riffiani"
+            },
+            {
+                "authorId": "97763979",
+                "name": "S. Taridala"
+            },
+            {
+                "authorId": "2339391953",
+                "name": "Zulhan Arif"
+            }
+        ]
+    },
+    {
+        "paperId": "d41c0848cd36383cf6bc7ddbb6a67b68386e7a47",
+        "externalIds": {
+            "DOI": "10.4314/hpjsmt.v6i1.1",
+            "CorpusId": 275886616
+        },
+        "url": "https://www.semanticscholar.org/paper/d41c0848cd36383cf6bc7ddbb6a67b68386e7a47",
+        "title": "The dynamics of mycological assemblage of Mairua Reservoir, Katsina State, Nigeria",
+        "abstract": "A mycological study of some selected species of fungi in relation to fishing was conducted at Mairua Reservoir. The people of the area are mainly agriculturalist, but fishing is the major activity taking place around the reservoir. Wtaer samples were collected monthly from February-April and June-August 2020. Spatially the data were analysed using Analysis of Variance (ANOVA) and temporally using independent t-test. Findings on the mycological study shows that the yeast count range between 9.42\u00b13.91 and 18.38\u00b11.04 (106 CFU/ml) while the mold count range between 5.20\u00b11.74 and 7.58\u00b11.97 (107 CFU/ml) in various sampling sites. The order of the occurrence of fungal isolates across the various sampling sites was Aspergillus niger (30.23%), Cladosporium sp. (25.58%), Aspergillus flavus (16.28%), Penicillium sp. (16.28%) and Fusarium sp. (11.63%). The prevalence of these pathogenic fungi in the water could affect fish growth. Hence, there should be adequate sensitization to educate households and farmers bordering the reservoir on the danger associated with loading the reservoir with waste materials.",
+        "venue": "HAFED POLY Journal of Science, Management and Technology",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-21",
+        "authors": [
+            {
+                "authorId": "2342152340",
+                "name": "Z.M Dabo"
+            },
+            {
+                "authorId": "2342151914",
+                "name": "M.A Saidu"
+            },
+            {
+                "authorId": "2342153539",
+                "name": "A. M. Gwiokura"
+            },
+            {
+                "authorId": "2342154380",
+                "name": "F. Dayyabu"
+            },
+            {
+                "authorId": "2342156384",
+                "name": "A.M Hashim"
+            },
+            {
+                "authorId": "2342156034",
+                "name": "Bello Abdulkadir"
+            },
+            {
+                "authorId": "2342151907",
+                "name": "F.B Yahaya"
+            },
+            {
+                "authorId": "2342152348",
+                "name": "H.A Ghali"
+            }
+        ]
+    },
+    {
+        "paperId": "d3dce19ce9d932bbae5ffe4460ae8293db572eed",
+        "externalIds": {
+            "DOI": "10.3390/foods14030361",
+            "CorpusId": 275863100
+        },
+        "url": "https://www.semanticscholar.org/paper/d3dce19ce9d932bbae5ffe4460ae8293db572eed",
+        "title": "Arginine-Enhanced Termitomyces Mycelia: Improvement in Growth and Lignocellulose Degradation Capabilities",
+        "abstract": "Termitomyces mushrooms, known for their symbiotic relationship with termites and their high nutritional and medicinal value, are challenging to cultivate artificially due to their specific growth requirements. This study investigates the impact of arginine on the mycelial growth, development, and lignocellulolytic capabilities of Termitomyces. We found that arginine significantly promoted conidia formation, altered mycelial morphology, and enhanced biomass and polysaccharide content. The addition of arginine also upregulated the expression of the enzymes related to lignocellulose decomposition, leading to increased activities of cellulase, hemicellulase, and laccase, which accelerated the decomposition and utilization of corn straw. A transcriptome analysis revealed differential expression patterns of carbohydrate-active enzyme genes in arginine-supplemented Termitomyces mycelia, providing insights into the molecular mechanisms underlying these enhancements. The GO enrichment analysis and KEGG pathway analysis highlighted the role of arginine in transmembrane transport, fatty acid oxidation, and carbohydrate metabolism. This study offers a molecular basis for the observed phenotypic changes and valuable insights for developing optimal culture strategies for Termitomyces, potentially enhancing its artificial cultivation and application in the bioconversion of lignocellulosic waste.",
+        "venue": "Foods",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Materials Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-23",
+        "authors": [
+            {
+                "authorId": "2342124294",
+                "name": "Wenhui Yi"
+            },
+            {
+                "authorId": null,
+                "name": "Jingfei Zhou"
+            },
+            {
+                "authorId": "2341936284",
+                "name": "Qiwei Xiao"
+            },
+            {
+                "authorId": null,
+                "name": "Wujie Zhong"
+            },
+            {
+                "authorId": null,
+                "name": "Xuefeng Xu"
+            }
+        ]
+    },
+    {
+        "paperId": "d1b0cbb545b956e06e8f51d527b86eef058dfc79",
+        "externalIds": {
+            "DOI": "10.37727/jkdas.2024.26.6.1895",
+            "CorpusId": 275155161
+        },
+        "url": "https://www.semanticscholar.org/paper/d1b0cbb545b956e06e8f51d527b86eef058dfc79",
+        "title": "A Study on Changes in the Consumption Behavior of Non-timber Forest Products in the Gyeonggi, Seoul, Incheon",
+        "abstract": "To make forestry households competitive and their incomes stable, production methods should align with consumer demands. This study analyzes metropolitan households' consumption behaviors regarding Non-timber forest products (NTFP) and agricultural products using agri-food consumer panel data from the Rural Development Administration (2010-2021). We examine demographic differences in purchase preferences, focusing on shiitake mushrooms, persimmons, and chestnuts, which have high household purchase frequency. Findings show that raw NTFP account for less than 3% of total grocery consumption, which is lower than that of agricultural products. While the consumption of processed agricultural products has increased steadily, the consumption of processed NTFP has remained stagnant at below 1% over 12 years. Preferences for shiitake mushrooms varied significantly by age and household income, for persimmons by age and household size, and for chestnuts by household size and income. These results inform strategies and policy recommendations to promote NTFP consumption.",
+        "venue": "The Korean Data Analysis Society",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Economics",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-31",
+        "authors": [
+            {
+                "authorId": "2337954235",
+                "name": "Jee-Ae Min"
+            },
+            {
+                "authorId": "2322369600",
+                "name": "Yoonseong Chang"
+            },
+            {
+                "authorId": "2338040307",
+                "name": "Jumi Kim"
+            },
+            {
+                "authorId": "2337924693",
+                "name": "Byung-Heon Jung"
+            }
+        ]
+    },
+    {
         "paperId": "d07654cb1643626c2fe1fc11b04bc786aeeca3e4",
         "externalIds": {
             "DOI": "10.48165/jefa.2024.20.1.30",
@@ -351,6 +727,84 @@
             {
                 "authorId": "2340100888",
                 "name": "A. S. Khanna"
+            }
+        ]
+    },
+    {
+        "paperId": "c7cf7fcedd57838a88054deae0c2fa6a2c378d08",
+        "externalIds": {
+            "DOI": "10.1111/cote.12810",
+            "CorpusId": 275866955
+        },
+        "url": "https://www.semanticscholar.org/paper/c7cf7fcedd57838a88054deae0c2fa6a2c378d08",
+        "title": "Chemical profiling and characterisation of anthraquinone\u2010based polyphenols as biocolourants from Cortinarius semisanguineus",
+        "abstract": "Anthraquinone dyes are known for their significant colour (brightness of shade in the red, blue and green areas) and light fastness properties compared with other synthetic dyes (such as azo\u2010based dyes). However, challenging multi\u2010step synthesis of anthraquinones and limited access to fewer substituents result in insufficient reactivity, hindering their wider industrial applications. Therefore, seeking highly substituted anthraquinone\u2010based colourants from natural sources is gaining interest among researchers. Notably, certain species of Dermocybe mushrooms are recognised for their red gills rich in anthraquinone colourants, which have been studied. However, limited knowledge of the chemotaxonomic characteristics of their species and molecular structure hinders wide use of their commercial applications. Our study screened extraction methods for their selectivity towards specific anthraquinone types, such as glycosidic vs non\u2010glycosidic, or those with carboxylic acid groups vs those without. In our observation, a sequential extraction strategy, starting with aqueous buffer extract followed by acetone extract, selectively yielded carboxylic acid\u2010containing anthraquinones and non\u2010carboxylic acid\u2010containing anthraquinones, respectively. We carried out a detailed analysis of anthraquinone\u2010based colourants in Cortinarius semisanguineus, comparing MS1\u2010MS2 profiles with two other species of the Dermocybe fungus group (Cortinarius sanguineus and Cortinarius ominosus), highlighting key interspecies differences in expressing certain anthraquinones or regioisomers. This study led to the structural identification of eleven natural anthraquinones and their glycosidic forms among these species. The carboxylic anthraquinones identified and characterised by their fragmentation pattern using MS1\u2010MS2 profiles include dermolutein, dermorubin, chlorodermorubin, endocrocin and chlorodermolutein, while the non\u2010carboxylic anthraquinones, primarily from the acetone extract, were dermoglaucin, emodin and dermocybin.",
+        "venue": "Coloration Technology",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Chemistry",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-22",
+        "authors": [
+            {
+                "authorId": "31647579",
+                "name": "Arvind Negi"
+            },
+            {
+                "authorId": "2212478839",
+                "name": "P. Toukola"
+            },
+            {
+                "authorId": "2237345293",
+                "name": "Riikka R\u00e4is\u00e4nen"
+            }
+        ]
+    },
+    {
+        "paperId": "c6130c147eb70d4d88cde02e3c25d83bac50d9e8",
+        "externalIds": {
+            "DOI": "10.56557/upjoz/2024/v45i244721",
+            "CorpusId": 275220967
+        },
+        "url": "https://www.semanticscholar.org/paper/c6130c147eb70d4d88cde02e3c25d83bac50d9e8",
+        "title": "Organic Management of Meloidogyne incognita (Root-knot Nematode) in Dolichos lab lab (Indian Bean) with Aqueous Extracts of Pleurotus ostreatus Oyster Mushroom Spent Compost",
+        "abstract": "This investigation was done to determine the efficacy of oyster mushroom spent compost to control the root knot nematodes. The cultivation of oyster mushrooms yields spent mushroom compost (SMC), which has a unique microbiota that may include additional nematode antagonists and high levels of mycelium residual enzymes, and high humidity. These characteristics make SMC an excellent candidate for biological control. In order to reduce Meloidogyne incognita in Indian beans, this study evaluated the potential of an aqueous extract of SMC from Pleurotus ostreatus cultivation. Invitro experiments on second stage Juveniles (J2) larvae showed successful results with death of the larvae at 50% concentration.",
+        "venue": "Uttar Pradesh Journal of Zoology",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-29",
+        "authors": [
+            {
+                "authorId": "2338321338",
+                "name": "Chandrakala B"
+            },
+            {
+                "authorId": "2280215181",
+                "name": "Y. S. Kumari"
             }
         ]
     },
@@ -462,6 +916,142 @@
         ]
     },
     {
+        "paperId": "ba2c579cb26599a99a46c6c820454231e4cc8f5c",
+        "externalIds": {
+            "DOI": "10.55627/pbulletin.003.02.0847",
+            "CorpusId": 275187856
+        },
+        "url": "https://www.semanticscholar.org/paper/ba2c579cb26599a99a46c6c820454231e4cc8f5c",
+        "title": "Mushroom production, research and market in Pakistan",
+        "abstract": "Mushroom is extensively produced for human consumption in many nations, including Pakistan due to their high protein and vitamin content. Pakistan boasts a high diversity of mushrooms because of its harsh geographical conditions and seasonal variations. Due to the plentiful supply of agro-wastes that make mushroom production possible, mushroom manufacturing is one of Pakistan\u2019s most potential cottage industries. The most popular commercially produced mushroom species are Oyster, Straw, and Button mushrooms; however, the most common and best-selling variety is the white button mushroom (Agaricus bisporus). This review article\u2019s objective is to gather information regarding Pakistan\u2019s mushroom production. Despite an increase in mushroom production, there are some issues that mushroom producers face during production and marketing that need to be resolved for further development of this sector. In light of the nation\u2019s land scarcity and high unemployment rate, boosting mushroom production may be a viable strategy for boosting the rural economy. The growth of this industry would also enhance the variety of company ventures and job prospects in semi-urban and rural regions.",
+        "venue": "Plant Bulletin",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Business",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle",
+            "Review"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": [
+            {
+                "authorId": "2338140480",
+                "name": "Basharat Mehmood"
+            }
+        ]
+    },
+    {
+        "paperId": "b51b512f48d5e5dbdf1076d08e9e74c84b14e4ca",
+        "externalIds": {
+            "DOI": "10.3390/foods14030357",
+            "CorpusId": 275841037
+        },
+        "url": "https://www.semanticscholar.org/paper/b51b512f48d5e5dbdf1076d08e9e74c84b14e4ca",
+        "title": "Isolation and Identification of Aspergillus spp. from Rotted Walnuts and Inhibition Mechanism of Aspergillus flavus via Cinnamon Essential Oil",
+        "abstract": "Walnuts are prone to contamination by rotting fungi. However, the microflora present in walnuts across various regions of China has not been thoroughly investigated. Cinnamon essential oil (CEO) is commonly used in food preservation because of its natural safety and strong antimicrobial properties. Additionally, studies on the antifungal potential of CEO to prevent walnut spoilage are limited. Therefore, we investigated Aspergillus spp. contamination in moldy walnuts stored across different locations in Shanxi, China. A total of 100 moldy walnut samples underwent traditional mycological analysis to isolate Aspergillus spp. The antibacterial properties and the mechanisms by which CEO targets Aspergillus spp. were thoroughly investigated. Five representative morphospecies were subsequently classified to the species level using Internal Transcribed Spacer sequence analysis. The dominant species were Aspergillus flavus and Aspergillus fumigatus, with frequencies of 100% and 93%, respectively, followed by Aspergillus nigers, Aspergillus terreus, and Aspergillus tubingensis, with frequencies of 78%, 47%, and 40%, respectively. Overall, 358 fungal species belonging to the Aspergillus genus were recovered. The MIC of CEO against A. flavus in vitro was 0.78 g/L. Furthermore, CEO compromised the permeability and integrity of the cell membrane, causing the leakage of intracellular components and promoting the accumulation of malondialdehyde compounds and a decrease in superoxide dismutase activity. Overall, we isolated and identified Aspergillus spp. in moldy walnuts and confirmed the feasibility of using CEO as a green anti-Aspergillus spp. agent for the preservation of walnuts.",
+        "venue": "Foods",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-22",
+        "authors": [
+            {
+                "authorId": "2341866219",
+                "name": "Doudou Zhang"
+            },
+            {
+                "authorId": "2341826452",
+                "name": "Kangjing Luo"
+            },
+            {
+                "authorId": "2341888295",
+                "name": "Shaocong Wen"
+            },
+            {
+                "authorId": null,
+                "name": "Qing Zhou"
+            },
+            {
+                "authorId": "2341962392",
+                "name": "Bochao Li"
+            },
+            {
+                "authorId": null,
+                "name": "Wenhui Liang"
+            },
+            {
+                "authorId": "2341745958",
+                "name": "Jianbing Di"
+            }
+        ]
+    },
+    {
+        "paperId": "a6d810229c3612f22b960a99b5dec56bd92047dd",
+        "externalIds": {
+            "DOI": "10.35746/jtim.v7i1.608",
+            "CorpusId": 275332290
+        },
+        "url": "https://www.semanticscholar.org/paper/a6d810229c3612f22b960a99b5dec56bd92047dd",
+        "title": "Media Pembelajaran Jenis Jamur Berbasis Augmented Reality Menggunakan Metode Marker Based Tracking",
+        "abstract": "Mushrooms are a plant-based food source with considerable potential and are often found around us. However, some types of mushrooms have similar characteristics and morphology. Based on these problems, an application is made that aims as a medium for the introduction of mushroom types through the use of Augmented Reality (AR) technology. By utilizing Augmented Reality as an interactive educational media, it is expected to facilitate users in obtaining information about the type of fungus accompanied by visualization in the form of 3D objects. The research method used consists of three stages, namely data collection, multimedia product creation, and evaluation. This mushroom type learning application is made using AR marker based on tracking technology with the MDLC (Multimedia Development Life Cycle) method according to Luther Sutopo. Based on the results of Black Box testing, angle, distance and light intensity testing, the application can function properly. Evaluation using the System Usability Scale (SUS) was conducted on the general public with an age range of 17-45 years in RW 05 Panyingkiran Village, Indihiang District, Tasikmalaya City with a population of 356 people, determining the number of respondents using the slovin formula which is 32 people. The test results show that the application obtained an average score of 74.78, which indicates that the application is in the \u201cAcceptable\u201d category for Acceptability Range, Grade C in Grade Scale, and \u201cGood\u201d in Adjective Rating.",
+        "venue": "JTIM Jurnal Teknologi Informasi dan Multimedia",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Computer Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-02",
+        "authors": [
+            {
+                "authorId": "2338748896",
+                "name": "Tedi Wardiana"
+            },
+            {
+                "authorId": "73738150",
+                "name": "E. Hidayat"
+            },
+            {
+                "authorId": "1471732122",
+                "name": "Euis Nur Fitriani Dewi"
+            }
+        ]
+    },
+    {
         "paperId": "a6a79e0a8b14dd457289076e16d178cb8e2c6c39",
         "externalIds": {
             "DOI": "10.3329/ralf.v11i3.78896",
@@ -507,92 +1097,6 @@
             {
                 "authorId": "2301870672",
                 "name": "Jebunnahar Khandakar"
-            }
-        ]
-    },
-    {
-        "paperId": "a416062b2d1d9d2330f567244840bbdb5bb4d65f",
-        "externalIds": {
-            "DOI": "10.3390/jof11010037",
-            "CorpusId": 275383207
-        },
-        "url": "https://www.semanticscholar.org/paper/a416062b2d1d9d2330f567244840bbdb5bb4d65f",
-        "title": "Annotated Checklist of Poroid Hymenochaetoid Fungi in Central Asia: Taxonomic Diversity, Ecological Roles, and Potential Distribution Patterns",
-        "abstract": "Central Asia, located at the heart of Eurasia, is renowned for its varied climate and vertical vegetative distribution, which support diverse biomes and position it as a global biodiversity hotspot. Despite this ecological richness, Central Asia\u2019s fungal diversity, particularly wood-inhabiting macrofungi, remains largely unexplored. This study investigates the diversity, ecological roles, and potential distribution of poroid Hymenochaetoid fungi in the region. By conducting field surveys, collecting basidiomes, and reviewing the literature and herbarium records from five Central Asian countries, we compiled a comprehensive checklist of these fungi. In total, 43 Hymenochaetoid species belonging to 18 genera were identified, with Inonotus, Phellinus, and Phylloporia being the most species-rich. Notably, Inonotus hispidus and Phellinus igniarius were found to be the most widespread species. These macrofungi play essential ecological roles as saprotrophs and pathogens of various identified host plant families, aiding in lignin degradation and exhibiting diverse enzymatic activities. For the first time, we modelled the potential distribution patterns of Hymenochaetoid fungi in Central Asia, revealing that their distribution is strongly influenced by host plant availability and temperature-related factors. The three most critical variables were host plant density, annual temperature range (Bio7), and mean temperature of the warmest quarter (Bio10). The distribution of suitable habitats is uneven, with highly suitable areas (4.52%) concentrated in the mountainous border regions between Kazakhstan, Kyrgyzstan, Tajikistan, and Uzbekistan. These results underscore the significance of specific environmental conditions for the growth and survival of Hymenochaetoid fungi in this region. Our findings highlight the urgent need for continued mycological and host plant research and expanded conservation initiatives to document and preserve macrofungal and botanical biodiversity in this under-explored area. In light of climate change, the collected mycological and botanical data provide a valuable reference for promoting forest health management globally.",
-        "venue": "Journal of Fungi",
-        "citationCount": 0,
-        "openAccessPdf": null,
-        "s2FieldsOfStudy": [
-            {
-                "category": "Environmental Science",
-                "source": "s2-fos-model"
-            },
-            {
-                "category": "Biology",
-                "source": "s2-fos-model"
-            }
-        ],
-        "publicationTypes": [
-            "JournalArticle",
-            "Review"
-        ],
-        "publicationDate": "2025-01-05",
-        "authors": [
-            {
-                "authorId": "2310974972",
-                "name": "Yusufjon Gafforov"
-            },
-            {
-                "authorId": "90062665",
-                "name": "Manzura Yarasheva"
-            },
-            {
-                "authorId": "2108076690",
-                "name": "Xue-Wei Wang"
-            },
-            {
-                "authorId": "2281139854",
-                "name": "Milena Ra\u0161eta"
-            },
-            {
-                "authorId": "2261004363",
-                "name": "Y. Rakhimova"
-            },
-            {
-                "authorId": "89670561",
-                "name": "L. Kyzmetova"
-            },
-            {
-                "authorId": "2339142453",
-                "name": "Kanaim Bavlankulova"
-            },
-            {
-                "authorId": "2241877451",
-                "name": "Sylvie Rapior"
-            },
-            {
-                "authorId": "2339076389",
-                "name": "Jia-Jian Chen"
-            },
-            {
-                "authorId": "2296904069",
-                "name": "E. Langer"
-            },
-            {
-                "authorId": "2339142751",
-                "name": "Burkhon Munnavarov"
-            },
-            {
-                "authorId": "2339136836",
-                "name": "Zafar Aslonov"
-            },
-            {
-                "authorId": "2141225789",
-                "name": "Bobozoda Bakokhoja"
-            },
-            {
-                "authorId": "2241950944",
-                "name": "Li-Wei Zhou"
             }
         ]
     },
@@ -683,6 +1187,145 @@
         ]
     },
     {
+        "paperId": "8d7e0ce44a8325e88de0a001f71c21d9c75ea4a4",
+        "externalIds": {
+            "DOI": "10.33263/lianbs134.173",
+            "CorpusId": 275485194
+        },
+        "url": "https://www.semanticscholar.org/paper/8d7e0ce44a8325e88de0a001f71c21d9c75ea4a4",
+        "title": "Theoretical Description for Psilocin and Coprine Electrochemical Determination in Mushroom Pulp and Biological Liquids over Cobalt (II) Oxyhydroxide-Modified Electrode",
+        "abstract": "The possibility of the electrochemical determination of poisonous mushroom toxins psilocin and coprine on CoO(OH)-modified electrode has been evaluated theoretically. The analysis of the correspondent mathematical model confirms the efficiency of the electrochemical sensor for detecting both mycotoxins in mushrooms and biological liquids for either investigation or diagnostic purposes. The linear dependence between the concentration of both of the analytes is established in a wide concentration range, providing an excellent analytical signal interpretation.",
+        "venue": "Letters in Applied NanoBioScience",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Chemistry",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": []
+    },
+    {
+        "paperId": "8c2665f9aa07ae264770a07285d2d0f6d5195614",
+        "externalIds": {
+            "DOI": "10.33003/fjs-2024-0806-2928",
+            "CorpusId": 275841056
+        },
+        "url": "https://www.semanticscholar.org/paper/8c2665f9aa07ae264770a07285d2d0f6d5195614",
+        "title": "COMPARATIVE STUDY ON THE FUNGI DETERMINANTS IN LOCUST BEANS (IRU) PRODUCED FROM PARKIA BIGLOBOSA AND PROSOPIS AFRICANA",
+        "abstract": "Iru, a traditional fermented condiment widely consumed in West Africa, is produced from the seeds of Parkia biglobosa (African locust bean) and Prosopis Africana (Mesquite/Okpehe). The quality and safety of Iru can be significantly affected by fungal contaminants during processing and storage. This study aims to compare the fungal contaminants present in Iru produced from Parkia biglobosa and Prosopis Africana, examining their impact on the nutritional and microbial quality of the final product. Standard mycological techniques were used to isolate and identify fungal species using Potato dextrose agar (PDA). The microbial load, proximate composition, and physicochemical properties of the samples were analysed to assess the quality and safety of the fermented products. Results showed that Parkia biglobosa Iru exhibited a higher diversity of fungal species compared to Prosopis Africana Iru. Aspergillus niger and Sacharomyces cerevisiae were the most prevalent with (23.81%) each while Penicillium chrysogenum has the least prevalence (1.0%). This diversity poses a greater risk of mycotoxin contamination in Iru from Parkia biglobosa. Both Prosopis Africana and Parkia bioglobosa offers significant nutritional benefits but Parkia generally has higher moisture content, protein and fat content while Prosopis contains higher fibre, ash content and carbohydrates which aids metabolic process overall nutritional value and energy source respectively.",
+        "venue": "FUDMA Journal of Sciences",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-31",
+        "authors": [
+            {
+                "authorId": "2341822820",
+                "name": "Ganiyat M. Abdulganiyu"
+            },
+            {
+                "authorId": "2341823185",
+                "name": "S. A. Laba"
+            },
+            {
+                "authorId": "2280025415",
+                "name": "A. E. Ajadi"
+            },
+            {
+                "authorId": "2335472940",
+                "name": "B. A. Aguda"
+            }
+        ]
+    },
+    {
+        "paperId": "8bd6b626eb71d8a666627253909ab6ce6b682af1",
+        "externalIds": {
+            "DOI": "10.3897/mycokeys.112.141615",
+            "CorpusId": 275867329
+        },
+        "url": "https://www.semanticscholar.org/paper/8bd6b626eb71d8a666627253909ab6ce6b682af1",
+        "title": "Morpho-phylogenetic analyses of two novel edible mushrooms from China and a mini review of Lyophyllum (Agaricales, Lyophyllaceae) cultivation and bioactivities",
+        "abstract": "Lyophyllum plays an important role in the natural ecosystem and has significant economic value. Some species of this genus have been cultivated in Asia, America, and Europe. This study describes four edible species of Lyophyllum, two of which were newly discovered. Lyophyllum edulis has a dark grayish orange pileus, a grayish orange upper part of the stipe, and globose, subglobose to broadly ellipsoid basidiospores, while L. sinense has a dark gray-orange when injured pileus, dark grayish orange points and lines on the stipe surface, and quadrangular to broadly fusiform basidiospores. Molecular phylogenetic analyses using the internal transcribed spacer ITS1-5.8S-ITS2 ribosomal RNA (ITS), the large subunit ribosomal RNA (LSU), the second-largest subunit of RNA polymerase II (rpb2), and translation elongation factor 1-alpha (tef1-\u03b1) indicated that L. edulis is related to L. shimeji, L. heimogu, and L. decastes, and L. sinense has an affinity to L. bulborhizum and L. nigrum. We also summarize the cultivation techniques of the two edible species, L. shimeji and L. decastes.",
+        "venue": "MycoKeys",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle",
+            "Review"
+        ],
+        "publicationDate": "2025-01-23",
+        "authors": [
+            {
+                "authorId": null,
+                "name": "Song-Ming Tang"
+            },
+            {
+                "authorId": "49619854",
+                "name": "Feng-Ming Yu"
+            },
+            {
+                "authorId": "2128493173",
+                "name": "S. Karunarathna"
+            },
+            {
+                "authorId": "39903107",
+                "name": "Zonglong Luo"
+            },
+            {
+                "authorId": "2316933295",
+                "name": "Kai-Yang Niu"
+            },
+            {
+                "authorId": "2342097164",
+                "name": "Rui-Yu Li"
+            },
+            {
+                "authorId": null,
+                "name": "Lin Li"
+            },
+            {
+                "authorId": null,
+                "name": "Xi-Jun Su"
+            },
+            {
+                "authorId": "2303080861",
+                "name": "Shu-Hong Li"
+            }
+        ]
+    },
+    {
         "paperId": "88a2dd4d4729ec2c74acdd3ebbdecbfcc50e60f3",
         "externalIds": {
             "DOI": "10.21514/1998-426x-2024-17-4-7-17",
@@ -745,6 +1388,161 @@
             {
                 "authorId": "2339843176",
                 "name": "Elnaz Hesami Naghshbandi"
+            }
+        ]
+    },
+    {
+        "paperId": "78dbd469fb5a0e3b2530476bc1540aba03a9057f",
+        "externalIds": {
+            "DOI": "10.37855/jah.2024.v26i04.86",
+            "CorpusId": 275395994
+        },
+        "url": "https://www.semanticscholar.org/paper/78dbd469fb5a0e3b2530476bc1540aba03a9057f",
+        "title": "Domestication of Pleurotus sajor-caju, P. ostreatus and Laetiporus sulphureus from the Abongfen gallery forest of Kedjom-Keku, Northwest Region of Cameroon",
+        "abstract": "This study aimed to conserve the rich biodiversity of wild mushrooms in Abongfen Forest by domesticating selected species for year-round availability and protection from extinction. Six mushrooms collected (Laetiporus sulphureus, Phellinus sp, Inonotus obliquus, Pleurotus sajor-caju, Stereum sp. and Pleurotus ostreatus) were cultured in Potato Dextrose Agar (PDA) to obtain pure cultures and mother spawn which was subsequently domesticated. Each mushroom species was cultivated in a completely randomized design with four treatments: sawdust (50%) mixed with maize cobs (50%), palm cones (100%), sawdust (100%) and beans straw (100%), all supplemented with rice brand (10%) and quick lime in eight replicates. Maize cobs were ground in an electric mill while palm cones and bean straws were reduced with a sharp knife to smaller sizes (1-3cm long) and soaked overnight in tap water. Excess water was drained using a sieve to 65% moisture content. Each portion was well mixed on a clean, cemented floor using a clean spade. 2.0 kg of each composition was filled into 25 x 15 cm polypropylene bags and sterilized in a drum for 4 hours. After cooling, each bag was inoculated with three table spoonsful of spawn, incubated at room temperature 25\u00b12 oC and the spawn run was observed until fully colonized. The days of colonization, primordial initiation and harvesting were noted. The fruit bodies on each bag were counted and weighed (g) after harvesting to determine the yield. Pleurotus sajor-caju, Pleurotus ostreatus and Laetiporus sulphureus colonized the substrate, but only Pleurotus grew and produced fruit bodies. Mycelial colonization was higher on beans straw (31.60 \u00b1 2.46 days). The mean diameter of pileus (24.70\u00b10.94 cm) and, average number of fruiting bodies (4.5\u00b11.2) and weight of fruit bodies (95.20 \u00b1 2.58 g) were best on maize cobs mixed with sawdust. Wild edible mushrooms need to be domesticated to ensure their availability for food and medicine and to provide a source of income.",
+        "venue": "Journal of Applied Horticulture",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2024-12-30",
+        "authors": [
+            {
+                "authorId": "2339185530",
+                "name": "Ngwang Mercy Veyeh"
+            },
+            {
+                "authorId": "89305770",
+                "name": "T. Katamssadan"
+            },
+            {
+                "authorId": "11328031",
+                "name": "T. R. Kinge"
+            }
+        ]
+    },
+    {
+        "paperId": "736a792d443a24b4a03a90d05cb7d132b69c20d8",
+        "externalIds": {
+            "DOI": "10.1093/ijfood/vvae004",
+            "CorpusId": 275525515
+        },
+        "url": "https://www.semanticscholar.org/paper/736a792d443a24b4a03a90d05cb7d132b69c20d8",
+        "title": "Fecal fermentation of lentinan and its effect on gut microbiota and metabolites",
+        "abstract": "\n Lentinan (LNT) is a polysaccharide from Shiitake mushrooms that has significant effects regarding antioxidant, hypoglycemic, anti-inflammatory activities, etc., and this effect is influenced by the human intestinal flora. However, the interactions between LNT and human intestinal microorganisms, and their metabolic processes, remain unclear. In this study, the fermentation characteristics of LNT and its effects on intestinal flora and metabolites were studied by in vitro fermentation. Our results indicated that LNT was effectively utilised by intestinal microbiota, and the utilisation rate was 62.7\u2009\u00b1\u20093.0% after fermentation for 48\u00a0hr. The concentrations of short-chain fatty acids (mainly acetic acid and propionic acid) were increased to 4.157\u2009\u00b1\u20090.197 and 5.847\u2009\u00b1\u20090.283\u00a0mM, respectively. LNT also increased the relative abundance of beneficial bacteria, such as Bifidobacterium and Parabacteroides, while reducing harmful bacteria like Veillonella and Klebsiella. Metabolomics and microbial correlation analysis revealed that the catabolism of LNT was also accompanied by amino acid catabolism, especially alanine, aspartic acid, glutamate, and the biosynthesis of adenosine 5\u2019-monophosphate, etc. These findings suggest that LNT can support gut health and demonstrates potential as a prebiotic.",
+        "venue": "International Journal of Food Science & Technology",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Biology",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Agricultural and Food Sciences",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-01",
+        "authors": [
+            {
+                "authorId": "2330463908",
+                "name": "Yuhan Yang"
+            },
+            {
+                "authorId": "2310115597",
+                "name": "Xu Zhou"
+            },
+            {
+                "authorId": "2261386253",
+                "name": "Botao Wang"
+            },
+            {
+                "authorId": "2298484503",
+                "name": "Li Wei"
+            },
+            {
+                "authorId": "2298572395",
+                "name": "Yuyan Zhang"
+            },
+            {
+                "authorId": "2340157565",
+                "name": "Xuemin Wang"
+            },
+            {
+                "authorId": null,
+                "name": "Junying Bai"
+            },
+            {
+                "authorId": "7219240",
+                "name": "Huayi Suo"
+            }
+        ]
+    },
+    {
+        "paperId": "6cb278ca9f064e20ebaed547f9be57ff6a2c9435",
+        "externalIds": {
+            "DOI": "10.1063/5.0250310",
+            "CorpusId": 275862116
+        },
+        "url": "https://www.semanticscholar.org/paper/6cb278ca9f064e20ebaed547f9be57ff6a2c9435",
+        "title": "Spreading dynamics of a fluorocarbon surfactant-laden droplet impacting on oil surface at varying Weber numbers",
+        "abstract": "Effective suppression of flammable liquid fires depends on the rapid formation of a closed water film by aqueous film-forming foam (AFFF) over the oil surface. To investigate the mechanism of film formation on the oil surface with a compounded solution using the fluorocarbon betaine amphoteric surfactant (OC5-Betaine) as the active ingredient, a multi-angle visualization experiment was applied to capture the impact and spreading of the surfactant-laden droplets on a 25\u2009mm deep corn oil pool synchronously, within a Weber number (We) range of 7\u2013168. The results revealed that various characteristic impact phenomena strongly correlate with the We. The critical We for complete floating of a droplet or partial droplet sink to the bottom of oil pool after impact is approximately 155. There are two patterns, \u201cNipple\u201d and \u201cMushroom,\u201d when the droplet impacts the oil surface and sinks to the lowest point. When the We exceeds 90, the droplets consistently adopt the Mushroom shape. For a given We, the maximum depth and maximum penetration time of the Nipple type are greater than those of the Mushroom type. There is a high probability of \u201cRebound static\u201d phenomenon for the Nipple type, which slows spreading. A range of We between 90 and 140 promotes rapid droplet spreading and prevents jet breakup, making it optimal for firefighting. These findings offer insights for developing more effective AFFFs.",
+        "venue": "The Physics of Fluids",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Environmental Science",
+                "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-01",
+        "authors": [
+            {
+                "authorId": null,
+                "name": "Yun Zhang"
+            },
+            {
+                "authorId": null,
+                "name": "Meiwei Huang"
+            },
+            {
+                "authorId": "2325560671",
+                "name": "Xingxiang Liu"
+            },
+            {
+                "authorId": "144304384",
+                "name": "Jieqing Zheng"
+            },
+            {
+                "authorId": "2268379498",
+                "name": "Yiming Xu"
+            },
+            {
+                "authorId": "2342047924",
+                "name": "Yong Guo"
             }
         ]
     },
@@ -974,15 +1772,15 @@
         ]
     },
     {
-        "paperId": "51d64eaf147d23cd7c8d7a9b7352b0c1c0e3c1c8",
+        "paperId": "49371eb391cb99944e3a4ff71fb3171710409b2c",
         "externalIds": {
-            "DOI": "10.3390/metabo15010020",
-            "CorpusId": 275383299
+            "DOI": "10.3126/arj.v5i1.73393",
+            "CorpusId": 275408744
         },
-        "url": "https://www.semanticscholar.org/paper/51d64eaf147d23cd7c8d7a9b7352b0c1c0e3c1c8",
-        "title": "In Vivo Effectiveness of Pleurotus ostreatus in Degradation of Toxic Metabolites of Filamentous Fungi Such as Aflatoxin B1 and Zearalenone",
-        "abstract": "Background/Objectives: Mycotoxins, secondary metabolites synthesized by filamentous fungi, have been classified as dangerous substances and proven to be carcinogenic, as well as to have genotoxic, nephrotoxic, hepatotoxic, teratogenic, and mutagenic properties. Despite numerous trials to develop an effective and safe-for-human-health method of detoxification, there is still a high risk associated with the occurrence of these toxins in food and feed. Biological methods of food preservation are an alternative option to conventional chemical and physical methods, characterized by their less negative impact on human health as well as their high efficiency against filamentous fungi and other foodborne pathogens. Mycoremediation is a new biotechnique based on the capability of fungi to detoxify matrices from various pullulans. Ligninolytic enzymes produced by white rot fungi (WRF) characterize a high efficiency in the degradation of various mycotoxins. Methods: In our study, Pleurotus\u00a0ostreatus, as a representative of WRF, was cultivated on a medium contaminated by AFB1 and ZEN (mushroom substrate and maize) in a few variants of concentration. After the cultivation, medium and fruiting bodies were collected and analyzed with the usage of HPLC and LC/MS methods. Results: The reduction oscillated between 53 and 87% (AFB1) and 73 and 97% (ZEN) depending on the initial concentration of toxins in the medium. Grown fruiting bodies contained insignificant amounts of both toxins. Conclusions: These findings confirm the potential of P.\u00a0ostreatus as an effective biological agent for reducing mycotoxins in contaminated medium, highlighting its applicability in developing sustainable and safe methods for detoxification.",
-        "venue": "Metabolites",
+        "url": "https://www.semanticscholar.org/paper/49371eb391cb99944e3a4ff71fb3171710409b2c",
+        "title": "Ecology and Ethnomycological Study of Some Wild Mushrooms in Tropical Riverine Forest, Lumbini Province, West Nepal",
+        "abstract": "Mushrooms are an integral part of the forest ecosystem. The forest\u2019s tree species diversity and humid environment during the monsoon period favor the ideal growth of a diverse group of mushrooms. A study was conducted in a tropical riverine forest named Sukhaura Hariyali Community Forest at Makrahar, Rupandehi, Lumbini province, to investigate the diversity of ethnomycological use of wild mushrooms. An opportunistic sampling method was used for the collection of wild mushroom samples. Thirty-three specimens of wild mushrooms were collected, and twenty-three species from sixteen genera belonging to twelve families were identified. The ethnomycological significance of collected species was also explored from the study sites. Among the surveyed species, Russula (five species) was the most widely distributed in the studied area. The ecological preference of the species revealed that a maximum of twelve species were mycorrhizal, ten species were found saprophytic, and a single species (Fomes fomentarius) was found parasitic. Ten species were found to be edible, while poisonous and inedible mushrooms comprise three and seven species respectively. Agaricus arvensis, Pycnoporus cinnabarinus, and Xerocomus subtomentosus, were found to be used by locals for therapeutic purposes. The study provides the baseline data for macrofungal diversity, ecology, wild mushroom exploration, and their use.",
+        "venue": "Amrit Research Journal",
         "citationCount": 0,
         "openAccessPdf": null,
         "s2FieldsOfStudy": [
@@ -996,25 +1794,26 @@
             }
         ],
         "publicationTypes": [
-            "JournalArticle"
+            "JournalArticle",
+            "Review"
         ],
-        "publicationDate": "2025-01-05",
+        "publicationDate": "2024-12-31",
         "authors": [
             {
-                "authorId": "2148369406",
-                "name": "Agnieszka Zapa\u015bnik"
+                "authorId": "2339280334",
+                "name": "Anand Prasad Bhattarai"
             },
             {
-                "authorId": "1395860283",
-                "name": "M. Bry\u0142a"
+                "authorId": "2339285222",
+                "name": "Hari Sharan Adhikari"
             },
             {
-                "authorId": "2129362674",
-                "name": "Adrian Wojtczak"
+                "authorId": "88103416",
+                "name": "H. Aryal"
             },
             {
-                "authorId": "2304048844",
-                "name": "Barbara Soko\u0142owska"
+                "authorId": "87191970",
+                "name": "U. Budhathoki"
             }
         ]
     },
@@ -1052,47 +1851,84 @@
         ]
     },
     {
-        "paperId": "2edfed4c65d50560c51080778f2de8306267237d",
+        "paperId": "2fea31c6a1bba339e8732a8f6226e742c0c3edbe",
         "externalIds": {
-            "DOI": "10.3390/jof11010034",
-            "CorpusId": 275376286
+            "DOI": "10.26418/jtllb.v13i1.87189",
+            "CorpusId": 275885883
         },
-        "url": "https://www.semanticscholar.org/paper/2edfed4c65d50560c51080778f2de8306267237d",
-        "title": "Ex Situ Conservation, DNA Barcoding and Enzymatic Potential Evaluation of Macrofungi (Basidiomycota, Ascomycota) from Vietnam",
-        "abstract": "The diversity and resource potential of macroscopic fungi in tropical regions remain understudied. Vietnam, being in a biodiversity hotspot, has a large number of new fungal species that are of interest for biotechnology and medicine. The presence of a large number of protected areas in Vietnam creates favorable opportunities for the study and ex situ conservation of tropical biodiversity. From 2012 to 2023, 785 strains of macrofungi from National Parks of Vietnam were preserved in the LE-BIN collection, 327 of which were barcoded with the sequences deposited in the NCBI GenBank. A taxonomic analysis demonstrated that many of the preserved isolates are potentially new or poorly studied species, representing a useful resource for taxonomical studies and a search for new medicinal mushrooms. More than 180 strains were studied for the first time for growth rate and enzymatic activities. Of these, 53 strains showed high growth rate, 43\u2014high cellulolytic activity, 73\u2014high oxidative enzymes activity, and 27 showed high proteolytic activity, making them promising candidates for biotechnological and medical applications and opening new opportunities for sustainable biomass management, discovery of new enzymes and bioactive substances, development of new drugs and efficient plant waste treatment technologies. The results confirm the importance of the ex situ conservation of fungal diversity in tropical regions as a valuable source for scientific and commercial applications and suggest certain new active strains for biotechnological study.",
-        "venue": "Journal of Fungi",
+        "url": "https://www.semanticscholar.org/paper/2fea31c6a1bba339e8732a8f6226e742c0c3edbe",
+        "title": "Penerapan Teknologi Ramah Lingkungan untuk Mengurangi Limbah pada Industri Pengolahan Kayu",
+        "abstract": "The wood processing industry is a crucial sector that utilizes forest resources to produce various value-added products. In Pontianak City, wood processing industries produce items such as door and window frames, doors, windows, and cabinets. The aim of this study is to identify clean production alternatives for the wood processing industry. The research methods include field studies and descriptive analysis of the production process and the potential waste generated. The production process in Pontianak's wood processing industry includes several stages: receiving and unloading raw materials, cutting wood to the required size, profiling products, smoothing wood surfaces, and final assembly of finished products. Each of these stages has the potential to generate waste, including unused wood scraps, wood dust, and shavings from the smoothing process. This study offers recommendations for clean technologies that can be applied to reduce this waste. These clean technologies include the production of active carbon, using wood dust waste as partition material, producing bio briquettes and wood pellets as alternative fuels, and using wood waste as a growing medium for oyster mushroom cultivation. Additionally, wood waste can be used to create creative products, such as entertainment and educational games.",
+        "venue": "Jurnal Teknologi Lingkungan Lahan Basah",
         "citationCount": 0,
         "openAccessPdf": null,
         "s2FieldsOfStudy": [
             {
                 "category": "Environmental Science",
                 "source": "s2-fos-model"
+            }
+        ],
+        "publicationTypes": [
+            "JournalArticle"
+        ],
+        "publicationDate": "2025-01-24",
+        "authors": [
+            {
+                "authorId": "2342151249",
+                "name": "Tineke Mulyana"
             },
             {
-                "category": "Biology",
+                "authorId": "2342147760",
+                "name": "Naura Afifah Wardana"
+            },
+            {
+                "authorId": "2085557011",
+                "name": "Isna Apriani"
+            }
+        ]
+    },
+    {
+        "paperId": "1463bee82f14414a05b5ab6811fcc6509fd118b0",
+        "externalIds": {
+            "DOI": "10.3389/fsufs.2024.1474624",
+            "CorpusId": 275871198
+        },
+        "url": "https://www.semanticscholar.org/paper/1463bee82f14414a05b5ab6811fcc6509fd118b0",
+        "title": "The impact of competition for picking wild edible mushrooms and the opportunity cost for rural communities: the case of Castile and Le\u00f3n (Spain)",
+        "abstract": "Picking wild edible mushrooms is a key activity both for rural as well as urban communities. Studies into the topic support the notion of the major socio-economic benefits, which increase both producer as well as consumer surplus. However, to date, no study has estimated picking harvests in the way this study does or what effects these might have on local communities with regard to other activities, both in terms of work and leisure time. This study explores both issues, taking as an indicator a variable used in conventional analysis in other sectors, yet which thus far has not been employed in wild edible mushroom picking: productivity value. The chosen study area is the autonomous community of Castile and Le\u00f3n, a Spanish region with an important and long-running mycological tradition. Using the decision-making method between individuals\u2019 leisure time and work time, the authors test the corresponding hypotheses. The results that emerge for the years analyzed (2013 and 2014) support the hypothesis of distorting/moderating effects related to the effects of picking yields on pickers\u2019 income and their impact on the individual supply for labor function of pickers.",
+        "venue": "Frontiers in Sustainable Food Systems",
+        "citationCount": 0,
+        "openAccessPdf": null,
+        "s2FieldsOfStudy": [
+            {
+                "category": "Economics",
+                "source": "s2-fos-model"
+            },
+            {
+                "category": "Environmental Science",
                 "source": "s2-fos-model"
             }
         ],
         "publicationTypes": [
             "JournalArticle"
         ],
-        "publicationDate": "2025-01-04",
+        "publicationDate": "2025-01-23",
         "authors": [
             {
-                "authorId": "4085170",
-                "name": "N. Psurtseva"
+                "authorId": "2210110013",
+                "name": "Pablo de Frutos Madrazo"
             },
             {
-                "authorId": "32175548",
-                "name": "A. Kiyashko"
+                "authorId": "2342015107",
+                "name": "Joaqu\u00edn Latorre Minguell"
             },
             {
-                "authorId": "6198768",
-                "name": "S. Senik"
+                "authorId": "2007052625",
+                "name": "P. A. Mart\u00edn-Cervantes"
             },
             {
-                "authorId": "117176157",
-                "name": "T. Pham"
+                "authorId": "2342014800",
+                "name": "Fernando Mart\u00ednez Pe\u00f1a"
             }
         ]
     },
@@ -1140,7 +1976,7 @@
                 "name": "Guimiao Xiao"
             },
             {
-                "authorId": null,
+                "authorId": "2262087637",
                 "name": "Deyao Huang"
             },
             {
@@ -1154,55 +1990,6 @@
             {
                 "authorId": "2261833065",
                 "name": "Haiyong Weng"
-            }
-        ]
-    },
-    {
-        "paperId": "08c1c7ed98c1fbf02d726862548047df643cd079",
-        "externalIds": {
-            "DOI": "10.1111/jade.12550",
-            "CorpusId": 275632783
-        },
-        "url": "https://www.semanticscholar.org/paper/08c1c7ed98c1fbf02d726862548047df643cd079",
-        "title": "Becoming Materially Aware with Mushrooms: A Sociomaterial Analysis of Biomaking",
-        "abstract": "Biomaking and other bio\u2010oriented creative approaches are beginning to gain traction in education. Operating at the intersections of arts and sciences, they represent a field of integrative practices that involve creative making with the biological. In educational contexts, however, bio\u2010oriented creative practices have been studied primarily from hylomorphic perspectives that do not account for the roles of different non\u2010human organisms or other materials that participate in the processes. Drawing on theories of sociomateriality and material agency, and utilising multispecies microethnography, the paper attends to the specificities of making, makers, materials and artefacts in biomaking. It explores a case of a Finnish upper secondary school workshop implemented as part of the school's art curriculum within a larger educational development initiative. In the workshop, makers engaged with webcap mushrooms to extract, use and experiment with their pigments. The analysis builds on constructed operational sequences of the workshop activities, and a scrutiny of their interconnections, stages and participants. The paper shows how making, emergent artefacts and interplays of makers\u2019 intentions and materialities can instate moments of relationality and learning, and thus build makers\u2019 material awareness of the more\u2010than\u2010human organisms around them. The study proposes making with the biological as an attunement to our enmeshment with the environment.",
-        "venue": "International Journal of Art &amp; Design Education",
-        "citationCount": 0,
-        "openAccessPdf": null,
-        "s2FieldsOfStudy": [
-            {
-                "category": "Education",
-                "source": "s2-fos-model"
-            },
-            {
-                "category": "Environmental Science",
-                "source": "s2-fos-model"
-            },
-            {
-                "category": "Sociology",
-                "source": "s2-fos-model"
-            },
-            {
-                "category": "Biology",
-                "source": "s2-fos-model"
-            }
-        ],
-        "publicationTypes": [
-            "JournalArticle"
-        ],
-        "publicationDate": "2025-01-17",
-        "authors": [
-            {
-                "authorId": "2266120815",
-                "name": "P\u00e4ivikki Liukkonen"
-            },
-            {
-                "authorId": "2405282",
-                "name": "Henriikka Vartiainen"
-            },
-            {
-                "authorId": "47993567",
-                "name": "S. Kokko"
             }
         ]
     }

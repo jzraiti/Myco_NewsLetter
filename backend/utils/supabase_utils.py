@@ -1,58 +1,102 @@
 import os
+import logging
 import pandas as pd
 from supabase import Client, create_client
+from postgrest import APIError
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def supabase_articles_POST(data: list):
-    """POSTs the given data to the Supabase database.
+    """POSTs the given article data to the Supabase database."""
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+        
+        supabase: Client = create_client(url, key)
+        
+        df = pd.DataFrame(data)
+        df = df.map(lambda x: tuple(x) if isinstance(x, list) else x)
+        df = df.drop_duplicates(subset=["paperId"])
 
-    Args:
-        data (list): The data to POST.
-    """
-    url: str = os.getenv("SUPABASE_URL")
-    key: str = os.getenv("SUPABASE_KEY")
-    supabase: Client = create_client(url, key)
+        try:
+            journals = supabase.table("scholar_journals").select("title").execute()
+            existing_journals = set(journal["title"] for journal in journals.data)
+        except APIError as e:
+            logger.error(f"Failed to fetch existing journals: {str(e)}")
+            raise
 
-    df = pd.DataFrame(data)
-    df = df.map(lambda x: tuple(x) if isinstance(x, list) else x)
-    df = df.drop_duplicates(subset=["paperId"])
+        unique_venues = df["venue"].unique()
+        new_journals = [
+            {"title": venue} for venue in unique_venues if venue not in existing_journals
+        ]
 
-    # Get all existing journals
-    journals = supabase.table("scholar_journals").select("title").execute()
-    existing_journals = set(journal["title"] for journal in journals.data)
+        if new_journals:
+            try:
+                supabase.table("scholar_journals").insert(new_journals).execute()
+                logger.info(f"Added {len(new_journals)} new journals")
+            except APIError as e:
+                logger.error(f"Failed to insert new journals: {str(e)}")
+                raise
 
-    # Get unique venues from the new articles
-    unique_venues = df["venue"].unique()
-    
-    # Find venues that don't exist in journals table
-    new_journals = [
-        {"title": venue}
-        for venue in unique_venues
-        if venue not in existing_journals
-    ]
+        data = df.to_dict(orient="records")
+        result = supabase.table("ss_articles").upsert(data, on_conflict="paperId").execute()
+        logger.info(f"Successfully updated {len(data)} articles")
+        return result
 
-    # Insert new journals if any
-    if new_journals:
-        supabase.table("scholar_journals").insert(new_journals).execute()
-
-    data = df.to_dict(orient="records")
-
-    return supabase.table("ss_articles").upsert(data, on_conflict="paperId").execute()
-
+    except Exception as e:
+        logger.error(f"Error in supabase_articles_POST: {str(e)}")
+        raise
 
 def supabase_articles_GET():
-    """GETs the data from the Supabase database."""
-    url: str = os.getenv("SUPABASE_URL")
-    key: str = os.getenv("SUPABASE_KEY")
-    supabase: Client = create_client(url, key)
+    """GETs the article data from the Supabase database."""
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
 
-    return supabase.table("ss_articles").select("*").execute()
+        supabase: Client = create_client(url, key)
+        result = supabase.table("ss_articles").select("*").execute()
+        logger.info("Successfully fetched articles")
+        return result
 
+    except Exception as e:
+        logger.error(f"Error in supabase_articles_GET: {str(e)}")
+        raise
 
 def supabase_recipients_GET():
     """GETs the data from the Supabase database."""
-    url: str = os.getenv("SUPABASE_URL")
-    key: str = os.getenv("SUPABASE_KEY")
-    supabase: Client = create_client(url, key)
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
 
-    return supabase.table("ss_recipients").select("*").execute()
+        supabase: Client = create_client(url, key)
+        result = supabase.table("ss_recipients").select("*").execute()
+        logger.info("Successfully fetched recipients")
+        return result
+
+    except Exception as e:
+        logger.error(f"Error in supabase_recipients_GET: {str(e)}")
+        raise
+
+def supabase_journals_GET():
+    """GETs the journal data from the Supabase database."""
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+
+        supabase: Client = create_client(url, key)
+        result = supabase.table("scholar_journals").select("*").execute()
+        logger.info("Successfully fetched journals")
+        return result
+
+    except Exception as e:
+        logger.error(f"Error in supabase_journals_GET: {str(e)}")
+        raise

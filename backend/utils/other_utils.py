@@ -5,7 +5,13 @@ import logging
 from openai import OpenAI
 from jinja2 import Environment, FileSystemLoader
 
-from utils.supabase_utils import supabase_articles_GET, supabase_articles_POST
+from utils.supabase_utils import (
+    supabase_articles_GET,
+    supabase_articles_POST,
+    supabase_journals_GET,
+)
+
+from utils.ss_api import fetch_bulk_articles
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 dotenv.load_dotenv()
@@ -24,24 +30,31 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
-        temperature=1.2,    
+        temperature=1,
         messages=[
             {
                 "role": "system",
-                "content": "You are a ChatGPT, a helpful assistant that is knowledgable about Mycology and fungi and specializes in generating short sneak peeks of new mycology articles for a mycology newsletter.",
+                "content": "You are a ChatGPT, a helpful assistant and expert in Mycology and fungi. Your specialty is crafting professional, concise, and engaging sneak peeks for mycology articles written by researchers from all around the world, tailored for a newsletter. Highlight the most intriguing or unexpected aspects of the research while maintaining scientific accuracy and a tone that sparks curiosity.",
             },
-            # {
-            #     "role": "user",
-            #     "content": f"Write an informational little sneak peek (as an outsider) for this research paper titled {title} with this given abstracted summary: {content}. Limit your answer to 500 characters, and try not to write the summaries in the same style as these summaries: {other_summaries}",
-            # },
             {
                 "role": "user",
-                "content": f"Write an informational little sneak peek (as an outsider) for this research paper titled {title} with this given abstracted summary: {content}. Limit your answer to 500 characters.",
+                "content": f'As an informed observer, write a compelling sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, and keep the length under 300 characters.',
             },
         ],
     )
 
     return completion.choices[0].message.content
+
+
+def generate_summaries(selected_articles: pd.DataFrame):
+    for index, article in selected_articles.iterrows():
+        article_dict = article.to_dict()
+        generated_content: str = generate_gpt_paper_summary(
+            title=article_dict["title"], content=article_dict["abstract"]
+        )
+        selected_articles.at[index, "llm_summary"] = generated_content
+
+    return selected_articles
 
 
 def article_selection(data: list) -> dict:
@@ -59,8 +72,6 @@ def article_selection(data: list) -> dict:
 
     # Sorting by citation count (redundancy check)
     df = df.sort_values(by="citationCount", ascending=False)
-
-
 
     # Post to Supabase to update duplicates
     response = supabase_articles_POST(df.to_dict(orient="records"))
@@ -81,39 +92,44 @@ def article_selection(data: list) -> dict:
         }
 
     df = pd.DataFrame(response.data)
-    df = df.sort_values(by="citationCount", ascending=False)  # redundancy check
+    df = df.sort_values(by="citationCount", ascending=False)
     df = df[df["abstract"].notnull()]
+    df = df[df["llm_summary"].isnull()]
 
-    # Selecting the top 5 articles and generating summaries
-    selected_articles = df.head(5).copy()
-    selected_articles = selected_articles[selected_articles["citationCount"] > 0]
-    if selected_articles < 5:
-        pass # todo
+    # Selecting articles with citations first
+    selected_articles = df[df["citationCount"] > 0].head(5).copy()
+    cited_papers = len(selected_articles)
 
-    all_generated_content = ""
-    for index, article in selected_articles.iterrows():
-        article_dict = article.to_dict()
-        generated_content: str = generate_gpt_paper_summary(
-            title=article_dict["title"],
-            content=article_dict["abstract"],
-            other_summaries=all_generated_content,
+    if cited_papers < 5:
+        # Fetch journal h5-index data
+        journals = supabase_journals_GET()
+
+        # Create a mapping of journal titles to h5-index
+        journal_h5_index = {j["title"]: j["h5-index"] for j in journals.data}
+
+        # Add h5-index to remaining articles
+        remaining_df = df[df["citationCount"] == 0].copy()
+        remaining_df["h5-index"] = remaining_df["venue"].map(journal_h5_index)
+
+        # Sort by h5-index and select remaining needed articles
+        remaining_articles = (
+            remaining_df.sort_values(by="h5-index", ascending=False)
+            .head(5 - cited_papers)
+            .copy()
         )
-        selected_articles.at[index, "llm_summary"] = generated_content
-        all_generated_content += generated_content + "\n"
+
+        # Combine cited and h5-index based articles
+        selected_articles = pd.concat([selected_articles, remaining_articles])
+
+    # Generate summaries for selected articles
+    # selected_articles = generate_summaries(selected_articles)
 
     # Update the df with summaries and update supabase table
     df.update(selected_articles)
     response = supabase_articles_POST(df.to_dict(orient="records"))
-    if hasattr(response, "error") and response.error:
-        return {
-            "success": False,
-            "error": response.error,
-            "message": "Failed to upsert data",
-
-        }
 
     # Return 1: all processed articles, 2: top 5 articles
-    return df.to_dict(orient="records"), df.head(5).to_dict(orient="records")
+    return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
 
 
 def render_template(articles: list[dict], unsubscribe_link: str) -> str:
@@ -123,24 +139,9 @@ def render_template(articles: list[dict], unsubscribe_link: str) -> str:
 
 
 def test_render_template():
-    articles = [
-        {
-            "title": "Study on Fungal Growth",
-            "summary": "An in-depth analysis of fungal development in various environments.",
-            "paper_url": "https://example.com/paper1",
-        },
-        {
-            "title": "Mycology Advances",
-            "summary": "Recent advancements in mycological research and applications.",
-            "paper_url": "https://example.com/paper2",
-        },
-    ]
+    articles = []
     unsubscribe_url = "https://example.com/unsubscribe"
 
     html_content = render_template(articles, unsubscribe_url)
     with open("test_email.html", "w") as f:
         f.write(html_content)
-
-
-if __name__ == "__main__":
-    test_render_template()
