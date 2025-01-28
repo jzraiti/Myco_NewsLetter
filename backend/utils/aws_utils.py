@@ -1,24 +1,90 @@
 import boto3
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
+import logging
 
-def send_email(html_content, recipients):
-    ses = boto3.client('ses', region_name='us-east-1')
-    for recipient in recipients:
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = "Myco Newsletter"
-        msg['From'] = "your-email@example.com"
-        msg['To'] = recipient
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+load_dotenv()
 
-        part = MIMEText(html_content, 'html')
-        msg.attach(part)
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
+AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 
-        ses.send_raw_email(
-            Source=msg['From'],
-            Destinations=[msg['To']],
-            RawMessage={'Data': msg.as_string()}
+
+def aws_ses_send_email():
+    import boto3
+    from botocore.exceptions import ClientError
+
+    SENDER = os.getenv("EMAIL_SENDER")
+    RECIPIENT = "andrewkkchen@gmail.com"
+    AWS_REGION = "us-west-1"
+    SUBJECT = "Amazon SES Test (SDK for Python)"
+
+    # The email body for recipients with non-HTML email clients.
+    BODY_TEXT = (
+        "Amazon SES Test (Python)\r\n"  
+        "This email was sent with Amazon SES using the "
+        "AWS SDK for Python (Boto)."
+    )
+
+    BODY_HTML = """<html>
+    <head></head>
+    <body>
+    <h1>Amazon SES Test (SDK for Python)</h1>
+    <p>This email was sent with
+        <a href='https://aws.amazon.com/ses/'>Amazon SES</a> using the
+        <a href='https://aws.amazon.com/sdk-for-python/'>
+        AWS SDK for Python (Boto)</a>.</p>
+    </body>
+    </html>
+                """
+
+    CHARSET = "UTF-8"
+
+    session = boto3.Session(
+        aws_access_key_id=AWS_ACCESS_KEY,
+        aws_secret_access_key=AWS_SECRET_KEY,
+    )
+    client = session.client(service_name="ses", region_name=AWS_REGION)
+
+    try:
+        response = client.send_email(
+            Destination={
+                "ToAddresses": [
+                    RECIPIENT,
+                ],
+            },
+            Message={
+                "Body": {
+                    "Html": {
+                        "Charset": CHARSET,
+                        "Data": BODY_HTML,
+                    },
+                    "Text": {
+                        "Charset": CHARSET,
+                        "Data": BODY_TEXT,
+                    },
+                },
+                "Subject": {
+                    "Charset": CHARSET,
+                    "Data": SUBJECT,
+                },
+            },
+            Source=SENDER,
         )
+    except ClientError as e:
+        logging.error(e.response["Error"]["Message"])
+    else:
+        logging.info("Email sent! Message ID:"),
+        print(response["MessageId"])
+
 
 def upload_to_s3(html_content):
-    s3 = boto3.client('s3')
-    s3.put_object(Bucket='your-s3-bucket', Key='newsletter.html', Body=html_content, ContentType='text/html')
+    s3 = boto3.client("s3")
+    s3.put_object(
+        Bucket="your-s3-bucket",
+        Key="newsletter.html",
+        Body=html_content,
+        ContentType="text/html",
+    )

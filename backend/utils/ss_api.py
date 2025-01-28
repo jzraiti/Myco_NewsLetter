@@ -8,21 +8,24 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 load_dotenv()
 
 
-def fetch_bulk_articles(num_articles: int, search_term: str) -> list:
-    """Fetches a bulk of articles, sorted by recency, from the Semantic Scholar API.
+def fetch_bulk_articles() -> list:
+    """Fetches a bulk of mycology articles, sorted by recency, from the Semantic Scholar API.
 
     Args:
         num_articles (int): The number of articles to fetch.
         search_term (str): The search term to use.
     """
-    logging.info(f"Fetching {num_articles} articles for '{search_term}'...")
     url = "http://api.semanticscholar.org/graph/v1/paper/search/bulk/"
-    two_weeks_ago = (datetime.now() - timedelta(weeks=2)).strftime("%Y-%m-%d")
+    four_weeks_ago = (datetime.now() - timedelta(weeks=4)).strftime("%Y-%m-%d")
+    num_articles = 100
+    search_term = "mycology|mushrooms|mushroom"
+    logging.info(f"Fetching {num_articles} articles for '{search_term}'...")
 
     query_params = {
         "query": search_term,
         "sort": "citationCount:desc",
-        "publicationDateOrYear": f"{two_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
+        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
+        "fieldsOfStudy": "Environmental Science",
     }
 
     query_param_list = [
@@ -53,6 +56,28 @@ def fetch_bulk_articles(num_articles: int, search_term: str) -> list:
     if response.status_code == 200:
         data = response.json()
         papers = data.get("data", [])
+
+        # Exclude out papers without an absract summary
+        papers = [paper for paper in papers if paper.get("abstract")]
+
+        # Exclude out papers related to Medicine
+        papers = [
+            paper
+            for paper in papers
+            if not any(
+                field.get("category") == "Medicine"
+                for field in paper.get("s2FieldsOfStudy", [])
+            )
+        ]
+        papers = [
+            paper
+            for paper in papers
+            if not any(
+                field.get("category") == "Education"
+                for field in paper.get("s2FieldsOfStudy", [])
+            )
+        ]
+
         logging.info(f"Successfully fetched {num_articles} articles.")
         return papers[:num_articles]
     else:
@@ -84,8 +109,3 @@ def fetch_reference_count_by_paper(paper_id: str) -> dict:
             f"Error when fetching references: {response.status_code}\n{response.text}"
         )
         return {}
-
-
-if __name__ == "__main__":
-    articles = fetch_bulk_articles(20, "mycology")
-    print(articles)
