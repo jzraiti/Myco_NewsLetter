@@ -138,10 +138,15 @@ def render_template(articles: list[dict], unsubscribe_link: str) -> str:
     return template.render(articles=articles, unsubscribe_link=unsubscribe_link)
 
 
-def test_render_template():
-    articles = []
-    unsubscribe_url = "https://example.com/unsubscribe"
+def resend_send_email():
+    import resend
+    resend.api_key = os.getenv("RESEND_API_KEY")
 
-    html_content = render_template(articles, unsubscribe_url)
-    with open("test_email.html", "w") as f:
-        f.write(html_content)
+    r = resend.Emails.send(
+        {
+            "from": "millenniummarket.team@gmail.com",
+            "to": "andrewkkchen@gmail.com",
+            "subject": "Hello World",
+            "html": "<p>Congrats on sending your <strong>first email</strong>!</p>",
+        }
+    )

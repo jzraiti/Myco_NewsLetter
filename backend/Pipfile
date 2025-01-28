@@ -8,7 +8,7 @@ requests="*"
 openai="*"
 python-dotenv="*"
 pandas="*"
-
+resend="*"
 [dev-packages]
 
 [requires]

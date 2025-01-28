@@ -3,25 +3,15 @@ from utils.other_utils import (
     article_selection,
     render_template,
     generate_gpt_paper_summary,
+    resend_send_email
 )
 from utils.ss_api import fetch_bulk_articles
 import json
-from utils.supabase_utils import supabase_articles_POST
+from utils.aws_utils import aws_ses_send_email
+import boto3
 
-
-def generate_and_send_newsletter():
-    data = fetch_bulk_articles()
-    _, selection = article_selection(data)
-
-    for article in selection:
-        authors = ", ".join(author["name"] for author in article["authors"])
-        article["authors"] = authors
-
-    html_content = render_template(selection, "https://example.com")
-
-    with open("newsletter.html", "w") as f:
-        f.write(html_content)
-
+def test_send_email():
+    resend_send_email()
 
 def test():
     writestring = ""
@@ -43,4 +33,4 @@ def test_article_selection():
 
 if __name__ == "__main__":
     # test()
-    generate_and_send_newsletter()
+    test_send_email()
