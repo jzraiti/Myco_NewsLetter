@@ -140,13 +140,55 @@ def render_template(articles: list[dict], unsubscribe_link: str) -> str:
 
 def resend_send_email():
     import resend
+
     resend.api_key = os.getenv("RESEND_API_KEY")
 
-    r = resend.Emails.send(
-        {
-            "from": "millenniummarket.team@gmail.com",
-            "to": "andrewkkchen@gmail.com",
-            "subject": "Hello World",
-            "html": "<p>Congrats on sending your <strong>first email</strong>!</p>",
-        }
-    )
+    try:
+        r = resend.Emails.send(
+            {
+                "from": "myconewsletter@mycoweekly.click",
+                "to": "achen266@wisc.edu",
+                "subject": "Hello World",
+                "html": "<p>Congrats on sending your <strong>first email</strong>!</p>",
+            }
+        )
+        print("Email sent successfully!")
+    except Exception as e:
+        print(e)
+        return
+
+
+def smtp_send_email():
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    from email.utils import formataddr
+
+    # Email configuration
+    sender_email = os.getenv("SENDER_EMAIL")
+    receiver_email = "andrewkkchen@gmail.com"
+    password = os.getenv("SENDER_APP_PASSWORD")
+    smtp_server = "smtp.gmail.com"
+    port = 587
+
+    # Create message
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Weekly Digest"
+    message["From"] = formataddr(("MycoWeekly", sender_email))
+    message["To"] = receiver_email
+
+    # HTML content
+    html = ""
+    with open("test_email.html") as f:
+        html = f.read()
+
+    # Attach HTML content
+    message.attach(MIMEText(html, "html"))
+
+    # Send email
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.starttls()
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+
+    print("Email sent successfully")

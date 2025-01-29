@@ -3,7 +3,8 @@ from utils.other_utils import (
     article_selection,
     render_template,
     generate_gpt_paper_summary,
-    resend_send_email
+    resend_send_email,
+    smtp_send_email
 )
 from utils.ss_api import fetch_bulk_articles
 import json
@@ -11,7 +12,7 @@ from utils.aws_utils import aws_ses_send_email
 import boto3
 
 def test_send_email():
-    resend_send_email()
+    smtp_send_email()
 
 def test():
     writestring = ""
