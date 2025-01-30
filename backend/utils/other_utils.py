@@ -173,22 +173,33 @@ def smtp_send_email():
 
     # Create message
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Weekly Digest"
+    message["Subject"] = "Weekly Digest of the week 1/29"
     message["From"] = formataddr(("MycoWeekly", sender_email))
     message["To"] = receiver_email
 
+    # Add preview text before the main HTML
+    preview_text = "🍄 Your weekly mycology research highlights: Latest discoveries in fungal research and development"
+    preview_html = f"""
+    <div style="display: none; max-height: 0px; overflow: hidden;">
+        {preview_text}
+    </div>
+    """
+
     # HTML content
-    html = ""
     with open("test_email.html") as f:
         html = f.read()
 
-    # Attach HTML content
-    message.attach(MIMEText(html, "html"))
+    # Combine preview text with main HTML
+    full_html = preview_html + html
+    message.attach(MIMEText(full_html, "html"))
 
     # Send email
-    with smtplib.SMTP(smtp_server, port) as server:
-        server.starttls()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
+    try:
+        with smtplib.SMTP(smtp_server, port) as server:
+            server.starttls()
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message.as_string())
 
-    print("Email sent successfully")
+        print("Email sent successfully")
+    except Exception as e:
+        logging.error(f"Error in smtp_send_email: {str(e)}")
