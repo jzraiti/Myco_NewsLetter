@@ -43,7 +43,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
             },
             {
                 "role": "user",
-                "content": f'As an informed observer, write a compelling sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, and keep the length under 300 characters.',
+                "content": f'As an informed observer, write a compelling and informational summary for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, and keep the length under 300 characters.',
             },
         ],
     )
@@ -53,7 +53,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
 
 def generate_summary(article: dict) -> str:
     """Generates a summary of the given article using GPT-4o-mini."""
-    print(f"Generating summary for article: {article['paperId']}")
+    logging.info(f"Generating summary for article: {article['paperId']}")
     article = article.to_dict()
     generated_content: str = generate_gpt_paper_summary(
         title=article["title"], content=article["abstract"]
@@ -63,8 +63,12 @@ def generate_summary(article: dict) -> str:
 
 def extract_favicon(url: str) -> str:
     try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+        }
+
         # Fetch the webpage
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         response.raise_for_status()
 
         # Parse HTML
@@ -182,10 +186,13 @@ def article_selection(data: list) -> dict:
     if not selected_articles.empty:
         for index, article in selected_articles.iterrows():
             journal_url, favicon_url = fetch_venue_info(article)
-            # llm_summary = generate_summary(article)
-            if journal_url and favicon_url:
+            llm_summary = generate_summary(article)
+            if journal_url:
                 selected_articles.at[index, "url"] = journal_url
+            if favicon_url:
                 selected_articles.at[index, "favicon"] = favicon_url
+            if llm_summary:
+                selected_articles.at[index, "llm_summary"] = llm_summary
 
         # Update the df with summaries and update supabase table
         df.update(selected_articles)
