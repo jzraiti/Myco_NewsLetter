@@ -76,7 +76,7 @@ def supabase_recipients_GET():
             raise ValueError("Missing Supabase credentials")
 
         supabase: Client = create_client(url, key)
-        result = supabase.table("ss_recipients").select("*").execute()
+        result = supabase.table("recipients").select("*").execute()
         logger.info("Successfully fetched recipients")
         return result
 

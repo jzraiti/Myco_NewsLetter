@@ -4,12 +4,15 @@ from utils.other_utils import (
     render_template,
     generate_gpt_paper_summary,
     resend_send_email,
-    smtp_send_email
+    smtp_send_email,
+    fetch_venue_info
 )
-from utils.ss_api import fetch_bulk_articles
+from utils.supabase_utils import supabase_articles_GET
+from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import json
 from utils.aws_utils import aws_ses_send_email
 import boto3
+import favicon
 
 def test_send_email():
     smtp_send_email()
@@ -27,11 +30,27 @@ def test():
 
 
 def test_article_selection():
-    data = fetch_bulk_articles()
+    # data = fetch_bulk_articles()
+    data = supabase_articles_GET().data
     _, result = article_selection(data)
     return result
 
+def test_article_detail():
+    paperID = "4a99756c2b5237219828b0f7e63f9c417430f1cc"
+    result = fetch_paper_details(paperID)
+    print(result)
+
+def test_venue_info():
+    url = "https://www.semanticscholar.org/paper/The-importance-of-antimicrobial-resistance-in-Gow-Johnson/0d2f56b0cab7d659bb76797e5c6d79237d8c8fdb"
+    result = fetch_venue_info(url)
+    print(result)
+
+def test_favicon():
+    icons = favicon.get(url="mycokeys.pensoft.net")
 
 if __name__ == "__main__":
     # test()
-    test_send_email()
+    # test_send_email()
+    test_article_selection()
+    # test_article_detail()
+    # test_venue_info()

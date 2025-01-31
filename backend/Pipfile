@@ -9,6 +9,10 @@ openai="*"
 python-dotenv="*"
 pandas="*"
 resend="*"
+bs4="*"
+favicon="*"
+extract_favicon="*"
+
 [dev-packages]
 
 [requires]

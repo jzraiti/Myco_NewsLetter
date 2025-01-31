@@ -109,3 +109,36 @@ def fetch_reference_count_by_paper(paper_id: str) -> dict:
             f"Error when fetching references: {response.status_code}\n{response.text}"
         )
         return {}
+
+
+def fetch_paper_details(paper_id: str) -> dict:
+    """Fetches the details of a paper given its id.
+
+    Args:
+        paper_id (str): The id of the paper.
+    """
+
+    url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
+    headers = {
+        "x-api-key": os.getenv("SEMANTIC_SCHOLAR_API_KEY"),
+    }
+    query_param_list = [
+        "title",
+        "url",
+        "venue",
+        "publicationVenue",
+        "citationCount",
+        "influentialCitationCount",
+        "tldr"
+    ]
+    query_params = ",".join([param for param in query_param_list])
+    response = requests.get(url=url, headers=headers, params={"fields": query_params})
+
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        logging.error(
+            f"Error when fetching paper details: {response.status_code}\n{response.text}"
+        )
+        return {}

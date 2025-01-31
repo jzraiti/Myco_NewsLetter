@@ -1,14 +1,19 @@
 import os
 import dotenv
+from extract_favicon import from_url
 import pandas as pd
 import logging
 from openai import OpenAI
 from jinja2 import Environment, FileSystemLoader
+import requests
+from urllib.parse import urljoin, urlparse
+from bs4 import BeautifulSoup
 
 from utils.supabase_utils import (
     supabase_articles_GET,
     supabase_articles_POST,
     supabase_journals_GET,
+    supabase_recipients_GET,
 )
 
 from utils.ss_api import fetch_bulk_articles
@@ -46,15 +51,67 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
     return completion.choices[0].message.content
 
 
-def generate_summaries(selected_articles: pd.DataFrame):
-    for index, article in selected_articles.iterrows():
-        article_dict = article.to_dict()
-        generated_content: str = generate_gpt_paper_summary(
-            title=article_dict["title"], content=article_dict["abstract"]
-        )
-        selected_articles.at[index, "llm_summary"] = generated_content
+def generate_summary(article: dict) -> str:
+    """Generates a summary of the given article using GPT-4o-mini."""
+    print(f"Generating summary for article: {article['paperId']}")
+    article = article.to_dict()
+    generated_content: str = generate_gpt_paper_summary(
+        title=article["title"], content=article["abstract"]
+    )
+    return generated_content
 
-    return selected_articles
+
+def extract_favicon(url: str) -> str:
+    try:
+        # Fetch the webpage
+        response = requests.get(url)
+        response.raise_for_status()
+
+        # Parse HTML
+        soup = BeautifulSoup(response.text, "html.parser")
+
+        # Look for favicon in different possible locations
+        favicon_link = soup.find("link", rel=["icon", "shortcut icon"])
+        if favicon_link and favicon_link.get("href"):
+            # Construct the full favicon URL
+            favicon_url = urljoin(url, favicon_link["href"])
+            return favicon_url
+        else:
+            logging.info(f"No favicon found for: {url}")
+            return None
+
+    except Exception as e:
+        logging.error(f"Error extracting favicon: {e}")
+        return None
+
+
+def fetch_venue_info(article: dict) -> str:
+    """Parses through the Semantic Scholar webpage and fetches the journal link and favicon."""
+
+    try:
+        # Fetch the webpage
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        }
+        doi_url = f"https://doi.org/{article["externalIds"]["DOI"]}"
+
+        # Follow DOI redirect to get actual journal URL
+        doi_response = requests.get(doi_url, headers=headers, allow_redirects=True)
+        journal_url = doi_response.url
+
+        # Extract base domain from journal URL
+        parsed_url = urlparse(journal_url)
+        base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
+
+        favicon_url = extract_favicon(base_url)
+        logging.info(
+            f"Successfully fetched venue info for article: {article['paperId']}"
+        )
+        return journal_url, favicon_url
+
+    except Exception as e:
+        logging.error(f"Error fetching venue info for article: {str(e)}")
+        return None, None
 
 
 def article_selection(data: list) -> dict:
@@ -121,12 +178,18 @@ def article_selection(data: list) -> dict:
         # Combine cited and h5-index based articles
         selected_articles = pd.concat([selected_articles, remaining_articles])
 
-    # Generate summaries for selected articles
-    # selected_articles = generate_summaries(selected_articles)
+    # Generate summaries and fetch venue info
+    if not selected_articles.empty:
+        for index, article in selected_articles.iterrows():
+            journal_url, favicon_url = fetch_venue_info(article)
+            # llm_summary = generate_summary(article)
+            if journal_url and favicon_url:
+                selected_articles.at[index, "url"] = journal_url
+                selected_articles.at[index, "favicon"] = favicon_url
 
-    # Update the df with summaries and update supabase table
-    df.update(selected_articles)
-    response = supabase_articles_POST(df.to_dict(orient="records"))
+        # Update the df with summaries and update supabase table
+        df.update(selected_articles)
+        response = supabase_articles_POST(df.to_dict(orient="records"))
 
     # Return 1: all processed articles, 2: top 5 articles
     return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
@@ -165,17 +228,13 @@ def smtp_send_email():
     from email.utils import formataddr
 
     # Email configuration
+
+    receiver_email_list = supabase_articles_GET()
+    receiver_email_list = receiver_email_list["email"]
     sender_email = os.getenv("SENDER_EMAIL")
-    receiver_email = "andrewkkchen@gmail.com"
     password = os.getenv("SENDER_APP_PASSWORD")
     smtp_server = "smtp.gmail.com"
     port = 587
-
-    # Create message
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "Weekly Digest of the week 1/29"
-    message["From"] = formataddr(("MycoWeekly", sender_email))
-    message["To"] = receiver_email
 
     # Add preview text before the main HTML
     preview_text = "🍄 Your weekly mycology research highlights: Latest discoveries in fungal research and development"
@@ -188,18 +247,22 @@ def smtp_send_email():
     # HTML content
     with open("test_email.html") as f:
         html = f.read()
+    message = MIMEMultipart("alternative")
+    message["Subject"] = "Weekly Digest of the week 1/29"
+    message["From"] = formataddr(("MycoWeekly", sender_email))
 
-    # Combine preview text with main HTML
     full_html = preview_html + html
     message.attach(MIMEText(full_html, "html"))
 
-    # Send email
-    try:
-        with smtplib.SMTP(smtp_server, port) as server:
-            server.starttls()
-            server.login(sender_email, password)
-            server.sendmail(sender_email, receiver_email, message.as_string())
+    for receiver_email in receiver_email_list:
+        message["To"] = receiver_email
 
-        print("Email sent successfully")
-    except Exception as e:
-        logging.error(f"Error in smtp_send_email: {str(e)}")
+        try:
+            with smtplib.SMTP(smtp_server, port) as server:
+                server.starttls()
+                server.login(sender_email, password)
+                server.sendmail(sender_email, receiver_email, message.as_string())
+
+            print(f"email sent successfully to {receiver_email}")
+        except Exception as e:
+            logging.error(f"Error in smtp_send_email: {str(e)}")
