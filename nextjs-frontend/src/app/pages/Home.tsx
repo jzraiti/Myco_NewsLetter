@@ -109,8 +109,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full p-4 border-t mt-auto">
-        <div className="max-w-7xl mx-auto text-center text-sm text-gray-500">
+        <div className="max-w-7xl mx-auto text-center text-sm text-gray-500 ">
           © 2024 MycoNewsletter. All rights reserved.
+          {/* TODO implement AWS trigger here */}
+          <Link href="/unsubscribe" className="ml-2 hover:text-gray-600">Unsubscribe</Link>
         </div>
       </footer>
     </div>
