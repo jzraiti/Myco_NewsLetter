@@ -6,69 +6,138 @@
     <title>Myco Newsletter</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
         line-height: 1.6;
-        max-width: 600px;
+        max-width: 800px;
         margin: 0 auto;
         padding: 20px;
         color: #333;
+        background-color: #f9fafb;
       }
       .header {
         text-align: center;
-        padding: 20px 0;
-        border-bottom: 2px solid #8b4513;
+        padding: 24px 0;
+        border-bottom: 1px solid #e5e7eb;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .logo-container {
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 16px;
+        width: 100%;
+      }
+      .logo {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        margin-right: 12px;
+      }
+      .brand-name {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 24px;
+        font-weight: bold;
+        color: #111827;
       }
       .article {
-        margin: 25px 0;
-        padding: 15px;
-        background-color: #fffcf1;
-        border-radius: 5px;
+        margin: 24px auto;
+        max-width: 700px;
+        padding: 24px;
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.2s ease;
+      }
+      .article:hover {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
       .article-title {
-        color: #8b4513;
+        color: #111827;
         font-size: 18px;
-        margin-bottom: 10px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .article-venue {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .article-authors {
+        color: #4b5563;
+        font-size: 14px;
+        margin-bottom: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .article-summary {
         font-size: 14px;
-        color: #666;
-      }
-      .footer {
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid #ddd;
-        text-align: center;
-        font-size: 12px;
-        color: #888;
+        color: #4b5563;
+        line-height: 1.6;
       }
       .read-more {
         display: inline-block;
-        margin-top: 10px;
-        color: #8b4513;
+        margin-top: 16px;
+        padding: 8px 16px;
+        background-color: #f3f4f6;
+        color: #111827;
         text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .footer {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid #e5e7eb;
+        text-align: center;
+        font-size: 14px;
+        color: #6b7280;
+      }
+      .unsubscribe-link {
+        color: #6b7280;
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
     <div class="header">
-      <h1>🍄 Myco Newsletter Research Digest</h1>
-      <p>Your weekly dose of mycological research highlights</p>
+      <div class="logo-container">
+        <img
+          src="https://miscbucketach96.s3.us-west-1.amazonaws.com/bimi-svg-tiny-12-ps.svg"
+          alt="Mushroom Logo"
+          class="logo"
+        />
+        <span class="brand-name">MycoWeekly Newsletter</span>
+      </div>
+      <p>Your Weekly Dose of Mycology Research</p>
     </div>
 
-    <!-- Articles will be dynamically inserted here -->
     {% for article in articles %}
     <div class="article">
       <h2 class="article-title">{{ article.title }}</h2>
-      <h5>{{ article.venue }}</h5>
-      <p>{{ article.authors }}</p>
+      <div class="article-venue">{{ article.venue }}</div>
+      <div class="article-authors">{{ article.authors }}</div>
       <p class="article-summary">{{ article.llm_summary }}</p>
-      <a href="{{ article.url }}" class="read-more">Read full paper →</a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="{{ article.url }}" class="read-more">Read full paper → </a>
+        <img src="{{article.favicon}}" alt="Venue Logo" class="logo" style="margin: 0;">
+      </div>
     </div>
     {% endfor %}
 
     <div class="footer">
-      <p>Thank you for subscribing to Myco Research Digest</p>
-      <p>To unsubscribe, <a href="{{ unsubscribe_url }}">click here</a></p>
+      <p>Thank you for subscribing to MycoNewsletter</p>
+      <p>
+        <a href="{{ unsubscribe_url }}" class="unsubscribe-link">Unsubscribe</a>
+      </p>
     </div>
   </body>
 </html>

@@ -21,6 +21,7 @@ from utils.ss_api import fetch_bulk_articles
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 dotenv.load_dotenv()
 
+NUMBER_OF_ARTICLES = 4
 
 def generate_gpt_paper_summary(title: str, content: str) -> str:
     """Generates a summary of a research paper using GPT-4o-mini.
@@ -39,11 +40,11 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": "You are a ChatGPT, a helpful assistant and expert in Mycology and fungi. Your specialty is crafting professional, concise, and engaging sneak peeks for mycology articles written by researchers from all around the world, tailored for a newsletter. Highlight the most intriguing or unexpected aspects of the research while maintaining scientific accuracy and a tone that sparks curiosity.",
+                "content": "You are a ChatGPT, a helpful assistant and expert in Mycology and fungi. Your specialty is crafting professional and concise sneak peeks for mycology articles written by researchers from all around the world, tailored for a newsletter. Highlight the most intriguing or unexpected aspects of the research while maintaining scientific accuracy and a tone that sparks curiosity.",
             },
             {
                 "role": "user",
-                "content": f'As an informed observer, write a compelling and informational summary for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, and keep the length under 300 characters.',
+                "content": f'As an informed observer, write a compelling and informational sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, do not write the article in the first person point of view, and keep the length under 300 characters.',
             },
         ],
     )
@@ -119,7 +120,7 @@ def fetch_venue_info(article: dict) -> str:
 
 
 def article_selection(data: list) -> dict:
-    """Selects the top 5 articles from the given data and generates summaries for them.
+    """Selects top articles from the given data and generates summaries for them.
 
     Args:
         data (list): The list of articles to process.
@@ -161,7 +162,7 @@ def article_selection(data: list) -> dict:
     selected_articles = df[df["citationCount"] > 0].head(5).copy()
     cited_papers = len(selected_articles)
 
-    if cited_papers < 5:
+    if cited_papers < NUMBER_OF_ARTICLES:
         # Fetch journal h5-index data
         journals = supabase_journals_GET()
 
@@ -175,7 +176,7 @@ def article_selection(data: list) -> dict:
         # Sort by h5-index and select remaining needed articles
         remaining_articles = (
             remaining_df.sort_values(by="h5-index", ascending=False)
-            .head(5 - cited_papers)
+            .head(NUMBER_OF_ARTICLES - cited_papers)
             .copy()
         )
 
@@ -198,7 +199,7 @@ def article_selection(data: list) -> dict:
         df.update(selected_articles)
         response = supabase_articles_POST(df.to_dict(orient="records"))
 
-    # Return 1: all processed articles, 2: top 5 articles
+    # Return 1: all processed articles, 2: top articles
     return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
 
 
@@ -228,48 +229,56 @@ def resend_send_email():
         return
 
 
-def smtp_send_email():
+def smtp_send_email(html_content: str):
     import smtplib
     from email.mime.text import MIMEText
     from email.mime.multipart import MIMEMultipart
     from email.utils import formataddr
+    from datetime import datetime
 
     # Email configuration
 
-    receiver_email_list = supabase_articles_GET()
-    receiver_email_list = receiver_email_list["email"]
+    receiver_email_list = supabase_recipients_GET()
+    receiver_email_list = [receiver["email"] for receiver in receiver_email_list.data]
     sender_email = os.getenv("SENDER_EMAIL")
     password = os.getenv("SENDER_APP_PASSWORD")
     smtp_server = "smtp.gmail.com"
     port = 587
 
     # Add preview text before the main HTML
-    preview_text = "🍄 Your weekly mycology research highlights: Latest discoveries in fungal research and development"
-    preview_html = f"""
+    preview_text = "🍄 Your weekly mycology research highlights: Latest discoveries in fungal research and development "
+    full_html = f"""
     <div style="display: none; max-height: 0px; overflow: hidden;">
         {preview_text}
     </div>
+    <div style="background-color: #f9fafb; width: 100%; padding: 20px 0;">
+        {html_content}
+    </div>
     """
 
-    # HTML content
-    with open("test_email.html") as f:
-        html = f.read()
-    message = MIMEMultipart("alternative")
-    message["Subject"] = "Weekly Digest of the week 1/29"
-    message["From"] = formataddr(("MycoWeekly", sender_email))
+    # Connect to SMTP server once
+    with smtplib.SMTP(smtp_server, port) as server:
+        server.starttls()
+        server.login(sender_email, password)
+        
+        # Send emails
+        for receiver_email in receiver_email_list:
+            try:
+                # Create fresh message for each recipient
+                message = MIMEMultipart("related")
+                message["Subject"] = f"Weekly Digest {datetime.now().strftime('%m/%d')}"
+                message["From"] = formataddr(("MycoWeekly Newsletter", sender_email))
+                message["To"] = receiver_email
 
-    full_html = preview_html + html
-    message.attach(MIMEText(full_html, "html"))
+                # Create the body with alternative parts
+                msgAlternative = MIMEMultipart("alternative")
+                message.attach(msgAlternative)
 
-    for receiver_email in receiver_email_list:
-        message["To"] = receiver_email
+                # Attach the HTML
+                msgAlternative.attach(MIMEText(full_html, "html"))
 
-        try:
-            with smtplib.SMTP(smtp_server, port) as server:
-                server.starttls()
-                server.login(sender_email, password)
+                # Send the email
                 server.sendmail(sender_email, receiver_email, message.as_string())
-
-            print(f"email sent successfully to {receiver_email}")
-        except Exception as e:
-            logging.error(f"Error in smtp_send_email: {str(e)}")
+                print(f"email sent successfully to {receiver_email}")
+            except Exception as e:
+                logging.error(f"Error sending email to {receiver_email}: {str(e)}")

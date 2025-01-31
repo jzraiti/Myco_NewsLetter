@@ -5,7 +5,7 @@ from utils.other_utils import (
     generate_gpt_paper_summary,
     resend_send_email,
     smtp_send_email,
-    fetch_venue_info
+    fetch_venue_info,
 )
 from utils.supabase_utils import supabase_articles_GET
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
@@ -14,8 +14,10 @@ from utils.aws_utils import aws_ses_send_email
 import boto3
 import favicon
 
+
 def test_send_email():
     smtp_send_email()
+
 
 def test():
     writestring = ""
@@ -30,27 +32,49 @@ def test():
 
 
 def test_article_selection():
-    # data = fetch_bulk_articles()
-    data = supabase_articles_GET().data
+    data = fetch_bulk_articles()
+    # data = supabase_articles_GET().data
     _, result = article_selection(data)
-    return result
+    for article in result:
+        article["authors"] = [author["name"] for author in article["authors"]]
+        article["authors"] = ", ".join(article["authors"])
+
+    email_html_template = render_template(result, "https://google.com")
+    smtp_send_email(email_html_template)
+
 
 def test_article_detail():
     paperID = "4a99756c2b5237219828b0f7e63f9c417430f1cc"
     result = fetch_paper_details(paperID)
     print(result)
 
+
 def test_venue_info():
     url = "https://www.semanticscholar.org/paper/The-importance-of-antimicrobial-resistance-in-Gow-Johnson/0d2f56b0cab7d659bb76797e5c6d79237d8c8fdb"
     result = fetch_venue_info(url)
     print(result)
 
+
 def test_favicon():
     icons = favicon.get(url="mycokeys.pensoft.net")
+
+
+def test_jan_31():
+    data = supabase_articles_GET().data
+    data = [article for article in data if article["llm_summary"] is not None]
+    data = data[:3]
+    for article in data:
+        article["authors"] = [author["name"] for author in article["authors"]]
+        article["authors"] = ", ".join(article["authors"])
+
+    email_html_template = render_template(data, "https://google.com")
+    smtp_send_email(email_html_template)
+
 
 if __name__ == "__main__":
     # test()
     # test_send_email()
-    test_article_selection()
+    # test_article_selection()
     # test_article_detail()
     # test_venue_info()
+    test_jan_31()
