@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -46,9 +47,11 @@ export default function Home() {
               className="font-bold flex items-center gap-2"
               onClick={() => (window.location.href = "/")}
             >
-              <img
+              <Image
                 src="/mushroom_logo.jpg"
                 alt="Mushroom Logo"
+                width={32}
+                height={32}
                 className="w-8 h-8"
               />
               MycoNewsletter
