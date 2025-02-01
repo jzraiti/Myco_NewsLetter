@@ -1,18 +1,16 @@
 from utils.aws_utils import upload_to_s3
 from utils.other_utils import (
     article_selection,
-    render_template,
     generate_gpt_paper_summary,
-    resend_send_email,
-    smtp_send_email,
     fetch_venue_info,
 )
+from utils.email_utils import render_template, smtp_send_email
 from utils.supabase_utils import supabase_articles_GET
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import json
-from utils.aws_utils import aws_ses_send_email
 import boto3
 import favicon
+import markdown
 
 
 def test_send_email():
@@ -66,8 +64,9 @@ def test_jan_31():
     for article in data:
         article["authors"] = [author["name"] for author in article["authors"]]
         article["authors"] = ", ".join(article["authors"])
+        article["llm_summary"] = markdown.markdown(article["llm_summary"])
 
-    email_html_template = render_template(data, "https://google.com")
+    email_html_template = render_template(data)
     smtp_send_email(email_html_template)
 
 

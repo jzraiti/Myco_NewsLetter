@@ -111,7 +111,7 @@
     <div class="header">
       <div class="logo-container">
         <img
-          src="https://miscbucketach96.s3.us-west-1.amazonaws.com/bimi-svg-tiny-12-ps.svg"
+          src="https://i.imgur.com/F3lPOpB.jpeg"
           alt="Mushroom Logo"
           class="logo"
         />
@@ -125,10 +125,9 @@
       <h2 class="article-title">{{ article.title }}</h2>
       <div class="article-venue">{{ article.venue }}</div>
       <div class="article-authors">{{ article.authors }}</div>
-      <p class="article-summary">{{ article.llm_summary }}</p>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <a href="{{ article.url }}" class="read-more">Read full paper → </a>
-        <img src="{{article.favicon}}" alt="Venue Logo" class="logo" style="margin: 0;">
+      <p class="article-summary">{{ article.llm_summary|safe }}</p>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <a href="{{ article.url }}">Read full paper</a>
       </div>
     </div>
     {% endfor %}

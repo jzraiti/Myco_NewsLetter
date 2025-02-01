@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b8b6db0b6f7ca4eda47dbb1f7c78802dfc582a5c487b583bb1fadd14c0879a96"
+            "sha256": "5074ad763c44b68eb5e73f6c382eda4bd150fbc77b7fe52bd2976d0912a75686"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -423,11 +423,10 @@
         },
         "h2": {
             "hashes": [
-                "sha256:03a46bcf682256c95b5fd9e9a99c1323584c3eec6440d379b9903d709476bc6d",
-                "sha256:a83aca08fbe7aacb79fec788c9c0bac936343560ed9ec18b82a13a12c28d2abb"
+                "sha256:479a53ad425bb29af087f3458a61d30780bc818e4ebcf01f0b536ba916462ed0"
             ],
-            "markers": "python_full_version >= '3.6.1'",
-            "version": "==4.1.0"
+            "markers": "python_version >= '3.9'",
+            "version": "==4.2.0"
         },
         "hpack": {
             "hashes": [
@@ -554,6 +553,15 @@
             "markers": "python_version >= '3.8'",
             "version": "==0.8.2"
         },
+        "markdown": {
+            "hashes": [
+                "sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2",
+                "sha256:7eb6df5690b81a1d7942992c97fad2938e956e79df20cbc6186e9c3a77b1c803"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==3.7"
+        },
         "numpy": {
             "hashes": [
                 "sha256:02935e2c3c0c6cbe9c7955a8efa8908dd4221d7755644c59d1bba28b94fd334f",
@@ -617,12 +625,12 @@
         },
         "openai": {
             "hashes": [
-                "sha256:993bd11b96900b9098179c728026f016b4982ded7ee30dfcf4555eab1171fff9",
-                "sha256:a8f843e10f2855713007f491d96afb2694b11b5e02cb97c7d01a0be60bc5bb51"
+                "sha256:216f325a24ed8578e929b0f1b3fb2052165f3b04b0461818adaa51aa29c71f8a",
+                "sha256:e8c512c0743accbdbe77f3429a1490d862f8352045de8dc81969301eb4a4f666"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.60.2"
+            "version": "==1.61.0"
         },
         "pandas": {
             "hashes": [

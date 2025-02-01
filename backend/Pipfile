@@ -12,6 +12,7 @@ resend="*"
 bs4="*"
 favicon="*"
 extract_favicon="*"
+markdown="*"
 
 [dev-packages]
 
