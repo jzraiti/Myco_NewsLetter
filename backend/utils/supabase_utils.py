@@ -43,7 +43,6 @@ def supabase_articles_POST(data: list):
 
         data = df.to_dict(orient="records")
         result = supabase.table("ss_articles").upsert(data, on_conflict="paperId").execute()
-        logger.info(f"Successfully updated {len(data)} articles")
         return result
 
     except Exception as e:
@@ -60,7 +59,6 @@ def supabase_articles_GET():
 
         supabase: Client = create_client(url, key)
         result = supabase.table("ss_articles").select("*").execute()
-        logger.info("Successfully fetched articles")
         return result
 
     except Exception as e:
@@ -77,7 +75,6 @@ def supabase_recipients_GET():
 
         supabase: Client = create_client(url, key)
         result = supabase.table("recipients").select("*").execute()
-        logger.info("Successfully fetched recipients")
         return result
 
     except Exception as e:
@@ -94,9 +91,40 @@ def supabase_journals_GET():
 
         supabase: Client = create_client(url, key)
         result = supabase.table("scholar_journals").select("*").execute()
-        logger.info("Successfully fetched journals")
         return result
 
     except Exception as e:
         logger.error(f"Error in supabase_journals_GET: {str(e)}")
+        raise
+
+def supabase_newsletters_GET():
+    """GETs the newsletter data from the Supabase database."""
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+
+        supabase: Client = create_client(url, key)
+        result = supabase.table("newsletters").select("*").execute()
+        return result
+
+    except Exception as e:
+        logger.error(f"Error in supabase_newsletters_GET: {str(e)}")
+        raise
+
+def supabase_newsletters_POST(data: dict):
+    """POSTs the given newsletter data to the Supabase database."""
+    try:
+        url: str = os.getenv("SUPABASE_URL")
+        key: str = os.getenv("SUPABASE_KEY")
+        if not url or not key:
+            raise ValueError("Missing Supabase credentials")
+
+        supabase: Client = create_client(url, key)
+        result = supabase.table("newsletters").upsert(data).execute()
+        return result
+
+    except Exception as e:
+        logger.error(f"Error in supabase_newsletters_POST: {str(e)}")
         raise

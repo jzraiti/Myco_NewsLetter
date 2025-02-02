@@ -13,6 +13,8 @@ bs4="*"
 favicon="*"
 extract_favicon="*"
 markdown="*"
+boto3="*"
+jinja2="*"
 
 [dev-packages]
 

@@ -5,7 +5,7 @@ from utils.other_utils import (
     fetch_venue_info,
 )
 from utils.email_utils import render_template, smtp_send_email
-from utils.supabase_utils import supabase_articles_GET
+from utils.supabase_utils import supabase_articles_GET, supabase_newsletters_POST
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import json
 import boto3
@@ -58,6 +58,8 @@ def test_favicon():
 
 
 def test_jan_31():
+    from datetime import datetime
+
     data = supabase_articles_GET().data
     data = [article for article in data if article["llm_summary"] is not None]
     data = data[:3]
@@ -67,7 +69,13 @@ def test_jan_31():
         article["llm_summary"] = markdown.markdown(article["llm_summary"])
 
     email_html_template = render_template(data)
-    smtp_send_email(email_html_template)
+    # smtp_send_email(email_html_template)
+    upload_to_s3(email_html_template)
+    data = {
+        "name": f"{datetime.now().strftime('%m-%d-%Y')}.html",
+        "link": f"https://myconews.s3-us-west-1.amazonaws.com/{datetime.now().strftime('%m-%d-%Y')}.html",
+    }
+    supabase_newsletters_POST(data)
 
 
 if __name__ == "__main__":

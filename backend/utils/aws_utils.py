@@ -12,6 +12,33 @@ AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
 AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
 
 
+def upload_to_s3(html_content):
+    from datetime import datetime
+
+    try:
+        # Initialize S3 client
+        s3 = boto3.client(
+            "s3", aws_access_key_id=AWS_ACCESS_KEY, aws_secret_access_key=AWS_SECRET_KEY
+        )
+
+        # Generate base key from date
+        base_key = datetime.now().strftime("%m-%d-%Y")
+        html_key = f"{base_key}.html"
+
+        # Upload HTML
+        s3.put_object(
+            Bucket="myconews",
+            Key=html_key,
+            Body=html_content.encode("utf-8"),
+            ContentType="text/html",
+        )
+        logging.info(f"Successfully uploaded html file {html_key} to S3!")
+
+    except Exception as e:
+        logging.error(f"Error uploading to S3: {e}")
+        raise e
+
+
 def aws_ses_send_email():
     import boto3
     from botocore.exceptions import ClientError
@@ -23,7 +50,7 @@ def aws_ses_send_email():
 
     # The email body for recipients with non-HTML email clients.
     BODY_TEXT = (
-        "Amazon SES Test (Python)\r\n"  
+        "Amazon SES Test (Python)\r\n"
         "This email was sent with Amazon SES using the "
         "AWS SDK for Python (Boto)."
     )
@@ -78,13 +105,3 @@ def aws_ses_send_email():
     else:
         logging.info("Email sent! Message ID:"),
         print(response["MessageId"])
-
-
-def upload_to_s3(html_content):
-    s3 = boto3.client("s3")
-    s3.put_object(
-        Bucket="your-s3-bucket",
-        Key="newsletter.html",
-        Body=html_content,
-        ContentType="text/html",
-    )
