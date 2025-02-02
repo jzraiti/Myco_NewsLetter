@@ -74,7 +74,7 @@ export default function Unsubscribe() {
           />
           MycoNewsletter
         </p>
-        <p className="text-gray-600">We're sad to see you go!</p>
+        <p className="text-gray-600">We are sad to see you go!</p>
         <div className="w-full max-w-md flex gap-2 p-2 rounded-lg">
           <Input
             type="email"
