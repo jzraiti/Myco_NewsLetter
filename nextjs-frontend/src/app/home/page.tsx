@@ -33,16 +33,40 @@ export default function Home() {
 
     setIsLoading(true);
     try {
-      const { error } = await supabase.from("recipients").insert([{ email }]);
-      if (error) throw error.message;
-      showToast("Thanks for subscribing! ", "success");
+      // First check if the user exists and their subscription status
+      const { data: existingUser } = await supabase
+        .from("recipients")
+        .select("is_subscribed")
+        .eq("email", email)
+        .single();
+
+      if (existingUser) {
+        if (existingUser.is_subscribed) {
+          showToast("You are already subscribed!", "error");
+          return;
+        }
+
+        // Update existing user's subscription status
+        const { error: updateError } = await supabase
+          .from("recipients")
+          .update({ is_subscribed: true })
+          .eq("email", email);
+
+        if (updateError) throw updateError.message;
+      } else {
+        
+        // Insert new user
+        const { error: insertError } = await supabase
+          .from("recipients")
+          .insert([{ email, is_subscribed: true }]);
+
+        if (insertError) throw insertError.message;
+      }
+
+      showToast("Thanks for subscribing!", "success");
       setEmail("");
     } catch (error) {
-      if ((error as string).includes("duplicate key value")) {
-        showToast("You are already subscribed!", "error");
-      } else {
-        showToast("Something went wrong. Please try again later.", "error");
-      }
+      showToast("Something went wrong. Please try again later.", "error");
     } finally {
       setIsLoading(false);
     }
