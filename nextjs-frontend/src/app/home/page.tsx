@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 import { Layout } from "@/components/Layout";
+import { Toast } from "@/components/ui/toast";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,6 +17,16 @@ const supabase = createClient(
 export default function Home() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [toast, setToast] = useState<{
+    show: boolean;
+    message: string;
+    variant: "success" | "error";
+  }>({ show: false, message: "", variant: "success" });
+
+  const showToast = (message: string, variant: "success" | "error") => {
+    setToast({ show: true, message, variant });
+    setTimeout(() => setToast((prev) => ({ ...prev, show: false })), 3000);
+  };
 
   const handleSubscribe = async () => {
     if (!email) return;
@@ -23,13 +34,15 @@ export default function Home() {
     setIsLoading(true);
     try {
       const { error } = await supabase.from("recipients").insert([{ email }]);
-
-      if (error) throw error;
-      alert("Thank you for subscribing!");
+      if (error) throw error.message;
+      showToast("Thanks for subscribing! ", "success");
       setEmail("");
     } catch (error) {
-      alert("Error subscribing. Please try again.");
-      console.error(error);
+      if ((error as string).includes("duplicate key value")) {
+        showToast("You are already subscribed!", "error");
+      } else {
+        showToast("Something went wrong. Please try again later.", "error");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -37,10 +50,14 @@ export default function Home() {
 
   return (
     <Layout>
+      <Toast
+        message={toast.message}
+        isVisible={toast.show}
+        onClose={() => setToast((prev) => ({ ...prev, show: false }))}
+        variant={toast.variant}
+      />
       <main className="flex-1 flex flex-col items-center justify-center gap-8 p-4 relative">
-        <p
-          className="font-bold flex items-center gap-2 text-3xl"
-        >
+        <p className="font-bold flex items-center gap-2 text-3xl">
           <Image
             src="/android-chrome-512x512.png"
             alt="Mushroom Logo"
