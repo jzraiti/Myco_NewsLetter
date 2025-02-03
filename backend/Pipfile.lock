@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "1ff4be75a574e8f577a5742fbdf8b4ac51196b0c090fd6b32d0903f7f78d9086"
+            "sha256": "62d98788b63897186e0f5a4e1b2ae2eccaea0c8c3a6fd785477ad9efe4c2c54c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -35,11 +35,11 @@
         },
         "beautifulsoup4": {
             "hashes": [
-                "sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051",
-                "sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed"
+                "sha256:9c4c3dfa67aba55f6cd03769c441b21e6a369797fd6766e4b4c6b3399aae2735",
+                "sha256:b6e5afb3a2b1472c8db751a92eabf7834e5c7099f990c5e4b35f1f16b60bae64"
             ],
             "markers": "python_full_version >= '3.6.0'",
-            "version": "==4.12.3"
+            "version": "==4.13.0"
         },
         "boto3": {
             "hashes": [
@@ -440,7 +440,8 @@
         },
         "h2": {
             "hashes": [
-                "sha256:479a53ad425bb29af087f3458a61d30780bc818e4ebcf01f0b536ba916462ed0"
+                "sha256:479a53ad425bb29af087f3458a61d30780bc818e4ebcf01f0b536ba916462ed0",
+                "sha256:c8a52129695e88b1a0578d8d2cc6842bbd79128ac685463b887ee278126ad01f"
             ],
             "markers": "python_version >= '3.9'",
             "version": "==4.2.0"
@@ -452,15 +453,6 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==4.1.0"
-        },
-        "html2image": {
-            "hashes": [
-                "sha256:71593b6b1e100a585201833656cc7446ce1d2d5c7ec101b507c5c2b71bca6ecc",
-                "sha256:8d3cf5ee805647d1fb21442137349b3ab0e352b4cac7e4280e2a0f841466e87c"
-            ],
-            "index": "pypi",
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
-            "version": "==2.0.5"
         },
         "httpcore": {
             "hashes": [
@@ -1131,14 +1123,6 @@
             ],
             "markers": "python_version >= '3.9'",
             "version": "==2.3.0"
-        },
-        "websocket-client": {
-            "hashes": [
-                "sha256:17b44cc997f5c498e809b22cdf2d9c7a9e71c02c8cc2b6c56e7c2d1239bfa526",
-                "sha256:3239df9f44da632f96012472805d40a23281a991027ce11d2f45a6f24ac4c3da"
-            ],
-            "markers": "python_version >= '3.8'",
-            "version": "==1.8.0"
         },
         "zstandard": {
             "hashes": [

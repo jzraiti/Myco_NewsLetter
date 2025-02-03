@@ -1,6 +1,5 @@
 import os
 import dotenv
-from extract_favicon import from_url
 import pandas as pd
 import logging
 from openai import OpenAI
@@ -36,7 +35,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
     client = OpenAI(api_key=OPENAI_API_KEY)
     completion = client.chat.completions.create(
         model="gpt-4o-mini",
-        temperature=1,
+        temperature=1.1,
         messages=[
             {
                 "role": "system",
@@ -44,7 +43,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
             },
             {
                 "role": "user",
-                "content": f'As an informed observer, write a compelling and informational sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, do not write the article in the first person point of view, and keep the length under 300 characters.',
+                "content": f'As an informed observer, write a compelling and informational sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, do not write the article in the first person point of view, and keep the length under 400 characters.',
             },
         ],
     )

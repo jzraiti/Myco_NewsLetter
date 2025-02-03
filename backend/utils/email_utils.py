@@ -42,7 +42,11 @@ def smtp_send_email(html_content: str):
     # Email configuration
 
     receiver_email_list = supabase_recipients_GET()
-    receiver_email_list = [receiver["email"] for receiver in receiver_email_list.data]
+    receiver_email_list = [
+        receiver["email"]
+        for receiver in receiver_email_list.data
+        if receiver["is_subscribed"]
+    ]
     sender_email = os.getenv("SENDER_EMAIL")
     password = os.getenv("SENDER_APP_PASSWORD")
     smtp_server = "smtp.gmail.com"
