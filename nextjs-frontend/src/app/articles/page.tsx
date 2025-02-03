@@ -36,59 +36,65 @@ export default function Articles() {
 
   return (
     <Layout>
+      <div className="fixed inset-0 -z-10">
+        <div 
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{
+            backgroundImage: `url('/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30" />
+        </div>
+      </div>
+
       <div className="flex flex-col min-h-0 flex-1">
         <div className="flex-1 overflow-y-auto">
           <div className="flex flex-col p-6 max-w-3xl mx-auto">
-            <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4">
+            <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg">
               <Image
                 src="/android-chrome-512x512.png"
                 alt="Mushroom Logo"
                 width={48}
                 height={48}
-                className="w-12 h-12"
+                className="w-12 h-12 rounded-full shadow-lg"
               />
               Research Articles
             </h1>
-            <p className="text-center text-gray-600 mb-4">
+            <p className="text-center text-white/90 mb-4 drop-shadow-sm">
               Explore our collection of curated mycology research articles. Each
-              article is summarized and analyzed to highlight key findings and
-              implications.
+              article is summarized and analyzed to highlight key findings.
             </p>
-            <Separator className="mb-6" />
+            <Separator className="mb-6 bg-white/20"/>
 
             {isLoading ? (
               <div className="flex justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
               </div>
             ) : (
               <div className="space-y-4 mb-6">
                 {articles.map((article, index) => (
                   <Card
                     key={article.id ?? index}
-                    className="p-6 hover:shadow-lg transition-shadow"
+                    className="p-6 backdrop-blur-md bg-white/90 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     <p className="text-md font-semibold mb-2">
                       {article.title}
                     </p>
-                    <span className="text-sm text-gray-500">
-                    <p className="text-sm text-gray-500 mb-2">
+                    <p className="text-sm text-gray-600 mb-2">
                       {article.venue}
                     </p>
-                    </span>
                     <p className="text-sm mb-4 mt-4">{article.llm_summary}</p>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-gray-500 flex items-center gap-2">
                         {article.publicationDate}
                         <img
-                          src={
-                            article.favicon
-                              ? article.favicon
-                              : "/semanticscholar_logo.png"
-                          }
-                          alt="Favicon"
+                          src={article.favicon || "/semanticscholar_logo.png"}
+                          alt="Source"
                           width={22}
                           height={22}
-                          className="inline-block ml-2"
+                          className="inline-block"
                         />
                       </span>
                       <a
@@ -96,7 +102,7 @@ export default function Articles() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <Button>Read More</Button>
+                        <Button className="shadow-lg">Read More</Button>
                       </a>
                     </div>
                   </Card>

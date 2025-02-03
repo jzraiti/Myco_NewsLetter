@@ -69,6 +69,11 @@
         font-size: 14px;
         margin-bottom: 4px;
       }
+      .article-date {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
       .article-authors {
         color: #4b5563;
         font-size: 14px;
@@ -125,6 +130,7 @@
     {% for article in articles %}
     <div class="article">
       <h2 class="article-title">{{ article.title }}</h2>
+      <div class="article-date">{{ article.publicationDate }}</div>
       <div class="article-venue">{{ article.venue }}</div>
       <div class="article-authors">{{ article.authors }}</div>
       <p class="article-summary">{{ article.llm_summary|safe }}</p>

@@ -5,7 +5,7 @@ from utils.other_utils import (
     fetch_venue_info,
 )
 from utils.email_utils import render_template, smtp_send_email
-from utils.supabase_utils import supabase_newsletters_POST
+from utils.supabase_utils import supabase_newsletters_POST, supabase_articles_GET
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import markdown
 
@@ -33,6 +33,7 @@ def test_venue_info():
     result = fetch_venue_info(url)
     print(result)
 
+
 def script(event, context):
     from datetime import datetime
 
@@ -56,5 +57,19 @@ def script(event, context):
         return
 
 
+def test_email_template():
+    result = supabase_articles_GET().data
+    result = [article for article in result if article["llm_summary"] is not None]
+    result = result[:4]
+    for article in result:
+        article["authors"] = [author["name"] for author in article["authors"]]
+        article["authors"] = ", ".join(article["authors"])
+        article["llm_summary"] = markdown.markdown(article["llm_summary"])
+
+    email_html_template = render_template(result)
+    smtp_send_email(email_html_template)
+
+
 if __name__ == "__main__":
-    script("event", "context")
+    # script("event", "context")
+    test_email_template()

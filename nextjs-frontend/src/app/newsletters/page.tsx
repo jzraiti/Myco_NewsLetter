@@ -36,33 +36,45 @@ export default function PreviousNewsletters() {
 
   return (
     <Layout>
+      <div className="fixed inset-0 -z-10">
+        <div 
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{
+            backgroundImage: `url('/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30 " />
+        </div>
+      </div>
+
       <div className="flex flex-col p-6 max-w-3xl mx-auto flex-1">
-        <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4">
+        <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg">
           <Image
             src="/android-chrome-512x512.png"
             alt="Mushroom Logo"
             width={48}
             height={48}
-            className="w-12 h-12"
+            className="w-12 h-12 rounded-full shadow-lg"
           />
           Previous Newsletters
         </h1>
-        <p className="text-center text-gray-600 mb-4">
+        <p className="text-center text-white/90 mb-4 drop-shadow-sm">
           Browse through our archive of past newsletters. Each newsletter is
-          sent out weekly and contains a curated list of top research articles
-          from the last few weeks.
+          sent out weekly and contains a curated list of top research articles.
         </p>
-        <Separator className="mb-6"/>
+        <Separator className="mb-6 bg-white/20"/>
         {isLoading ? (
           <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
           </div>
         ) : (
           <div className="space-y-4">
             {newsletters.map((newsletter) => (
               <Card
                 key={newsletter.id}
-                className="p-6 hover:shadow-lg transition-shadow"
+                className="p-6 backdrop-blur-md bg-white/90 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 <a
                   href={newsletter.link}
@@ -71,10 +83,9 @@ export default function PreviousNewsletters() {
                   className="block"
                 >
                   <h2 className="text-lg font-semibold mb-2">
-                    Release -{" "}
-                    {new Date(newsletter.created_at).toLocaleDateString()}
+                    Release - {new Date(newsletter.created_at).toLocaleDateString()}
                   </h2>
-                  <Button className="mt-4">View Newsletter</Button>
+                  <Button className="mt-4 shadow-lg">View Newsletter</Button>
                 </a>
               </Card>
             ))}
