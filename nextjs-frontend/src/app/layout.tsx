@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MycoNewsletter",
+  title: "MycoWeekly",
   description: "Your Weekly Dose of Mycology Research",
   icons: {
     icon: [

@@ -14,7 +14,7 @@ export function TopBar() {
               height={32}
               className="w-8 h-8"
             />
-            MycoNewsletter
+            MycoWeekly
           </Link>
           <Link href="/newsletters" className="hover:text-gray-600">
             Previous Newsletters

@@ -89,7 +89,7 @@ export default function Home() {
             height={48}
             className="w-12 h-12 "
           />
-          MycoNewsletter
+          Mycoweekly
         </p>
         <h1 className="text-4xl font-bold text-center text-gray-800 drop-shadow-sm">
           Your Weekly Dose of Mycology Research

@@ -72,7 +72,7 @@ export default function Unsubscribe() {
             height={48}
             className="w-12 h-12 "
           />
-          MycoNewsletter
+          MycoWeekly
         </p>
         <p className="text-gray-600">We are sad to see you go!</p>
         <div className="w-full max-w-md flex gap-2 p-2 rounded-lg">

@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="w-full p-4 border-t mt-auto bg-white/80">
       <div className="max-w-7xl mx-auto flex justify-center items-center gap-4 text-sm text-gray-500">
-        <span>© 2024 MycoNewsletter. All rights reserved.</span>
+        <span>© 2024 MycoWeekly. All rights reserved.</span>
         <div className="flex items-center gap-4">
           <Link
             href="https://github.com/jzraiti/Myco_NewsLetter"
