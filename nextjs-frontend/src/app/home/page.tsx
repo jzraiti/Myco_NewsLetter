@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -27,6 +27,24 @@ export default function Home() {
     setToast({ show: true, message, variant });
     setTimeout(() => setToast((prev) => ({ ...prev, show: false })), 3000);
   };
+
+  // Function to get a random image
+const getRandomImage = () => {
+  const images = [
+      '/backgrounds/boys-in-bristol-photography-Lo_KNBSCYUQ-unsplash.jpg',
+      '/backgrounds/clyde-gravenberch-uj253l7xPFU-unsplash.jpg',
+      '/backgrounds/diana-parkhouse-5prKIX4JLO0-unsplash.jpg',
+      '/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg',
+      '/backgrounds/rosie-pritchard-epwBnTgYMAc-unsplash.jpg',
+      '/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg',
+      '/backgrounds/shiho-azuma-jbz9h7pWxkg-unsplash.jpg',
+      '/backgrounds/timothy-dykes-DyraknirZ84-unsplash.jpg',
+      '/backgrounds/timothy-dykes-zpuVzW5rv4Q-unsplash.jpg',
+      '/backgrounds/wyxina-tresse-D74M77fOzyg-unsplash.jpg'
+  ];
+  const randomIndex = Math.floor(Math.random() * images.length);
+  return images[randomIndex];
+}
 
   const handleSubscribe = async () => {
     if (!email) return;
@@ -80,6 +98,15 @@ export default function Home() {
         onClose={() => setToast((prev) => ({ ...prev, show: false }))}
         variant={toast.variant}
       />
+      <div
+        style={{
+          backgroundImage: `url(${getRandomImage()})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+      </div>
+
       <main className="flex-1 flex flex-col items-center justify-center gap-8 p-4 relative">
         <p className="font-bold flex items-center gap-2 text-3xl">
           <Image
