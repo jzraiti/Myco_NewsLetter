@@ -25,7 +25,7 @@ export default function OurTeam() {
         </h1>
 
         <p className="text-xl text-center text-white/90 max-w-2xl mb-8">
-          We're passionate about making mycology research accessible to
+          We are passionate about making mycology research accessible to
           everyone.
         </p>
 
