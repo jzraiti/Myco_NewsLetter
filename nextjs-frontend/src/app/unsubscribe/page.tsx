@@ -57,6 +57,19 @@ export default function Unsubscribe() {
 
   return (
     <Layout>
+      <div className="fixed inset-0 -z-10">
+        <div 
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{
+            backgroundImage: `url('/backgrounds/shiho-azuma-jbz9h7pWxkg-unsplash.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30 " />
+        </div>
+      </div>
+
       <Toast
         message={toast.message}
         isVisible={toast.show}
@@ -64,26 +77,30 @@ export default function Unsubscribe() {
         variant={toast.variant}
       />
       <main className="flex-1 flex flex-col items-center justify-center gap-8 p-4 relative">
-        <p className="font-bold flex items-center gap-2 text-3xl">
+        <p className="font-bold flex items-center gap-2 text-3xl text-white drop-shadow-lg">
           <Image
             src="/android-chrome-512x512.png"
             alt="Mushroom Logo"
             width={48}
             height={48}
-            className="w-12 h-12 "
+            className="w-12 h-12 rounded-full shadow-lg"
           />
           MycoWeekly
         </p>
-        <p className="text-gray-600">We are sad to see you go!</p>
-        <div className="w-full max-w-md flex gap-2 p-2 rounded-lg">
+        <p className="text-white/90 text-xl drop-shadow-sm">We are sad to see you go!</p>
+        <div className="w-full max-w-md flex gap-2 p-2 rounded-lg backdrop-blur-md bg-white/10">
           <Input
             type="email"
             placeholder="Enter your email"
-            className="flex-1 bg-white"
+            className="flex-1 bg-white/90 placeholder:text-gray-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button onClick={handleUnsubscribe} disabled={isLoading}>
+          <Button 
+            onClick={handleUnsubscribe} 
+            disabled={isLoading}
+            className="bg-primary hover:bg-primary/90 text-white shadow-lg"
+          >
             {isLoading ? "Unsubscribing..." : "Unsubscribe"}
           </Button>
         </div>

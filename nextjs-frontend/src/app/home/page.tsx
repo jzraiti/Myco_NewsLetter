@@ -14,51 +14,66 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+const backgroundImages = [
+  '/backgrounds/abhijeet-majhi-5y1YGhrsH0c-unsplash.jpg',
+  '/backgrounds/alexx-cooper-VB3cvKx9-Hc-unsplash.jpg',
+  '/backgrounds/angelina-korolchak-FRRZK1ULzRM-unsplash.jpg',
+  '/backgrounds/atik-sulianami-xwiO6w6XEiM-unsplash.jpg',
+  '/backgrounds/boys-in-bristol-photography-Lo_KNBSCYUQ-unsplash.jpg',
+  '/backgrounds/bruno-kelzer-75-aDN68ZJE-unsplash.jpg',
+  '/backgrounds/clyde-gravenberch-uj253l7xPFU-unsplash.jpg',
+  '/backgrounds/damir-omerovic-UMaGtammiSI-unsplash.jpg',
+  '/backgrounds/diana-parkhouse-5prKIX4JLO0-unsplash.jpg',
+  '/backgrounds/giorgi-iremadze-10Xp5lIq5wY-unsplash.jpg',
+  '/backgrounds/jan-kopriva-y_U0VqiKFFk-unsplash.jpg',
+  '/backgrounds/kier-in-sight-archives-0kKBt4dGwN4-unsplash.jpg',
+  '/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg',
+  '/backgrounds/lucas-marulier-o5qGmMRquOg-unsplash.jpg',
+  '/backgrounds/mason-unrau-LpAsInS9ctU-unsplash.jpg',
+  '/backgrounds/michael-dziedzic-0LbTj2Nt5cU-unsplash.jpg',
+  '/backgrounds/rosie-pritchard-epwBnTgYMAc-unsplash.jpg',
+  '/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg',
+  '/backgrounds/shiho-azuma-jbz9h7pWxkg-unsplash.jpg',
+  '/backgrounds/timothy-dykes-DyraknirZ84-unsplash.jpg',
+  '/backgrounds/timothy-dykes-zpuVzW5rv4Q-unsplash.jpg',
+  '/backgrounds/vlad-rudkov-UMAJG4y1mm0-unsplash.jpg',
+  '/backgrounds/wyxina-tresse-D74M77fOzyg-unsplash.jpg',
+  '/backgrounds/wyxina-tresse-iNfpmebMc4k-unsplash.jpg',
+];
+
 export default function Home() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [subscriberCount, setSubscriberCount] = useState<number>(0);
   const [toast, setToast] = useState<{
     show: boolean;
     message: string;
     variant: "success" | "error";
   }>({ show: false, message: "", variant: "success" });
+  const [backgroundImage, setBackgroundImage] = useState('');
 
   const showToast = (message: string, variant: "success" | "error") => {
     setToast({ show: true, message, variant });
     setTimeout(() => setToast((prev) => ({ ...prev, show: false })), 3000);
   };
 
-  // Function to get a random image
-const getRandomImage = () => {
-  const images = [
-      '/backgrounds/abhijeet-majhi-5y1YGhrsH0c-unsplash.jpg',
-      '/backgrounds/alexx-cooper-VB3cvKx9-Hc-unsplash.jpg',
-      '/backgrounds/angelina-korolchak-FRRZK1ULzRM-unsplash.jpg',
-      '/backgrounds/atik-sulianami-xwiO6w6XEiM-unsplash.jpg',
-      '/backgrounds/boys-in-bristol-photography-Lo_KNBSCYUQ-unsplash.jpg',
-      '/backgrounds/bruno-kelzer-75-aDN68ZJE-unsplash.jpg',
-      '/backgrounds/clyde-gravenberch-uj253l7xPFU-unsplash.jpg',
-      '/backgrounds/damir-omerovic-UMaGtammiSI-unsplash.jpg',
-      '/backgrounds/diana-parkhouse-5prKIX4JLO0-unsplash.jpg',
-      '/backgrounds/giorgi-iremadze-10Xp5lIq5wY-unsplash.jpg',
-      '/backgrounds/jan-kopriva-y_U0VqiKFFk-unsplash.jpg',
-      '/backgrounds/kier-in-sight-archives-0kKBt4dGwN4-unsplash.jpg',
-      '/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg',
-      '/backgrounds/lucas-marulier-o5qGmMRquOg-unsplash.jpg',
-      '/backgrounds/mason-unrau-LpAsInS9ctU-unsplash.jpg',
-      '/backgrounds/michael-dziedzic-0LbTj2Nt5cU-unsplash.jpg',
-      '/backgrounds/rosie-pritchard-epwBnTgYMAc-unsplash.jpg',
-      '/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg',
-      '/backgrounds/shiho-azuma-jbz9h7pWxkg-unsplash.jpg',
-      '/backgrounds/timothy-dykes-DyraknirZ84-unsplash.jpg',
-      '/backgrounds/timothy-dykes-zpuVzW5rv4Q-unsplash.jpg',
-      '/backgrounds/vlad-rudkov-UMAJG4y1mm0-unsplash.jpg',
-      '/backgrounds/wyxina-tresse-D74M77fOzyg-unsplash.jpg',
-      '/backgrounds/wyxina-tresse-iNfpmebMc4k-unsplash.jpg',
-  ];
-  const randomIndex = Math.floor(Math.random() * images.length);
-  return images[randomIndex];
-}
+  const fetchSubscriberCount = async () => {
+    try {
+      const { count } = await supabase
+        .from('recipients')
+        .select('*', { count: 'exact', head: true })
+      
+      setSubscriberCount(count || 0);
+    } catch (error) {
+      console.error('Error fetching subscriber count:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubscriberCount();
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    setBackgroundImage(backgroundImages[randomIndex]);
+  }, []);
 
   const handleSubscribe = async () => {
     if (!email) return;
@@ -112,66 +127,84 @@ const getRandomImage = () => {
         onClose={() => setToast((prev) => ({ ...prev, show: false }))}
         variant={toast.variant}
       />
-      <div
-        style={{
-          backgroundImage: `url(${getRandomImage()})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="fixed inset-0 -z-10">
+        <div 
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30" />
+        </div>
       </div>
 
       <main className="flex-1 flex flex-col items-center justify-center gap-8 p-4 relative">
-        <p className="font-bold flex items-center gap-2 text-3xl">
+        <p className="font-bold flex items-center gap-2 text-3xl text-white drop-shadow-lg">
           <Image
             src="/android-chrome-512x512.png"
             alt="Mushroom Logo"
             width={48}
             height={48}
-            className="w-12 h-12 "
+            className="w-12 h-12 drop-shadow-lg rounded-full"
           />
           Mycoweekly
         </p>
-        <h1 className="text-4xl font-bold text-center text-gray-800 drop-shadow-sm">
+        <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">
           Your Weekly Dose of Mycology Research
         </h1>
 
-        {/* Email input */}
-        <div className="w-full max-w-md flex gap-2 p-2 rounded-lg">
+        <div className="w-full max-w-md flex gap-2 p-2 rounded-lg backdrop-blur-md bg-white/10">
           <Input
             type="email"
             placeholder="Enter your email"
-            className="flex-1 bg-white"
+            className="flex-1 bg-white/90 placeholder:text-gray-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Button onClick={handleSubscribe} disabled={isLoading}>
+          <Button 
+            onClick={handleSubscribe} 
+            disabled={isLoading}
+            className="bg-primary hover:bg-primary/90 text-white shadow-lg"
+          >
             {isLoading ? "Subscribing..." : "Subscribe"}
           </Button>
         </div>
 
-        {/* Feature cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-8">
-          <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-            <h3 className="font-semibold mb-2">Weekly Updates</h3>
-            <p className="text-sm text-gray-600">
-              Get the latest research delivered to your inbox
-            </p>
-          </Card>
+          {[
+            {
+              title: "Weekly Updates",
+              description: "Get the latest research delivered to your inbox"
+            },
+            {
+              title: "Curated Content",
+              description: "Hand-picked articles from top journals"
+            },
+            {
+              title: "AI Summaries",
+              description: "Concise, readable research breakdowns"
+            }
+          ].map((feature, index) => (
+            <Card 
+              key={index}
+              className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/90"
+            >
+              <h3 className="font-semibold mb-2">{feature.title}</h3>
+              <p className="text-sm text-gray-600">
+                {feature.description}
+              </p>
+            </Card>
+          ))}
+        </div>
 
-          <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-            <h3 className="font-semibold mb-2">Curated Content</h3>
-            <p className="text-sm text-gray-600">
-              Hand-picked articles from top journals
-            </p>
-          </Card>
-
-          <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-            <h3 className="font-semibold mb-2">AI Summaries</h3>
-            <p className="text-sm text-gray-600">
-              Concise, readable research breakdowns
-            </p>
-          </Card>
+        <div className="mt-8 text-center px-6 py-3 rounded-lg">
+          <p className="text-white">
+            <span>Join the other </span>
+            <span className="font-bold text-xl">{subscriberCount}</span>
+            <span> researchers subscribed!</span>
+          </p>
         </div>
       </main>
     </Layout>
