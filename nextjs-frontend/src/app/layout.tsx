@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Inter, Space_Grotesk, Figtree } from 'next/font/google';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space' });
+const figtree = Figtree({ subsets: ['latin'], variable: '--font-figtree' });
 
 export const metadata: Metadata = {
   title: "MycoWeekly",
@@ -40,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} ${figtree.variable} antialiased`}
       >
         {children}
       </body>

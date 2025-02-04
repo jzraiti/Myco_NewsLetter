@@ -71,7 +71,7 @@ export default function PreviousNewsletters() {
         <div
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url('/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg')`,
+            backgroundImage: `url('/backgrounds/atik-sulianami-xwiO6w6XEiM-unsplash.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -91,7 +91,7 @@ export default function PreviousNewsletters() {
           />
           Previous Newsletters
         </h1>
-        <p className="text-center text-white/90 mb-4 drop-shadow-sm">
+        <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
           Browse through our archive of past newsletters. Each newsletter is
           sent out weekly and contains a curated list of top research articles.
         </p>
@@ -101,24 +101,36 @@ export default function PreviousNewsletters() {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {newsletters.map((newsletter) => (
               <Card
                 key={newsletter.id}
-                className="p-6 hover:shadow-lg transition-shadow bg-cover bg-center"
-                style={{ backgroundImage: `url(${getRandomLandscapeImage()})` }}
+                className="relative overflow-hidden group h-48"
               >
+                <Image
+                  src={getRandomLandscapeImage()}
+                  alt="Newsletter background"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />
                 <a
                   href={newsletter.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block"
+                  className="relative z-10 h-full p-6 flex flex-col justify-between"
                 >
-                  <h2 className="text-lg font-semibold mb-2">
-                    Release -{" "}
-                    {new Date(newsletter.created_at).toLocaleDateString()}
-                  </h2>
-                  <Button className="mt-4 shadow-lg">View Newsletter</Button>
+                  <div>
+                    <h2 className="text-2xl font-semibold text-white mb-2">
+                      Myco Newsletter
+                    </h2>
+                    <p className="text-white/90">
+                      Released {new Date(newsletter.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300 group-hover:border-white/40">
+                    View Newsletter →
+                  </Button>
                 </a>
               </Card>
             ))}

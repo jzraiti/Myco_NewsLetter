@@ -7,6 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Layout } from "@/components/Layout";
+import ReactMarkdown from 'react-markdown';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,6 +17,37 @@ const supabase = createClient(
 export default function Articles() {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState<any[]>([]);
+
+  const getRandomLandscapeImage = () => {
+    const images = [
+      "/landscape_backgrounds/abbie-parks-XA1-J2rRGVw-unsplash.jpg",
+      "/landscape_backgrounds/casper-van-battum-icWhBzRNUFw-unsplash.jpg",
+      "/landscape_backgrounds/christopher-ott-qdcRECrSppU-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-8tZJG2t30fI-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-iQi_QFMfBZI-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-NugxTvRaQT0-unsplash.jpg",
+      "/landscape_backgrounds/emanuel-rodriguez-2hdbY4Xaihw-unsplash.jpg",
+      "/landscape_backgrounds/harshal-s-hirve-oZ0xzQFVCWY-unsplash.jpg",
+      "/landscape_backgrounds/henry-schneider-s3sJ5j2ml2o-unsplash.jpg",
+      "/landscape_backgrounds/james-wainscoat-WJ2ev0gQo4k-unsplash.jpg",
+      "/landscape_backgrounds/jason-mitrione-MLAXy8PcGNk-unsplash.jpg",
+      "/landscape_backgrounds/matt-seymour-qLvikxzTtWY-unsplash.jpg",
+      "/landscape_backgrounds/nyusha-svoboda-_AaHmPTYzig-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-_gHLz18DEpE-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-hqcxvmNyFyg-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-vOFzgDqPh3Y-unsplash (1).jpg",
+      "/landscape_backgrounds/peter-neumann-Uofb3of6CCQ-unsplash.jpg",
+      "/landscape_backgrounds/phoenix-han-2v_bZYAlKQ4-unsplash.jpg",
+      "/landscape_backgrounds/sandra-alekseeva-h4vXoyKX_-Y-unsplash.jpg",
+      "/landscape_backgrounds/timothy-dykes-3EUmV_AwKoA-unsplash.jpg",
+      "/landscape_backgrounds/timothy-dykes-3JrIpTJ7tkM-unsplash.jpg",
+      "/landscape_backgrounds/viktor-talashuk-0_cIDZw6rgc-unsplash.jpg",
+      "/landscape_backgrounds/wolfgang-hasselmann-PUcrsXh9V4s-unsplash.jpg",
+      "/landscape_backgrounds/zdenek-machacek-DwrVhMZmcaY-unsplash.jpg",
+    ];
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  };
 
   const fetchArticles = async () => {
     setIsLoading(true);
@@ -37,12 +69,12 @@ export default function Articles() {
   return (
     <Layout>
       <div className="fixed inset-0 -z-10">
-        <div 
+        <div
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url('/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundImage: `url('/backgrounds/alexx-cooper-VB3cvKx9-Hc-unsplash.jpg')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30" />
@@ -52,7 +84,7 @@ export default function Articles() {
       <div className="flex flex-col min-h-0 flex-1">
         <div className="flex-1 overflow-y-auto">
           <div className="flex flex-col p-6 max-w-3xl mx-auto">
-            <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg">
+            <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg font-display">
               <Image
                 src="/android-chrome-512x512.png"
                 alt="Mushroom Logo"
@@ -62,48 +94,65 @@ export default function Articles() {
               />
               Research Articles
             </h1>
-            <p className="text-center text-white/90 mb-4 drop-shadow-sm">
+            <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
               Explore our collection of curated mycology research articles. Each
               article is summarized and analyzed to highlight key findings.
             </p>
-            <Separator className="mb-6 bg-white/20"/>
+            <Separator className="mb-6 bg-white/20" />
 
             {isLoading ? (
               <div className="flex justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
               </div>
             ) : (
-              <div className="space-y-4 mb-6">
+              <div className="space-y-6 mb-6">
                 {articles.map((article, index) => (
                   <Card
                     key={article.id ?? index}
-                    className="p-6 backdrop-blur-md bg-white/90 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="relative overflow-hidden group min-h-[300px]"
                   >
-                    <p className="text-md font-semibold mb-2">
-                      {article.title}
-                    </p>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {article.venue}
-                    </p>
-                    <p className="text-sm mb-4 mt-4">{article.llm_summary}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500 flex items-center gap-2">
-                        {article.publicationDate}
-                        <img
-                          src={article.favicon || "/semanticscholar_logo.png"}
-                          alt="Source"
-                          width={22}
-                          height={22}
-                          className="inline-block"
-                        />
-                      </span>
-                      <a
-                        href={article.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button className="shadow-lg">Read More</Button>
-                      </a>
+                    <Image
+                      src={getRandomLandscapeImage()}
+                      alt="Article background"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/55 group-hover:bg-black/85 transition-colors duration-300" />
+                    <div className="relative z-10 h-full p-6 flex flex-col justify-between">
+                      <div>
+                        <h2 className="text-xl font-semibold text-white mb-3 font-display">
+                          {article.title}
+                        </h2>
+                        <p className="text-white/80 text-sm mb-4 font-body">
+                          {article.venue ? article.venue : "Journal Unknown"}
+                        </p>
+                        <div className={`${article.llm_summary ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body" : ""}`}>
+                          <ReactMarkdown>
+                            {article.llm_summary || ''}
+                          </ReactMarkdown>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center pt-6 border-t border-white/20 mt-6">
+                        <span className="text-md text-white/80 flex items-center gap-2">
+                          Published {article.publicationDate}
+                          <img
+                            src={article.favicon || "/semanticscholar_logo.png"}
+                            alt="Source"
+                            width={22}
+                            height={22}
+                            className="inline-block rounded-lg bg-white/20"
+                          />
+                        </span>
+                        <a
+                          href={article.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300">
+                            Read More →
+                          </Button>
+                        </a>
+                      </div>
                     </div>
                   </Card>
                 ))}

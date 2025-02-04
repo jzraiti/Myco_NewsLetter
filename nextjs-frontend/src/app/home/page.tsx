@@ -173,7 +173,7 @@ export default function Home() {
           />
           Mycoweekly
         </p>
-        <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg">
+        <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg font-display leading-tight">
           Your Weekly Dose of Mycology Research
         </h1>
 
@@ -211,10 +211,10 @@ export default function Home() {
           ].map((feature, index) => (
             <Card 
               key={index}
-              className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/90"
+              className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/20"
             >
-              <h3 className="font-semibold mb-2">{feature.title}</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold mb-2 font-display text-white">{feature.title}</h3>
+              <p className="text-sm text-white font-body">
                 {feature.description}
               </p>
             </Card>

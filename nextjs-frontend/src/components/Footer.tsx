@@ -23,6 +23,12 @@ export function Footer() {
             <span>GitHub</span>
           </Link>
           <Link 
+            href="/ourteam" 
+            className="hover:text-white transition-colors duration-200 drop-shadow-sm"
+          >
+            Our Team
+          </Link>
+          <Link 
             href="/unsubscribe" 
             className="hover:text-white transition-colors duration-200 drop-shadow-sm"
           >
