@@ -30,6 +30,37 @@ export default function PreviousNewsletters() {
     }
   };
 
+  const getRandomLandscapeImage = () => {
+    const images = [
+      "/landscape_backgrounds/abbie-parks-XA1-J2rRGVw-unsplash.jpg",
+      "/landscape_backgrounds/casper-van-battum-icWhBzRNUFw-unsplash.jpg",
+      "/landscape_backgrounds/christopher-ott-qdcRECrSppU-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-8tZJG2t30fI-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-iQi_QFMfBZI-unsplash.jpg",
+      "/landscape_backgrounds/david-clode-NugxTvRaQT0-unsplash.jpg",
+      "/landscape_backgrounds/emanuel-rodriguez-2hdbY4Xaihw-unsplash.jpg",
+      "/landscape_backgrounds/harshal-s-hirve-oZ0xzQFVCWY-unsplash.jpg",
+      "/landscape_backgrounds/henry-schneider-s3sJ5j2ml2o-unsplash.jpg",
+      "/landscape_backgrounds/james-wainscoat-WJ2ev0gQo4k-unsplash.jpg",
+      "/landscape_backgrounds/jason-mitrione-MLAXy8PcGNk-unsplash.jpg",
+      "/landscape_backgrounds/matt-seymour-qLvikxzTtWY-unsplash.jpg",
+      "/landscape_backgrounds/nyusha-svoboda-_AaHmPTYzig-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-_gHLz18DEpE-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-hqcxvmNyFyg-unsplash.jpg",
+      "/landscape_backgrounds/patrick-hendry-vOFzgDqPh3Y-unsplash (1).jpg",
+      "/landscape_backgrounds/peter-neumann-Uofb3of6CCQ-unsplash.jpg",
+      "/landscape_backgrounds/phoenix-han-2v_bZYAlKQ4-unsplash.jpg",
+      "/landscape_backgrounds/sandra-alekseeva-h4vXoyKX_-Y-unsplash.jpg",
+      "/landscape_backgrounds/timothy-dykes-3EUmV_AwKoA-unsplash.jpg",
+      "/landscape_backgrounds/timothy-dykes-3JrIpTJ7tkM-unsplash.jpg",
+      "/landscape_backgrounds/viktor-talashuk-0_cIDZw6rgc-unsplash.jpg",
+      "/landscape_backgrounds/wolfgang-hasselmann-PUcrsXh9V4s-unsplash.jpg",
+      "/landscape_backgrounds/zdenek-machacek-DwrVhMZmcaY-unsplash.jpg"
+    ];    
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
+  }
+
   useEffect(() => {
     fetchNewsletters();
   }, []);
@@ -62,7 +93,8 @@ export default function PreviousNewsletters() {
             {newsletters.map((newsletter) => (
               <Card
                 key={newsletter.id}
-                className="p-6 hover:shadow-lg transition-shadow"
+                className="p-6 hover:shadow-lg transition-shadow bg-cover bg-center"
+                style={{ backgroundImage: `url(${getRandomLandscapeImage()})` }}
               >
                 <a
                   href={newsletter.link}
