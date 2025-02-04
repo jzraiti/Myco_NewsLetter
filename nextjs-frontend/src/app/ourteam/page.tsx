@@ -32,7 +32,7 @@ export default function OurTeam() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
           {[
             {
-              name: "Chen",
+              name: "Andrew Chen",
               role: "Full Stack Developer",
               image: "/chen.jpeg",
               description:
@@ -41,7 +41,7 @@ export default function OurTeam() {
               linkedin: "https://www.linkedin.com/in/andrewkkchen/",
             },
             {
-              name: "Jason",
+              name: "Jason Raiti",
               role: "Research Lead",
               image: "/jason.png",
               description: "Curating and analyzing mycology research papers.",
