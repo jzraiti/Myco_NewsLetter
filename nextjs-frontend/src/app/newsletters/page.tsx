@@ -55,11 +55,11 @@ export default function PreviousNewsletters() {
       "/landscape_backgrounds/timothy-dykes-3JrIpTJ7tkM-unsplash.jpg",
       "/landscape_backgrounds/viktor-talashuk-0_cIDZw6rgc-unsplash.jpg",
       "/landscape_backgrounds/wolfgang-hasselmann-PUcrsXh9V4s-unsplash.jpg",
-      "/landscape_backgrounds/zdenek-machacek-DwrVhMZmcaY-unsplash.jpg"
-    ];    
+      "/landscape_backgrounds/zdenek-machacek-DwrVhMZmcaY-unsplash.jpg",
+    ];
     const randomIndex = Math.floor(Math.random() * images.length);
     return images[randomIndex];
-  }
+  };
 
   useEffect(() => {
     fetchNewsletters();
@@ -68,12 +68,12 @@ export default function PreviousNewsletters() {
   return (
     <Layout>
       <div className="fixed inset-0 -z-10">
-        <div 
+        <div
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
           style={{
             backgroundImage: `url('/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/30 " />
@@ -95,7 +95,7 @@ export default function PreviousNewsletters() {
           Browse through our archive of past newsletters. Each newsletter is
           sent out weekly and contains a curated list of top research articles.
         </p>
-        <Separator className="mb-6 bg-white/20"/>
+        <Separator className="mb-6 bg-white/20" />
         {isLoading ? (
           <div className="flex justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
@@ -115,7 +115,8 @@ export default function PreviousNewsletters() {
                   className="block"
                 >
                   <h2 className="text-lg font-semibold mb-2">
-                    Release - {new Date(newsletter.created_at).toLocaleDateString()}
+                    Release -{" "}
+                    {new Date(newsletter.created_at).toLocaleDateString()}
                   </h2>
                   <Button className="mt-4 shadow-lg">View Newsletter</Button>
                 </a>

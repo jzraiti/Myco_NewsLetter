@@ -8,16 +8,13 @@ import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 import { Layout } from "@/components/Layout";
 import { Toast } from "@/components/ui/toast";
+import Head from 'next/head';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-const backgroundImages = [
+// Move array outside component
+const BACKGROUND_IMAGES = [
+  '/backgrounds/angelina-korolchak-FRRZK1ULzRM-unsplash.jpg',
   '/backgrounds/abhijeet-majhi-5y1YGhrsH0c-unsplash.jpg',
   '/backgrounds/alexx-cooper-VB3cvKx9-Hc-unsplash.jpg',
-  '/backgrounds/angelina-korolchak-FRRZK1ULzRM-unsplash.jpg',
   '/backgrounds/atik-sulianami-xwiO6w6XEiM-unsplash.jpg',
   '/backgrounds/boys-in-bristol-photography-Lo_KNBSCYUQ-unsplash.jpg',
   '/backgrounds/bruno-kelzer-75-aDN68ZJE-unsplash.jpg',
@@ -30,7 +27,6 @@ const backgroundImages = [
   '/backgrounds/lance-reis-tJHKM92J_yM-unsplash.jpg',
   '/backgrounds/lucas-marulier-o5qGmMRquOg-unsplash.jpg',
   '/backgrounds/mason-unrau-LpAsInS9ctU-unsplash.jpg',
-  '/backgrounds/michael-dziedzic-0LbTj2Nt5cU-unsplash.jpg',
   '/backgrounds/rosie-pritchard-epwBnTgYMAc-unsplash.jpg',
   '/backgrounds/samuel-pWeA162MJ9Q-unsplash.jpg',
   '/backgrounds/shiho-azuma-jbz9h7pWxkg-unsplash.jpg',
@@ -39,7 +35,30 @@ const backgroundImages = [
   '/backgrounds/vlad-rudkov-UMAJG4y1mm0-unsplash.jpg',
   '/backgrounds/wyxina-tresse-D74M77fOzyg-unsplash.jpg',
   '/backgrounds/wyxina-tresse-iNfpmebMc4k-unsplash.jpg',
-];
+] as const;
+
+// Add image preload component
+const ImagePreloader = () => {
+  return (
+    <>
+      {BACKGROUND_IMAGES.map((src, index) => (
+        <link 
+          key={src}
+          rel="preload"
+          as="image"
+          href={src}
+          // Priority for first image only
+          {...(index === 0 ? {priority: true} : {})}
+        />
+      ))}
+    </>
+  );
+};
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -71,8 +90,8 @@ export default function Home() {
 
   useEffect(() => {
     fetchSubscriberCount();
-    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-    setBackgroundImage(backgroundImages[randomIndex]);
+    const randomIndex = Math.floor(Math.random() * BACKGROUND_IMAGES.length);
+    setBackgroundImage(BACKGROUND_IMAGES[randomIndex]);
   }, []);
 
   const handleSubscribe = async () => {
@@ -121,6 +140,9 @@ export default function Home() {
 
   return (
     <Layout>
+      <Head>
+        <ImagePreloader />
+      </Head>
       <Toast
         message={toast.message}
         isVisible={toast.show}
