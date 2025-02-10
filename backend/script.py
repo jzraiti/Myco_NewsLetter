@@ -4,7 +4,7 @@ from utils.other_utils import (
     generate_gpt_paper_summary,
     fetch_venue_info,
 )
-from utils.email_utils import render_template, smtp_send_email
+from utils.email_utils import render_template, smtp_send_email, resend_send_email
 from utils.supabase_utils import supabase_newsletters_POST, supabase_articles_GET
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import markdown
@@ -45,7 +45,7 @@ def script(event, context):
         article["llm_summary"] = markdown.markdown(article["llm_summary"])
 
     email_html_template = render_template(result)
-    smtp_send_email(email_html_template)
+    resend_send_email(email_html_template)
     upload_to_s3(email_html_template)
     data = {
         "name": f"{datetime.now().strftime('%m-%d-%Y')}.html",
@@ -58,18 +58,26 @@ def script(event, context):
 
 
 def test_email_template():
+    import random
+
     result = supabase_articles_GET().data
     result = [article for article in result if article["llm_summary"] is not None]
     result = result[:4]
     for article in result:
         article["authors"] = [author["name"] for author in article["authors"]]
         article["authors"] = ", ".join(article["authors"])
+        article["venue"] = (
+            article["venue"] if not article["venue"] == "" else "Unknown Journal"
+        )
         article["llm_summary"] = markdown.markdown(article["llm_summary"])
 
-    email_html_template = render_template(result)
-    smtp_send_email(email_html_template)
+    email_html_template = render_template(
+        result,
+    )
+
+    resend_send_email(email_html_template)
 
 
 if __name__ == "__main__":
-    # script("event", "context")
-    test_email_template()
+    script("event", "context")
+    # test_email_template()

@@ -12,21 +12,30 @@ def render_template(articles: list[dict]) -> str:
     return template.render(articles=articles)
 
 
-def resend_send_email():
+def resend_send_email(html_content: str):
     import resend
+    from datetime import datetime
 
     resend.api_key = os.getenv("RESEND_API_KEY")
 
+    receiver_email_list = supabase_recipients_GET()
+    receiver_email_list = [
+        receiver["email"]
+        for receiver in receiver_email_list.data
+        if receiver["is_subscribed"]
+    ]
+
     try:
-        r = resend.Emails.send(
-            {
-                "from": "myconewsletter@mycoweekly.click",
-                "to": "achen266@wisc.edu",
-                "subject": "Hello World",
-                "html": "<p>Congrats on sending your <strong>first email</strong>!</p>",
-            }
-        )
-        print("Email sent successfully!")
+        for receiver in receiver_email_list:
+            r = resend.Emails.send(
+                {
+                    "from": "MycoWeekly Newsletter <myconewsletter@mycoweekly.click>",
+                    "to": receiver,
+                    "subject": f"Weekly Digest {datetime.now().strftime('%m/%d')}",
+                    "html": html_content,
+                }
+            )
+            print(f"Email sent successfully to {receiver}")
     except Exception as e:
         print(e)
         return
