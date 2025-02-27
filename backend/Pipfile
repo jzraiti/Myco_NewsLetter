@@ -15,10 +15,10 @@ extract_favicon="*"
 markdown="*"
 boto3="*"
 jinja2="*"
+supabase = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.*"
-
 PIPENV_VERBOSITY=-1

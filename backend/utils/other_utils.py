@@ -22,6 +22,7 @@ dotenv.load_dotenv()
 
 NUMBER_OF_ARTICLES = 4
 
+
 def generate_gpt_paper_summary(title: str, content: str) -> str:
     """Generates a summary of a research paper using GPT-4o-mini.
 
@@ -39,11 +40,11 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": "You are a ChatGPT, a helpful assistant and expert in Mycology and fungi. Your specialty is crafting professional, creative, and concise sneak peeks for mycology articles written by researchers from all around the world, tailored for a newsletter. Highlight the most intriguing or unexpected aspects of the research while maintaining scientific accuracy and a tone that sparks curiosity.",
+                "content": "You are an expert in mycology and fungi, skilled at crafting professional, creative, and concise sneak peeks for mycology research articles. Your task is to create newsletter-style previews that highlight the most surprising or intriguing findings from global researchers, blending scientific accuracy with a curiosity-driven tone.",
             },
             {
                 "role": "user",
-                "content": f'As an informed observer, write a compelling and informational sneak peek for this research paper titled "{title}" based on this abstracted summary: {content}. Focus on making it unique and engaging for a research mycology audience, do not write the article in the first person point of view, and keep the length under 400 characters.',
+                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 400 characters.',
             },
         ],
     )
@@ -52,7 +53,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
 
 
 def generate_summary(article: dict) -> str:
-    """Generates a summary of the given article using GPT-4o-mini."""
+    """HELPER METHOD - Generates a summary of the given article using GPT-4o-mini."""
     logging.info(f"Generating summary for article: {article['paperId']}")
     article = article.to_dict()
     generated_content: str = generate_gpt_paper_summary(
@@ -200,5 +201,3 @@ def article_selection(data: list) -> dict:
 
     # Return 1: all processed articles, 2: top articles
     return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
-
-

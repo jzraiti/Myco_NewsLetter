@@ -8,9 +8,13 @@ from utils.email_utils import render_template, smtp_send_email, resend_send_emai
 from utils.supabase_utils import supabase_newsletters_POST, supabase_articles_GET
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 import markdown
+import json
 
 
 def test_summaries():
+    """
+    Tests the summary generation using gpt4o
+    """
     writestring = ""
     for i in range(1, 6):
         title = "A Comparative study of BO-SVM plus different Residual Networks for pneumonia disease detection"
@@ -22,19 +26,14 @@ def test_summaries():
         f.write(writestring)
 
 
-def test_article_detail():
-    paperID = "4a99756c2b5237219828b0f7e63f9c417430f1cc"
-    result = fetch_paper_details(paperID)
-    print(result)
-
-
-def test_venue_info():
-    url = "https://www.semanticscholar.org/paper/Thehttps://myco-newsletter-private.vercel.app/unsubscribe-importance-of-antimicrobial-resistance-in-Gow-Johnson/0d2f56b0cab7d659bb76797e5c6d79237d8c8fdb"
-    result = fetch_venue_info(url)
-    print(result)
+def tmp_test():
+    articles = fetch_bulk_articles()
+    with open("test_articles.json", "w") as f:
+        json.dump(articles, f)
 
 
 def script(event, context):
+    """Main script to run the newsletter generation and email sending process."""
     from datetime import datetime
 
     data = fetch_bulk_articles()
@@ -57,27 +56,7 @@ def script(event, context):
         return
 
 
-def test_email_template():
-    import random
-
-    result = supabase_articles_GET().data
-    result = [article for article in result if article["llm_summary"] is not None]
-    result = result[:4]
-    for article in result:
-        article["authors"] = [author["name"] for author in article["authors"]]
-        article["authors"] = ", ".join(article["authors"])
-        article["venue"] = (
-            article["venue"] if not article["venue"] == "" else "Unknown Journal"
-        )
-        article["llm_summary"] = markdown.markdown(article["llm_summary"])
-
-    email_html_template = render_template(
-        result,
-    )
-
-    resend_send_email(email_html_template)
-
-
 if __name__ == "__main__":
-    script("event", "context")
-    # test_email_template()
+    # script("event", "context")
+    tmp_test()
+    # test_summaries()
