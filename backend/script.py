@@ -27,6 +27,7 @@ def test_summaries():
 
 
 def tmp_test():
+    """TEMPORARY test for article fetching"""
     articles = fetch_bulk_articles()
     with open("test_articles.json", "w") as f:
         json.dump(articles, f)
@@ -56,7 +57,33 @@ def script(event, context):
         return
 
 
+def tmp_cleaning_JUFO():
+    """TEMPORARY function for cleaning JUFO data"""
+    import pandas as pd
+
+    df = None
+    with open("jfp-export.csv", "r") as f:
+        df = pd.read_csv(f)
+
+    print(len(df))
+    df = df.drop_duplicates(subset=["Name"])
+    print(len(df))
+
+    with open("jfp-export-cleaned.csv", "w") as f:
+        df.to_csv(f, index=False)
+
+
+def tmp_test_paper_detail():
+    """TEMPORARY function for testing paper details"""
+    paper_id = "51121bfb8d93362607e71e795aa3e71945156b4f"
+    data = fetch_paper_details(paper_id)
+    print(json.dumps(data,indent=2))
+
 if __name__ == "__main__":
+    from utils.other_utils import article_selection_JUFO
     # script("event", "context")
-    tmp_test()
+    # tmp_test()
+    article_selection_JUFO([])
     # test_summaries()
+    # tmp_cleaning_JUFO()
+    # tmp_test_paper_detail()

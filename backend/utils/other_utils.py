@@ -13,6 +13,8 @@ from utils.supabase_utils import (
     supabase_articles_POST,
     supabase_journals_GET,
     supabase_recipients_GET,
+    supabase_JUFO_GET,
+    supabase_query_all,
 )
 
 from utils.ss_api import fetch_bulk_articles
@@ -201,3 +203,36 @@ def article_selection(data: list) -> dict:
 
     # Return 1: all processed articles, 2: top articles
     return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
+
+
+def article_selection_JUFO(data: list) -> dict:
+    """Algorithm for article selection with JUFO criteria"""
+    df = pd.DataFrame(data)
+
+    # Data cleaning - all this logic is still the same from the original algorithm
+    # df = df.map(lambda x: tuple(x) if isinstance(x, list) else x)
+    # df = df.drop_duplicates(subset=["paperId"])
+    # response = supabase_articles_POST(df.to_dict(orient="records"))
+    # if hasattr(response, "error") and response.error:
+    #     return {
+    #         "success": False,
+    #         "error": response.error,
+    #         "message": "Failed to upsert data",
+    #     }
+
+    data = supabase_query_all("ss_articles")
+    df = pd.DataFrame(data)
+    journals = supabase_query_all("jufo_journals")
+    journal_levels = {j["Name"]: [j["Level"], j["panels"]] for j in journals}
+    import json
+
+    with open("journal_levels.json", "w") as f:
+        json.dump(journal_levels, f)
+    matching_df = df[df["venue"].isin(journal_levels.keys())].copy()
+    matching_df["Level"] = matching_df["venue"].map(lambda x: journal_levels[x][0])
+    matching_df["panels"] = matching_df["venue"].map(lambda x: journal_levels[x][1])
+    matching_df.sort_values(
+        by=["Level", "panels"], ascending=[False, True], inplace=True
+    )
+    matching_df.dropna(subset=["abstract"], inplace=True)
+    print(matching_df.head(10))

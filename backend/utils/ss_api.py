@@ -40,9 +40,9 @@ def fetch_bulk_articles() -> list:
 
     query_params = {
         "query": SEARCH_QUERY,
-        "sort": "citationCount:desc",
+        "sort": "publicationDate:desc",
         "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
-        "fieldsOfStudy": "Environmental Science",
+        # "fieldsOfStudy": "Environmental Science, ",
     }
 
     query_param_list = [
@@ -75,27 +75,27 @@ def fetch_bulk_articles() -> list:
         papers = data.get("data", [])
 
         # Exclude out papers without an absract summary
-        papers = [paper for paper in papers if paper.get("abstract")]
+        # papers = [paper for paper in papers if paper.get("abstract")]
 
-        # Exclude out papers related to Medicine
-        papers = [
-            paper
-            for paper in papers
-            if not any(
-                field.get("category") == "Medicine"
-                for field in paper.get("s2FieldsOfStudy", [])
-            )
-        ]
+        # # Exclude out papers related to Medicine
+        # papers = [
+        #     paper
+        #     for paper in papers
+        #     if not any(
+        #         field.get("category") == "Medicine"
+        #         for field in paper.get("s2FieldsOfStudy", [])
+        #     )
+        # ]
 
-        # Exclude out papers related to Education
-        papers = [
-            paper
-            for paper in papers
-            if not any(
-                field.get("category") == "Education"
-                for field in paper.get("s2FieldsOfStudy", [])
-            )
-        ]
+        # # Exclude out papers related to Education
+        # papers = [
+        #     paper
+        #     for paper in papers
+        #     if not any(
+        #         field.get("category") == "Education"
+        #         for field in paper.get("s2FieldsOfStudy", [])
+        #     )
+        # ]
 
         logging.info(f"Successfully fetched {len(papers)} articles.")
         return papers
