@@ -74,10 +74,7 @@ def fetch_bulk_articles() -> list:
         data = response.json()
         papers = data.get("data", [])
 
-        # Exclude out papers without an absract summary
-        # papers = [paper for paper in papers if paper.get("abstract")]
-
-        # # Exclude out papers related to Medicine
+        # Exclude out papers related to Medicine - OPTIONAL
         # papers = [
         #     paper
         #     for paper in papers
@@ -149,6 +146,7 @@ def fetch_paper_details(paper_id: str) -> dict:
         "citationCount",
         "influentialCitationCount",
         "tldr",
+        "abstract",
     ]
     query_params = ",".join([param for param in query_param_list])
     response = requests.get(url=url, headers=headers, params={"fields": query_params})

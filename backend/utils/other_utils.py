@@ -17,7 +17,7 @@ from utils.supabase_utils import (
     supabase_query_all,
 )
 
-from utils.ss_api import fetch_bulk_articles
+from utils.ss_api import fetch_bulk_articles, fetch_paper_details
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 dotenv.load_dotenv()
@@ -46,7 +46,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
             },
             {
                 "role": "user",
-                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 400 characters.',
+                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 250 characters.',
             },
         ],
     )
@@ -205,34 +205,62 @@ def article_selection(data: list) -> dict:
     return df.to_dict(orient="records"), selected_articles.to_dict(orient="records")
 
 
-def article_selection_JUFO(data: list) -> dict:
+def article_selection_JUFO(data: list):
     """Algorithm for article selection with JUFO criteria"""
     df = pd.DataFrame(data)
 
     # Data cleaning - all this logic is still the same from the original algorithm
-    # df = df.map(lambda x: tuple(x) if isinstance(x, list) else x)
-    # df = df.drop_duplicates(subset=["paperId"])
-    # response = supabase_articles_POST(df.to_dict(orient="records"))
-    # if hasattr(response, "error") and response.error:
-    #     return {
-    #         "success": False,
-    #         "error": response.error,
-    #         "message": "Failed to upsert data",
-    #     }
+    df = df.map(lambda x: tuple(x) if isinstance(x, list) else x)
+    df = df.drop_duplicates(subset=["paperId"])
+    response = supabase_articles_POST(df.to_dict(orient="records"))
+    if hasattr(response, "error") and response.error:
+        raise Exception(f"Failed to upsert data: {response.error}")
 
-    data = supabase_query_all("ss_articles")
-    df = pd.DataFrame(data)
+    # Fetching updated data from Supabase and filtering
+    articles = pd.DataFrame(supabase_query_all("ss_articles"))
+    articles = articles[articles["llm_summary"].isnull()]
+
+    # Querying journals and reconstructing foreign key relationship
     journals = supabase_query_all("jufo_journals")
     journal_levels = {j["Name"]: [j["Level"], j["panels"]] for j in journals}
-    import json
-
-    with open("journal_levels.json", "w") as f:
-        json.dump(journal_levels, f)
-    matching_df = df[df["venue"].isin(journal_levels.keys())].copy()
+    matching_df = articles[articles["venue"].isin(journal_levels.keys())].copy()
     matching_df["Level"] = matching_df["venue"].map(lambda x: journal_levels[x][0])
     matching_df["panels"] = matching_df["venue"].map(lambda x: journal_levels[x][1])
     matching_df.sort_values(
         by=["Level", "panels"], ascending=[False, True], inplace=True
     )
-    matching_df.dropna(subset=["abstract"], inplace=True)
-    print(matching_df.head(10))
+
+    # For each article in matching df, fetch the abstract property for summary generation.
+    # 1. If the article doesn't have an abstract summary, extract the tldr or abstract from article detail fetch
+    # 2. If there is a tldr summary, use that for the summary generation
+    # 3. Else skip and go to next article
+    count = 0
+    selected_articles = []
+    for index, row in matching_df.iterrows():
+        if count == 4:
+            break
+        if row["abstract"]:
+            try:
+                row["llm_summary"] = "PLACEHOLDER"
+                selected_articles.append(row)
+                count += 1
+            except Exception as e:
+                logging.error(f"Error generating summary: {e}", exc_info=True)
+        else:
+            article_detail = fetch_paper_details(row["paperId"])
+            if not article_detail:
+                continue
+            if not article_detail.get("tldr"):
+                continue
+            if article_detail.get("tldr", {}).get("text"):
+                row["llm_summary"] = article_detail.get("tldr").get("text")
+                selected_articles.append(row)
+                count += 1
+            else:
+                continue
+
+    response = supabase_articles_POST(selected_articles)
+    if hasattr(response, "error") and response.error:
+        raise Exception(f"Failed to upsert data: {response.error}")
+
+    return selected_articles

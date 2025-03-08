@@ -17,8 +17,8 @@ def test_summaries():
     """
     writestring = ""
     for i in range(1, 6):
-        title = "A Comparative study of BO-SVM plus different Residual Networks for pneumonia disease detection"
-        content = 'The term "pneumonia" is an ancient Greek word that means "lung," so, it is "lung disease". An inflammation of lung is not caused by infections only but there are many causes of pneumonia such as viruses, fungi, and internal parasites [6]. Deep learning advancements in recent years have aided in the identification and classification of lung diseases in medical images. For clinical treatment and teaching tasks, medical image classification is essential'
+        title = "Clonal Candida auris and ESKAPE pathogens on the skin of residents of nursing homes."
+        content = "Skin is a reservoir for colonization by C. auris and ESKAPE pathogens and their associated antimicrobial-resistance genes, as well as other high-priority pathogens and their associated antimicrobial-resistance genes shared in a nursing home."
         summary = generate_gpt_paper_summary(title, content)
         writestring += f"{i}. {summary}\n"
 
@@ -75,15 +75,20 @@ def tmp_cleaning_JUFO():
 
 def tmp_test_paper_detail():
     """TEMPORARY function for testing paper details"""
-    paper_id = "51121bfb8d93362607e71e795aa3e71945156b4f"
+    # paper_id = "51121bfb8d93362607e71e795aa3e71945156b4f"
+    paper_id = "0309d98e85ffd497806f86af62c2bd9ed74a38de"
     data = fetch_paper_details(paper_id)
-    print(json.dumps(data,indent=2))
+    print(json.dumps(data, indent=2))
+
 
 if __name__ == "__main__":
     from utils.other_utils import article_selection_JUFO
+
     # script("event", "context")
     # tmp_test()
-    article_selection_JUFO([])
-    # test_summaries()
+    # articles = article_selection_JUFO([])
+    test_summaries()
     # tmp_cleaning_JUFO()
     # tmp_test_paper_detail()
+    # articles = article_selection_JUFO(fetch_bulk_articles())
+    # print(articles)
