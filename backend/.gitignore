@@ -4,3 +4,6 @@ myco-newsletter-5ff4bf0f907d.json
 /lambda_package
 /env
 *.csv
+*.json
+*.txt
+!requirements.txt
