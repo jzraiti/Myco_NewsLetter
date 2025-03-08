@@ -216,7 +216,7 @@ def article_selection_JUFO(data: list):
     if hasattr(response, "error") and response.error:
         raise Exception(f"Failed to upsert data: {response.error}")
 
-    # Fetching updated data from Supabase and filtering
+    # Fetching updated data from Supabase and filtering to articles without summaries
     articles = pd.DataFrame(supabase_query_all("ss_articles"))
     articles = articles[articles["llm_summary"].isnull()]
 
@@ -239,9 +239,14 @@ def article_selection_JUFO(data: list):
     for index, row in matching_df.iterrows():
         if count == 4:
             break
+        # In the case that we get really low level publishers, there shouldn't be any articles for the week.
+        if row["Level"] < 2:
+            break
         if row["abstract"]:
             try:
-                row["llm_summary"] = "PLACEHOLDER"
+                row["llm_summary"] = generate_gpt_paper_summary(
+                    title=row["title"], content=row["abstract"]
+                )
                 selected_articles.append(row)
                 count += 1
             except Exception as e:
@@ -253,7 +258,9 @@ def article_selection_JUFO(data: list):
             if not article_detail.get("tldr"):
                 continue
             if article_detail.get("tldr", {}).get("text"):
-                row["llm_summary"] = article_detail.get("tldr").get("text")
+                row["llm_summary"] = generate_gpt_paper_summary(
+                    title=row["title"], content=article_detail.get("tldr").get("text")
+                )
                 selected_articles.append(row)
                 count += 1
             else:
