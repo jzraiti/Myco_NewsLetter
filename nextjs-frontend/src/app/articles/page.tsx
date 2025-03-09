@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Head from 'next/head';
+import Head from "next/head";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Layout } from "@/components/Layout";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 const LANDSCAPE_IMAGES = [
   "/landscape_backgrounds/abbie-parks-XA1-J2rRGVw-unsplash.jpg",
@@ -41,12 +41,7 @@ const ImagePreloader = () => {
   return (
     <>
       {LANDSCAPE_IMAGES.map((src, index) => (
-        <link 
-          key={src}
-          rel="preload"
-          as="image"
-          href={src}
-        />
+        <link key={src} rel="preload" as="image" href={src} />
       ))}
     </>
   );
@@ -71,6 +66,9 @@ export default function Articles() {
     try {
       const { data, error } = await supabase.from("ss_articles").select("*");
       if (error) throw error;
+      data.sort((a: any, b: any) => {
+        return a.Level - b.Level;
+      });
       setArticles(data || []);
     } catch (error) {
       console.error(error);
@@ -144,24 +142,23 @@ export default function Articles() {
                           {article.title}
                         </h2>
                         <p className="text-white/80 text-sm mb-4 font-body">
-                          {article.venue ? article.venue : "Journal Unknown"}
+                          {article.venue ? article.venue : "Journal Unknown"} • {article.Level? "Level " +article.Level: "Level Unknown"}
                         </p>
-                        <div className={`${article.llm_summary ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body" : ""}`}>
+                        <div
+                          className={`${
+                            article.llm_summary
+                              ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body"
+                              : ""
+                          }`}
+                        >
                           <ReactMarkdown>
-                            {article.llm_summary || ''}
+                            {article.llm_summary || ""}
                           </ReactMarkdown>
                         </div>
                       </div>
                       <div className="flex justify-between items-center pt-6 border-t border-white/20 mt-6">
                         <span className="text-md text-white/80 flex items-center gap-2">
                           Published {article.publicationDate}
-                          <img
-                            src={article.favicon || "/semanticscholar_logo.png"}
-                            alt="Source"
-                            width={22}
-                            height={22}
-                            className="inline-block rounded-lg bg-white/20"
-                          />
                         </span>
                         <a
                           href={article.url}

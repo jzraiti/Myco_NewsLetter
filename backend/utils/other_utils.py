@@ -222,7 +222,17 @@ def article_selection_JUFO(data: list):
 
     # Querying journals and reconstructing foreign key relationship
     journals = supabase_query_all("jufo_journals")
-    journal_levels = {j["Name"]: [j["Level"], j["panels"]] for j in journals}
+
+    def parse_panel(panel_str):
+        try:
+            # Take the first number if there are multiple levels
+            return int(str(panel_str).split("|")[0])
+        except (ValueError, TypeError, IndexError):
+            return 0
+
+    journal_levels = {
+        j["Name"]: [j["Level"], parse_panel(j["panels"])] for j in journals
+    }
     matching_df = articles[articles["venue"].isin(journal_levels.keys())].copy()
     matching_df["Level"] = matching_df["venue"].map(lambda x: journal_levels[x][0])
     matching_df["panels"] = matching_df["venue"].map(lambda x: journal_levels[x][1])
