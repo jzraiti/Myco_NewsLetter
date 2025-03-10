@@ -6,8 +6,8 @@ export function TopBar() {
     <div className="w-full border-b border-white/10 backdrop-blur-md bg-white/10">
       <nav className="max-w-7xl mx-auto flex justify-between items-center p-4">
         <div className="flex items-center gap-10">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="font-bold flex items-center gap-2 text-white drop-shadow-lg transition-transform hover:scale-105"
           >
             <Image
@@ -20,18 +20,22 @@ export function TopBar() {
             MycoWeekly
           </Link>
           <div className="flex gap-6">
-            <Link 
-              href="/newsletters" 
+            <Link
+              href="/newsletters"
               className="text-white/90 hover:text-white transition-colors duration-200 drop-shadow-sm"
             >
               Previous Newsletters
             </Link>
-            <Link 
-              href="/articles" 
+            <Link
+              href="/articles"
               className="text-white/90 hover:text-white transition-colors duration-200 drop-shadow-sm"
             >
               Articles
             </Link>
+            <Link
+              href="/jufo"
+              className="text-white/90 hover:text-white transition-colors duration-200 drop-shadow-sm"
+            >JUFO Article Rankings</Link>
           </div>
         </div>
       </nav>
