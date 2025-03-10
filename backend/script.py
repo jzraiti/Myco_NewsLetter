@@ -16,8 +16,8 @@ def test_summaries():
     """
     writestring = ""
     for i in range(1, 6):
-        title = "Clonal Candida auris and ESKAPE pathogens on the skin of residents of nursing homes."
-        content = "Skin is a reservoir for colonization by C. auris and ESKAPE pathogens and their associated antimicrobial-resistance genes, as well as other high-priority pathogens and their associated antimicrobial-resistance genes shared in a nursing home."
+        title = "STUDIES ON INDUSTRIAL APPLICATIONS OF EXTREMOPHILIC HALOPHILIC FUNGI"
+        content = "Marine ecosystems, covering 71% of Earth’s surface, harbor diverse life forms, including extremophilic halophilic fungi that thrive in hypersaline environments. Despite their ecological significance and biotechnological potential, halophilic fungi remain understudied. These organisms inhabit high-salt habitats like salt deserts, salterns, and certain foods, exhibiting unique adaptations to survive extreme salt, pH, and temperature conditions. Halophilic fungi produce stable enzymes, including xylanases, cellulases, amylases, and proteases, which maintain activity under stress. These enzymes hold immense potential for industries like bioremediation, wastewater treatment, and biofuel production. Their stability stems from distinct molecular features, such as acidic amino acids and hydrophobic side chains, which facilitate protective solvation and hydration shells, preventing enzyme aggregation at high salt concentrations. Elucidating these mechanisms can inform the development of sustainable industrial processes and environmental applications. By isolating and optimizing halophilic fungal enzymes, researchers can unlock cost-effective solutions to environmental and industrial challenges. Halophilic fungi thus represent a valuable resource for future biotechnology. This review provides enzymes production and applications of halophilic extremozymes and impact of halophilic extremophiles on the industrial biotechnology."
         summary = generate_gpt_paper_summary(title, content)
         writestring += f"{i}. {summary}\n"
 

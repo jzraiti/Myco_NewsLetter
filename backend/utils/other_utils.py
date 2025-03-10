@@ -42,11 +42,11 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": "You are an expert in mycology and fungi, skilled at crafting professional, creative, and concise sneak peeks for mycology research articles. Your task is to create newsletter-style previews that highlight the most surprising or intriguing findings from global researchers, blending scientific accuracy with a curiosity-driven tone.",
+                "content": "You are an expert in mycology and fungi, skilled at crafting professional, concise, and clear summaries for mycology research articles. Your task is to create newsletter-style previews that present key findings from global researchers in a straightforward, academic manner, focusing on surprising or significant results.",
             },
             {
                 "role": "user",
-                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 300 characters.',
+                "content": f"Write a concise, informational sneak peek for a research paper titled '{title}' based on this abstract: {content}. Begin with a sentence defining key terms for context. Tailor it for a mycology research audience. Use formal, human-like language without excessive embellishment. Keep it under 400 characters.",
             },
         ],
     )
