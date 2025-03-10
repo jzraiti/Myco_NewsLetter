@@ -37,8 +37,8 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     client = OpenAI(api_key=OPENAI_API_KEY)
     completion = client.chat.completions.create(
-        model="gpt-4o-mini",
-        temperature=1.1,
+        model="gpt-4o",
+        temperature=1,
         messages=[
             {
                 "role": "system",
@@ -46,7 +46,7 @@ def generate_gpt_paper_summary(title: str, content: str) -> str:
             },
             {
                 "role": "user",
-                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 250 characters.',
+                "content": f'Write a compelling, informational sneak peek for a research paper titled "{title}" based on this abstract: {content}. Tailor it for a mycology research audience, emphasizing unique and engaging elements, avoiding first-person perspective, and keeping it under 300 characters.',
             },
         ],
     )
