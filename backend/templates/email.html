@@ -129,7 +129,11 @@
     <div class="article">
       <h2 class="article-title">{{ article.title }}</h2>
       <div class="article-date">{{ article.publicationDate }}</div>
-      <div class="article-venue">{{ article.venue }}</div>
+      <div class="article-venue">
+        {{ article.venue if article.venue else "Journal Unknown" }}
+        {{ " • Level " + article.Level if article.Level else " • Not Graded" }}
+        ({{ article.panels + " panels" if article.panels }})
+      </div>
       <div class="article-authors">{{ article.authors }}</div>
       <p class="article-summary">{{ article.llm_summary|safe }}</p>
       <div style="display: flex; align-items: center; gap: 10px">
