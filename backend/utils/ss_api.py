@@ -24,7 +24,7 @@ def fetch_bulk_articles() -> list:
     query_params = {
         "query": search_term,
         "sort": "citationCount:desc",
-        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
+        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime('%Y-%m-%d')}",
         "fieldsOfStudy": "Environmental Science",
     }
 

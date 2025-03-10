@@ -97,7 +97,7 @@ def fetch_venue_info(article: dict) -> str:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
-        doi_url = f"https://doi.org/{article["externalIds"]["DOI"]}"
+        doi_url = f"https://doi.org/{article['externalIds']['DOI']}"
 
         # Follow DOI redirect to get actual journal URL
         doi_response = requests.get(doi_url, headers=headers, allow_redirects=True)

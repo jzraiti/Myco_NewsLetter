@@ -79,8 +79,7 @@ def test_email_template():
 
 
 if __name__ == "__main__":
-    #script("event", "context")
+    script("event", "context")
+
+    
     # test_email_template()
-    data = fetch_bulk_articles()
-    print(data)
-    _, result = article_selection(data)
