@@ -83,8 +83,11 @@ export default function Articles() {
           new Date(a.publicationDate).getTime()
         );
       });
-      setArticles(data || []);
-      console.log(data)
+      setArticles(
+        data.filter((article: any) => {
+          return article.Level != null;
+        }) || []
+      );
     } catch (error) {
       console.error(error);
     } finally {
@@ -159,7 +162,9 @@ export default function Articles() {
             ) : (
               <div className="space-y-6 mb-6">
                 {filteredArticles.length === 0 ? (
-                  <p className="text-center text-white/80">No articles found matching your search.</p>
+                  <p className="text-center text-white/80">
+                    No articles found matching your search.
+                  </p>
                 ) : (
                   filteredArticles.map((article, index) => (
                     <Card
@@ -182,7 +187,8 @@ export default function Articles() {
                             {article.venue ? article.venue : "Journal Unknown"}
                             {article.Level
                               ? ` • Level ${article.Level}`
-                              : " • Not Graded"}
+                              : " • Not Graded"}{" "}
+                            ({article.panels ? article.panels + " panels" : ""})
                           </p>
                           <div
                             className={`${
