@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Layout } from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
+import { Input } from "@/components/ui/input";
 
 const LANDSCAPE_IMAGES = [
   "/landscape_backgrounds/abbie-parks-XA1-J2rRGVw-unsplash.jpg",
@@ -52,13 +53,23 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
+const articleBackgrounds = new Map<string | number, string>();
+
 export default function Articles() {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getRandomLandscapeImage = () => {
     const randomIndex = Math.floor(Math.random() * LANDSCAPE_IMAGES.length);
     return LANDSCAPE_IMAGES[randomIndex];
+  };
+
+  const getArticleBackground = (articleId: string | number) => {
+    if (!articleBackgrounds.has(articleId)) {
+      articleBackgrounds.set(articleId, getRandomLandscapeImage());
+    }
+    return articleBackgrounds.get(articleId)!;
   };
 
   const fetchArticles = async () => {
@@ -67,9 +78,13 @@ export default function Articles() {
       const { data, error } = await supabase.from("ss_articles").select("*");
       if (error) throw error;
       data.sort((a: any, b: any) => {
-        return a.Level - b.Level;
+        return (
+          new Date(b.publicationDate).getTime() -
+          new Date(a.publicationDate).getTime()
+        );
       });
       setArticles(data || []);
+      console.log(data)
     } catch (error) {
       console.error(error);
     } finally {
@@ -80,6 +95,15 @@ export default function Articles() {
   useEffect(() => {
     fetchArticles();
   }, []);
+
+  const filteredArticles = articles.filter((article) => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      article.title?.toLowerCase().includes(searchLower) ||
+      article.llm_summary?.toLowerCase().includes(searchLower) ||
+      article.venue?.toLowerCase().includes(searchLower)
+    );
+  });
 
   return (
     <Layout>
@@ -101,7 +125,7 @@ export default function Articles() {
 
       <div className="flex flex-col min-h-0 flex-1">
         <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col p-6 max-w-3xl mx-auto">
+          <div className="flex flex-col p-6 max-w-5xl mx-auto">
             <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg font-display">
               <Image
                 src="/android-chrome-512x512.png"
@@ -118,61 +142,78 @@ export default function Articles() {
             </p>
             <Separator className="mb-6 bg-white/20" />
 
+            <div className="mb-6">
+              <Input
+                type="search"
+                placeholder="Search articles..."
+                className="max-w-xl mx-auto bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+
             {isLoading ? (
               <div className="flex justify-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
               </div>
             ) : (
               <div className="space-y-6 mb-6">
-                {articles.map((article, index) => (
-                  <Card
-                    key={article.id ?? index}
-                    className="relative overflow-hidden group min-h-[300px]"
-                  >
-                    <Image
-                      src={getRandomLandscapeImage()}
-                      alt="Article background"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/55 group-hover:bg-black/85 transition-colors duration-300" />
-                    <div className="relative z-10 h-full p-6 flex flex-col justify-between">
-                      <div>
-                        <h2 className="text-xl font-semibold text-white mb-3 font-display">
-                          {article.title}
-                        </h2>
-                        <p className="text-white/80 text-sm mb-4 font-body">
-                          {article.venue ? article.venue : "Journal Unknown"} • {article.Level? "Level " +article.Level: "Level Unknown"}
-                        </p>
-                        <div
-                          className={`${
-                            article.llm_summary
-                              ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body"
-                              : ""
-                          }`}
-                        >
-                          <ReactMarkdown>
-                            {article.llm_summary || ""}
-                          </ReactMarkdown>
+                {filteredArticles.length === 0 ? (
+                  <p className="text-center text-white/80">No articles found matching your search.</p>
+                ) : (
+                  filteredArticles.map((article, index) => (
+                    <Card
+                      key={article.id ?? index}
+                      className="relative overflow-hidden group min-h-[300px]"
+                    >
+                      <Image
+                        src={getArticleBackground(article.id ?? index)}
+                        alt="Article background"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/55 group-hover:bg-black/85 transition-colors duration-300" />
+                      <div className="relative z-10 h-full p-6 flex flex-col justify-between">
+                        <div>
+                          <h2 className="text-xl font-semibold text-white mb-3 font-display">
+                            {article.title}
+                          </h2>
+                          <p className="text-white/80 text-sm mb-4 font-body">
+                            {article.venue ? article.venue : "Journal Unknown"}
+                            {article.Level
+                              ? ` • Level ${article.Level}`
+                              : " • Not Graded"}
+                          </p>
+                          <div
+                            className={`${
+                              article.llm_summary
+                                ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body"
+                                : ""
+                            }`}
+                          >
+                            <ReactMarkdown>
+                              {article.llm_summary || ""}
+                            </ReactMarkdown>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center pt-6 border-t border-white/20 mt-6">
+                          <span className="text-md text-white/80 flex items-center gap-2">
+                            Published {article.publicationDate}
+                          </span>
+                          <a
+                            href={article.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300">
+                              Read More →
+                            </Button>
+                          </a>
                         </div>
                       </div>
-                      <div className="flex justify-between items-center pt-6 border-t border-white/20 mt-6">
-                        <span className="text-md text-white/80 flex items-center gap-2">
-                          Published {article.publicationDate}
-                        </span>
-                        <a
-                          href={article.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300">
-                            Read More →
-                          </Button>
-                        </a>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+                    </Card>
+                  ))
+                )}
               </div>
             )}
           </div>

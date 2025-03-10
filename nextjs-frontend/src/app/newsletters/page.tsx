@@ -65,6 +65,12 @@ export default function PreviousNewsletters() {
     try {
       const { data, error } = await supabase.from("newsletters").select("*");
       if (error) throw error;
+      data.sort((a: any, b: any) => {
+        return (
+          new Date(b.created_at).getTime() -
+          new Date(a.created_at).getTime()
+        );
+      });
       setNewsletters(data || []);
     } catch (error) {
       console.error(error);
@@ -100,7 +106,7 @@ export default function PreviousNewsletters() {
         </div>
       </div>
 
-      <div className="flex flex-col p-6 max-w-3xl mx-auto flex-1">
+      <div className="flex flex-col p-6 max-w-5xl mx-auto flex-1">
         <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg">
           <Image
             src="/android-chrome-512x512.png"
