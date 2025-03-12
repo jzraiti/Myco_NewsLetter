@@ -29,7 +29,7 @@ def resend_send_email(html_content: str):
         for receiver in receiver_email_list:
             r = resend.Emails.send(
                 {
-                    "from": "MycoWeekly Newsletter <myconewsletter@mycoweekly.click>",
+                    "from": "MycoWeekly Newsletter <myconewsletter@mycoweekly.org>",
                     "to": receiver,
                     "subject": f"Weekly Digest {datetime.now().strftime('%m/%d')}",
                     "html": html_content,
