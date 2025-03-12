@@ -35,7 +35,7 @@ export function TopBar() {
             <Link
               href="/jufo"
               className="text-white/90 hover:text-white transition-colors duration-200 drop-shadow-sm"
-            >JUFO Article Rankings</Link>
+            >Article Rankings</Link>
           </div>
         </div>
       </nav>

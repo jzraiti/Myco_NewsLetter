@@ -121,15 +121,34 @@ export default function JufoPage() {
         <div className="flex-1 overflow-y-auto">
           <div className="flex flex-col p-6 max-w-7xl mx-auto">
             <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white font-display">
-              JUFO Publication Rankings
+              Publication Rankings
             </h1>
 
             <Card className="bg-white/10 border-white/20 mb-8 mx-auto">
               <CardContent className="pt-6">
                 <p className="text-white/80 mb-4">
-                  The Publication Forum (JUFO) is a Finnish rating system for
-                  research publications, classifying academic journals,
-                  conferences, and book publishers. The rating levels are:
+                  Mycoweekly adheres to the JUFO ranking system. The team at 
+                  mycoweekly has decided to move away from traditional indices
+                  of importance such as impact factor or citation counts, due to concerns surrounding
+                  the accuracy and reliability of these metrics and the proliferation of predatory journals.
+                </p>
+
+                <p className="text-white/80 mb-4">
+                  For more information on the JUFO system 
+                  <a href="https://julkaisufoorumi.fi/en" target="_blank" rel="noopener noreferrer">
+                    click here
+                  </a>
+                </p>
+
+                <p className="text-white/80 mb-4">
+                  For more information on predatory journals 
+                  <a href="https://julkaisufoorumi.fi/en" target="_blank" rel="noopener noreferrer">
+                    click here
+                  </a>
+                </p>
+
+                <p className="text-white/80 mb-4">
+                  In Mycoweekly each article's publication channel is given a rating level. The rating levels are:
                 </p>
 
                 <ul className="list-disc pl-6 mb-4 space-y-2 text-white/80">
@@ -141,7 +160,7 @@ export default function JufoPage() {
 
                 <p className="text-white/80">
                   In our article selection process, we prioritize articles from
-                  publications rated Level 2 or higher to ensure high-quality,
+                  publications rated Level 2 or higher to ensure high-quality, relevant, and
                   peer-reviewed research content.
                 </p>
               </CardContent>

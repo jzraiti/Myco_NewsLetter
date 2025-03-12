@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState , useEffect} from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -193,39 +193,41 @@ export default function Home() {
             {isLoading ? "Subscribing..." : "Subscribe"}
           </Button>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-8">
-          {[
-            {
-              title: "Weekly Updates",
-              description: "Get the latest research delivered to your inbox"
-            },
-            {
-              title: "Curated Content",
-              description: "Hand-picked articles from top journals"
-            },
-            {
-              title: "AI Summaries",
-              description: "Concise, readable research breakdowns"
-            }
-          ].map((feature, index) => (
-            <Card 
-              key={index}
-              className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/20"
-            >
-              <h3 className="font-semibold mb-2 font-display text-white">{feature.title}</h3>
-              <p className="text-sm text-white font-body">
-                {feature.description}
-              </p>
-            </Card>
-          ))}
-        </div>
+        <Link href="/newsletters">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-8">
+            {[
+              {
+                title: "Weekly Updates",
+                description: "The latest papers delivered to your inbox"
+              },
+              {
+                title: "Curated Content",
+                description: "Selected articles from only the highest JUFO rated journals"
+              },
+              {
+                title: "Article Summaries",
+                description: "Concise, readable research breakdowns for quick reference"
+              }
+            ].map((feature, index) => (
+              <Card 
+                key={index}
+                className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/20"
+              >
+                <h3 className="font-semibold mb-2 font-display text-white">{feature.title}</h3>
+                <p className="text-sm text-white font-body">
+                  {feature.description}
+                </p>
+              </Card>
+              
+            ))}
+          </div>
+        </Link>
 
         <div className="mt-8 text-center px-6 py-3 rounded-lg">
           <p className="text-white">
             <span>Join the other </span>
             <span className="font-bold text-xl">{subscriberCount}</span>
-            <span> researchers subscribed!</span>
+            <span> mycologists subscribed!</span>
           </p>
         </div>
       </main>

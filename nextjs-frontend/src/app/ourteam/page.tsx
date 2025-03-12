@@ -42,9 +42,9 @@ export default function OurTeam() {
             },
             {
               name: "Jason Raiti",
-              role: "Research Lead",
+              role: "Project Lead",
               image: "/jason.png",
-              description: "Curating and analyzing mycology research papers.",
+              description: "Resident Mushroom Scientist and Ex-Software Engineer.",
               github: "https://github.com/jzraiti",
               linkedin: "https://www.linkedin.com/in/jason-raiti/",
             },
