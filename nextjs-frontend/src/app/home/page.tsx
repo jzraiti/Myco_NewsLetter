@@ -193,24 +193,26 @@ export default function Home() {
             {isLoading ? "Subscribing..." : "Subscribe"}
           </Button>
         </div>
-        <Link href="/newsletters">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-8">
-            {[
-              {
-                title: "Weekly Updates",
-                description: "The latest papers delivered to your inbox"
-              },
-              {
-                title: "Curated Content",
-                description: "Selected articles from only the highest JUFO rated journals"
-              },
-              {
-                title: "Article Summaries",
-                description: "Concise, readable research breakdowns for quick reference"
-              }
-            ].map((feature, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mt-8">
+          {[
+            {
+              title: "Weekly Updates",
+              description: "The latest papers delivered to your inbox",
+              href: "/newsletters"
+            },
+            {
+              title: "Curated Content",
+              description: "Selected articles from only the highest JUFO rated journals",
+              href: "/jufo"
+            },
+            {
+              title: "Article Summaries",
+              description: "Concise, readable research breakdowns for quick reference",
+              href: "/articles"
+            }
+          ].map((feature, index) => (
+            <Link key={index} href={feature.href}>
               <Card 
-                key={index}
                 className="p-6 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 backdrop-blur-md bg-white/20"
               >
                 <h3 className="font-semibold mb-2 font-display text-white">{feature.title}</h3>
@@ -218,10 +220,9 @@ export default function Home() {
                   {feature.description}
                 </p>
               </Card>
-              
-            ))}
-          </div>
-        </Link>
+            </Link>
+          ))}
+        </div>
 
         <div className="mt-8 text-center px-6 py-3 rounded-lg">
           <p className="text-white">
