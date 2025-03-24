@@ -25,8 +25,8 @@ def resend_send_email(html_content: str):
         if receiver["is_subscribed"]
     ]
 
-    try:
-        for receiver in receiver_email_list:
+    for receiver in receiver_email_list:
+        try:
             r = resend.Emails.send(
                 {
                     "from": "MycoWeekly Newsletter <myconewsletter@mycoweekly.org>",
@@ -36,9 +36,10 @@ def resend_send_email(html_content: str):
                 }
             )
             print(f"Email sent successfully to {receiver}")
-    except Exception as e:
-        print(e)
-        return
+        except Exception as e:
+            print(f"Failed to send email to {receiver}")
+            print(e)
+            return
 
 
 def smtp_send_email(html_content: str):
