@@ -140,7 +140,7 @@ export default function JufoPage() {
                 </p>
 
                 <p className="text-white/80 mb-4">
-                  For more information on predatory journals, you can read this wonderful (and reliable) article from Nature: <a href="https://julkaisufoorumi.fi/en" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                  For more information on predatory journals, you can read this wonderful (and reliable) article from Nature: <a href="https://www.nature.com/articles/d41586-019-03759-y" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
                     https://www.nature.com/articles/d41586-019-03759-y
                   </a>
                 </p>
