@@ -167,16 +167,25 @@ export default function Home() {
           <Image
             src="/android-chrome-512x512.png"
             alt="Mushroom Logo"
-            width={48}
-            height={48}
-            className="w-12 h-12 drop-shadow-lg rounded-full"
+            width={60}
+            height={60}
+            className="w-15 h-15 drop-shadow-lg rounded-full"
           />
           Mycoweekly
         </p>
         <h1 className="text-4xl font-bold text-center text-white drop-shadow-lg font-display leading-tight">
           Your Weekly Dose of Mycology Research
         </h1>
-
+        <p className="font-bold flex items-center gap-2 text-1xl text-white drop-shadow-lg">
+          In parntership with
+          <Image
+            src="/mms-logo.png"
+            alt="Mushroom Logo"
+            width={48}
+            height={48}
+            className="w-15 h-15 drop-shadow-lg rounded-full"
+          />
+        </p>
         <div className="w-full max-w-md flex gap-2 p-2 rounded-lg backdrop-blur-md bg-white/10">
           <Input
             type="email"

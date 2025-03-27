@@ -19,6 +19,19 @@ export function TopBar() {
             />
             MycoWeekly
           </Link>
+          <Link
+            href="https://madisonmycologicalsociety.com/"
+            className="font-bold flex items-center gap-2 text-white drop-shadow-lg transition-transform hover:scale-105"
+          >
+            <Image
+              src="/mms-logo.png"
+              alt="Mushroom Logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 rounded-full shadow-lg"
+            />
+            Madison Mycologial Society
+          </Link>
           <div className="flex gap-6">
             <Link
               href="/newsletters"
