@@ -177,7 +177,7 @@ export default function Home() {
           Your Weekly Dose of Mycology Research
         </h1>
         <p className="font-bold flex items-center gap-2 text-1xl text-white drop-shadow-lg">
-          In parntership with
+          In partnership with
           <Image
             src="/mms-logo.png"
             alt="Mushroom Logo"
