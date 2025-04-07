@@ -15,6 +15,7 @@ def render_template(articles: list[dict]) -> str:
 def resend_send_email(html_content: str):
     import resend
     from datetime import datetime
+    import time
 
     resend.api_key = os.getenv("RESEND_API_KEY")
 
@@ -36,6 +37,7 @@ def resend_send_email(html_content: str):
                 }
             )
             print(f"Email sent successfully to {receiver}")
+            time.sleep(1)  # Sleep for a second to avoid rate limiting
         except Exception as e:
             print(f"Failed to send email to {receiver}")
             print(e)
