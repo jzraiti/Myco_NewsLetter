@@ -39,7 +39,6 @@ def resend_send_email(html_content: str):
         except Exception as e:
             print(f"Failed to send email to {receiver}")
             print(e)
-            return
 
 
 def smtp_send_email(html_content: str):
