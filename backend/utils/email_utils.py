@@ -37,10 +37,9 @@ def resend_send_email(html_content: str):
                 }
             )
             print(f"Email sent successfully to {receiver}")
-            time.sleep(1)  # Sleep for a second to avoid rate limiting
         except Exception as e:
-            print(f"Failed to send email to {receiver}")
-            print(e)
+            print(f"Failed to send email to {receiver}: {e}")
+        time.sleep(0.5)
 
 
 def smtp_send_email(html_content: str):
