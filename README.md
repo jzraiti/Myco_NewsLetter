@@ -1,3 +1,4 @@
+![image](https://github.com/user-attachments/assets/8a711f91-f08e-4ad9-8fd1-42762acdaf74) 
 # Myco Newsletter
 
 A web application for managing and distributing newsletters about mycology and fungi.
