@@ -32,7 +32,7 @@ export default function JufoPage() {
   useEffect(() => {
     async function loadPublications() {
       try {
-        const response = await fetch("/jfp-export-cleaned-twice.csv");
+        const response = await fetch("/jfp-export2025.csv");
         const data = await response.text();
         const rows = data.split("\n");
 
@@ -49,13 +49,13 @@ export default function JufoPage() {
           if (parsedRow.length >= 8) {
             parsedPublications.push({
               Name: parsedRow[0] || "",
-              Website: parsedRow[1] || "",
-              Country: parsedRow[2] || "",
-              Publisher: parsedRow[3] || "",
-              Language: parsedRow[4] || "",
-              Year_Start: Number(parsedRow[5]) || 0,
-              panels: parsedRow[6] || "",
-              Level: parsedRow[7] || "",
+              panels: parsedRow[1] || "",
+              Level: parsedRow[2] || "",
+              Website: parsedRow[3] || "",
+              Country: parsedRow[4] || "",
+              Publisher: parsedRow[5] || "",
+              Language: parsedRow[6] || "",
+              Year_Start: Number(parsedRow[7]) || 0,
             });
           }
         }
