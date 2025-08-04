@@ -250,7 +250,7 @@ def article_selection_JUFO(data: list):
         if count == 4:
             break
         # In the case that we get really low level publishers, there shouldn't be any articles for the week.
-        if row["Level"] < 2:
+        if row["Level"] < 1:
             break
         if row["abstract"]:
             try:

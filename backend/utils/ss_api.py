@@ -8,21 +8,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 load_dotenv()
 
 SEARCH_QUERY = """
-mycology|fungi|"fungal biology"|"fungal ecology"|"fungal taxonomy"|"fungal systematics"|
-"fungal genetics"|"fungal evolution"|"fungal physiology"|"fungal metabolism"|"fungal biotechnology"|
-"fungal diversity"|Ascomycota|Basidiomycota|Zygomycota|Chytridiomycota|Glomeromycota|Microsporidia|
-Amanita|Aspergillus|Candida|Claviceps|Coprinus|Fusarium|Ganoderma|Lentinula|Morchella|
-Penicillium|Pleurotus|Psilocybe|Rhizopus|Saccharomyces|Schizophyllum|Trichoderma|Ustilago|
-"mycorrhizal fungi"|"decomposer fungi"|"endophytic fungi"|"lichenized fungi"|"parasitic fungi"|"saprotrophic fungi"|
-"wood decay fungi"|"fungal mutualisms"|"symbiotic fungi"|"fungal pathogens"|"fungal interactions"|"fungal biodegradation"|
-"medical mycology"|"industrial mycology"|"agricultural mycology"|mycoremediation|mycoforestry|mycotechnology|
-"fungal bioinformatics"|"fungal genomics"|"fungal transcriptomics"|"fungal proteomics"|"fungal secondary metabolites"|
-"fungal enzymes"|"fungal antibiotics"|"fungal fermentation"|"fungal synthetic biology"|"edible fungi"|"medicinal fungi"|
-"fermented fungi"|mycotoxins|"fungal immunomodulators"|"fungal antivirals"|"fungal cancer therapy"|"fungal probiotics"|
-"fungi and carbon cycling"|"fungal decomposition"|"fungal contributions to soil health"|"fungi and climate change"|
-"fungal biocontrol"|"fungal endophytes in agriculture"|"fungi and nitrogen cycling"|"fungal ecology modeling"|"AI in mycology"|
-"machine learning for fungal classification"|"fungal network analysis"|"fungal image processing"|"citizen science and fungi"|
-"iNaturalist fungi studies"|"DNA barcoding fungi"|"fungal spore dispersal"
+"fungal ecology"|"wood decay fungi"|"fungal decomposition"|"fungi and climate change"|"fungi and carbon cycling"|
+"fungal taxonomy"|"fungal systematics"|"Amanita"|Psilocybe|Pleurotus|Ganoderma|"Basidiomycota"|"Ascomycota"|"new fungal species"|
+"mycorrhizal fungi"|"lichenized fungi"|"fungal endophytes"|"symbiotic fungi"|mycoremediation|"wood wide web"|"edible fungi"
 """
 
 
@@ -34,15 +22,15 @@ def fetch_bulk_articles() -> list:
         search_term (str): The search term to use.
     """
     url = "http://api.semanticscholar.org/graph/v1/paper/search/bulk/"
-    four_weeks_ago = (datetime.now() - timedelta(weeks=4)).strftime("%Y-%m-%d")
+    four_weeks_ago = (datetime.now() - timedelta(weeks=4)).strftime('%Y-%m-%d')
     search_term_count = SEARCH_QUERY.count("|") + 1
     logging.info(f"Fetching articles with {search_term_count} search terms...")
 
     query_params = {
         "query": SEARCH_QUERY,
         "sort": "publicationDate:desc",
-        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime("%Y-%m-%d")}",
-        # "fieldsOfStudy": "Environmental Science, ",
+        "publicationDateOrYear": f"{four_weeks_ago}:{datetime.now().strftime('%Y-%m-%d')}",
+        "fieldsOfStudy": "Biology, Environmental Science ",
     }
 
     query_param_list = [
