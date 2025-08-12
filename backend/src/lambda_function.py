@@ -8,6 +8,7 @@ from utils.email_utils import render_template, resend_send_email
 from utils.supabase_utils import supabase_newsletters_POST
 from utils.ss_api import fetch_bulk_articles
 import markdown
+import os
 
 
 def test_summaries():
@@ -33,21 +34,25 @@ def script(event, context):
     result = article_selection_JUFO(data)
     if len(result) > 0:
         for article in result:
-            article["authors"] = [author["name"] for author in article["authors"]]
-            article["authors"] = ", ".join(article["authors"])
-            article["llm_summary"] = markdown.markdown(article["llm_summary"])
+            article["authors"] = [author.get("name") for author in article.get("authors", [])]
+            article["authors"] = ", ".join(article["authors"]) if article["authors"] else "Unknown"
+            if article.get("llm_summary"):
+                article["llm_summary"] = markdown.markdown(article["llm_summary"])
 
         email_html_template = render_template(result)
         resend_send_email(email_html_template)
         upload_to_s3(email_html_template)
+        bucket = os.getenv("NEWSLETTER_BUCKET", "myconews")
+        date_str = datetime.now().strftime('%m-%d-%Y')
         data = {
-            "name": f"{datetime.now().strftime('%m-%d-%Y')}.html",
-            "link": f"https://myconews.s3-us-west-1.amazonaws.com/{datetime.now().strftime('%m-%d-%Y')}.html",
+            "name": f"{date_str}.html",
+            "link": f"https://{bucket}.s3.amazonaws.com/{date_str}.html",
         }
         supabase_newsletters_POST(data)
     else:
+        from datetime import datetime as dt
         print(
-            f"No articles selected for the newsletter for the week of {datetime.now().strftime('%m-%d-%Y')}."
+            f"No articles selected for the newsletter for the week of {dt.now().strftime('%m-%d-%Y')}."
         )
 
 

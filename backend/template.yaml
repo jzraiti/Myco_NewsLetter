@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Myco Newsletter
+
+Parameters:
+  OpenAIApiKey:
+    Type: String
+    NoEcho: true
+    Description: OpenAI API key
+  SupabaseKey:
+    Type: String
+    NoEcho: true
+    Description: Supabase service role / anon key
+  SupabaseUrl:
+    Type: String
+    Description: Supabase project URL (https://xxxx.supabase.co)
+  ResendApiKey:
+    Type: String
+    NoEcho: true
+    Description: Resend API key
+  SemanticScholarApiKey:
+    Type: String
+    NoEcho: true
+    Description: Semantic Scholar API key
+  SenderEmail:
+    Type: String
+    Description: From email address
+  SenderAppPassword:
+    Type: String
+    NoEcho: true
+    Description: App password or SMTP credential
+  S3BucketName:
+    Type: String
+    Default: myconews
+    Description: S3 bucket for newsletter HTML output
+
+Resources:
+  MycoNewsletterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.script
+      Runtime: python3.11
+      CodeUri: src/
+      Timeout: 600
+      MemorySize: 2048
+      Layers:
+        - !Ref MycoNewsletterLayer
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:PutObject
+                - s3:GetObject
+              Resource: !Sub arn:aws:s3:::${S3BucketName}/*
+      Environment:
+        Variables:
+          OPENAI_API_KEY: !Ref OpenAIApiKey
+          SUPABASE_KEY: !Ref SupabaseKey
+          SUPABASE_URL: !Ref SupabaseUrl
+          RESEND_API_KEY: !Ref ResendApiKey
+          SEMANTIC_SCHOLAR_API_KEY: !Ref SemanticScholarApiKey
+          SENDER_EMAIL: !Ref SenderEmail
+          EMAIL_SENDER: !Ref SenderEmail
+          SENDER_APP_PASSWORD: !Ref SenderAppPassword
+          NEWSLETTER_BUCKET: !Ref S3BucketName
+      Events:
+        WeeklyRun:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 17 ? * MON *)
+            Name: MycoNewsletterWeekly
+            Description: Weekly Myco newsletter generation
+            Enabled: true
+
+  MycoNewsletterLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: MycoNewsletterLayer
+      ContentUri: layer/
+      CompatibleRuntimes:
+        - python3.11
+      LicenseInfo: MIT
+      Description: Common utilities for Lambda functions
+
+Outputs:
+  MycoNewsletterFunctionArn:
+    Description: "ARN of the Lambda Function"
+    Value: !GetAtt MycoNewsletterFunction.Arn
+  MycoNewsletterLayerArn:
+    Description: "ARN of the Lambda Layer"
+    Value: !Ref MycoNewsletterLayer

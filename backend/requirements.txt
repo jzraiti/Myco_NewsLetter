@@ -1,14 +1,3 @@
-beautifulsoup4==4.13.0
-boto3==1.36.11
-botocore==1.36.11
-bs4==0.0.2
-jinja2==3.1.5
-markdown==3.7
-numpy==2.2.2
-openai==1.61.0
-pandas==2.2.3
-python-dotenv==1.0.1
-requests==2.32.3
-resend==2.6.0
-urllib3==2.3.0
-supabase==2.11.0    
+# Lightweight, function-specific dependencies (heavy libs moved to layer)
+# If everything is in the layer, this can stay minimal.
+# boto3 is available in Lambda runtime by default.

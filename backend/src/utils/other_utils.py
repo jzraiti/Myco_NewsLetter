@@ -94,28 +94,25 @@ def extract_favicon(url: str) -> str:
 
 def fetch_venue_info(article: dict) -> str:
     """Parses through the Semantic Scholar webpage and fetches the journal link and favicon."""
-
     try:
-        # Fetch the webpage
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
-        doi_url = f"https://doi.org/{article["externalIds"]["DOI"]}"
-
-        # Follow DOI redirect to get actual journal URL
-        doi_response = requests.get(doi_url, headers=headers, allow_redirects=True)
+        external_ids = article.get("externalIds", {}) or {}
+        doi = external_ids.get("DOI")
+        if not doi:
+            logging.info("No DOI present for article; skipping venue info fetch.")
+            return None, None
+        doi_url = f"https://doi.org/{doi}"
+        doi_response = requests.get(doi_url, headers=headers, allow_redirects=True, timeout=15)
         journal_url = doi_response.url
-
-        # Extract base domain from journal URL
         parsed_url = urlparse(journal_url)
         base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
-
         favicon_url = extract_favicon(base_url)
         logging.info(
-            f"Successfully fetched venue info for article: {article['paperId']}"
+            f"Successfully fetched venue info for article: {article.get('paperId')}"
         )
         return journal_url, favicon_url
-
     except Exception as e:
         logging.error(f"Error fetching venue info for article: {str(e)}")
         return None, None
