@@ -57,28 +57,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TINF-01 | Unmapped | Pending |
-| TINF-02 | Unmapped | Pending |
-| TINF-03 | Unmapped | Pending |
-| TINF-04 | Unmapped | Pending |
-| ACCP-01 | Unmapped | Pending |
-| ACCP-02 | Unmapped | Pending |
-| ACCP-03 | Unmapped | Pending |
-| ACCP-04 | Unmapped | Pending |
-| FEQ-01 | Unmapped | Pending |
-| FEQ-02 | Unmapped | Pending |
-| FEQ-03 | Unmapped | Pending |
-| FEQ-04 | Unmapped | Pending |
-| BEQ-01 | Unmapped | Pending |
-| BEQ-02 | Unmapped | Pending |
-| BEQ-03 | Unmapped | Pending |
-| BEQ-04 | Unmapped | Pending |
+| TINF-01 | Phase 1 | Pending |
+| TINF-02 | Phase 1 | Pending |
+| TINF-03 | Phase 1 | Pending |
+| TINF-04 | Phase 1 | Pending |
+| ACCP-01 | Phase 4 | Pending |
+| ACCP-02 | Phase 4 | Pending |
+| ACCP-03 | Phase 4 | Pending |
+| ACCP-04 | Phase 4 | Pending |
+| FEQ-01 | Phase 2 | Pending |
+| FEQ-02 | Phase 2 | Pending |
+| FEQ-03 | Phase 2 | Pending |
+| FEQ-04 | Phase 2 | Pending |
+| BEQ-01 | Phase 3 | Pending |
+| BEQ-02 | Phase 3 | Pending |
+| BEQ-03 | Phase 3 | Pending |
+| BEQ-04 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16 ⚠
+- Mapped to phases: 16
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after initial definition*
+*Last updated: 2026-03-30 after roadmap creation*
