@@ -28,7 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Maintainer can run backend unit tests with a single project command.
   3. Maintainer can run acceptance tests with a single project command.
   4. Automated test runs complete without requiring live Supabase, email, or external article-service dependencies.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 01-01-PLAN.md — Add Vitest tooling and isolated frontend unit coverage for subscribe/unsubscribe flows.
+- [ ] 01-02-PLAN.md — Add backend pytest harness and mocked unit tests for Semantic Scholar and Lambda orchestration.
+- [ ] 01-03-PLAN.md — Add Playwright acceptance tooling and mocked public smoke coverage.
 **UI hint**: yes
 
 ### Phase 2: Frontend Quality & Efficiency
@@ -73,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Test Foundation | 0/TBD | Not started | - |
+| 1. Test Foundation | 0/3 | Not started | - |
 | 2. Frontend Quality & Efficiency | 0/TBD | Not started | - |
 | 3. Backend Quality & Safety | 0/TBD | Not started | - |
 | 4. Public Journey Acceptance Coverage | 0/TBD | Not started | - |
