@@ -1,0 +1,13 @@
+-r requirements.txt
+pytest
+python-dotenv
+requests
+jinja2
+markdown
+boto3
+pandas
+beautifulsoup4
+openai
+supabase
+postgrest
+resend
