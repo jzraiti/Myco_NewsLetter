@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test:unit": "vitest --run",
+    "test:unit": "node ./scripts/run-vitest.mjs --run",
     "test:unit:watch": "vitest"
+  },
+  "gsdContracts": {
+    "test:unit": "vitest --run"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.1",
