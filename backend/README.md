@@ -1,56 +1,29 @@
-# My Lambda Project
+# Backend
 
 ## Overview
-This project is an AWS Lambda application that utilizes a Lambda layer for shared functionality. It is structured to separate the main Lambda function, event handlers, utility functions, and common code into distinct modules.
 
-## Project Structure
-```
-my-lambda-project
-├── src
-│   ├── lambda_function.py       # Entry point for the AWS Lambda function
-│   ├── handlers                  # Directory for event handlers
-│   │   └── __init__.py
-│   └── utils                     # Directory for utility functions
-│       └── __init__.py
-├── layer                         # Directory for Lambda layer
-│   └── python
-│       ├── __init__.py
-│       └── common.py             # Common functions for shared use
-├── requirements.txt              # Dependencies for the main Lambda function
-├── layer-requirements.txt        # Dependencies for the Lambda layer
-├── template.yaml                 # AWS SAM template for infrastructure
-└── README.md                     # Project documentation
+This directory contains the Python AWS Lambda backend for Myco Newsletter. It fetches article data, selects newsletter content, renders newsletter HTML, and coordinates delivery and persistence helpers.
+
+## Test Command
+
+Run backend unit tests from the repository root with:
+
+```bash
+python backend/scripts/run_backend_tests.py
 ```
 
-## Setup Instructions
-1. **Clone the repository**:
-   ```
-   git clone <repository-url>
-   cd my-lambda-project
-   ```
+That command is the canonical maintainer entrypoint. It bootstraps `backend/.venv` automatically when needed, installs `backend/requirements-dev.txt`, and then runs the isolated pytest suite in `backend/tests`.
 
-2. **Install dependencies**:
-   - For the main Lambda function:
-     ```
-     pip install -r requirements.txt
-     ```
-   - For the Lambda layer:
-     ```
-     pip install -r layer-requirements.txt -t layer/python
-     ```
+## Key Files
 
-3. **Deploy the application**:
-   Use the AWS SAM CLI to build and deploy the application:
-   ```
-   sam build
-   sam deploy --guided
-   ```
+- `src/lambda_function.py` - Lambda entrypoint
+- `src/utils/` - article, email, Supabase, and AWS helper modules
+- `pytest.ini` - backend pytest discovery config
+- `requirements-dev.txt` - local backend test dependencies
+- `scripts/run_backend_tests.py` - repo-owned backend test bootstrap and runner
 
-## Usage
-- The main handler function is defined in `src/lambda_function.py`. You can modify this file to implement your business logic.
-- Add any additional event handlers in the `src/handlers` directory.
-- Utility functions can be placed in the `src/utils` directory for reuse across different modules.
-- Common functions that need to be shared across multiple Lambda functions can be added to `layer/python/common.py`.
+## Notes
 
-## License
-This project is licensed under the MIT License.
+- The backend test suite is intentionally scoped to `backend/tests`
+- The root-level live Semantic Scholar test is not part of the isolated phase-1 backend command
+- Backend unit tests use mocked integrations rather than live Supabase, email, S3, OpenAI, or Semantic Scholar services

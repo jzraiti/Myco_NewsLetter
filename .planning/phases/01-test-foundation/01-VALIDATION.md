@@ -20,15 +20,16 @@ created: 2026-03-30
 | **Framework** | Vitest + React Testing Library, pytest, Playwright |
 | **Config file** | `nextjs-frontend/vitest.config.ts`, `backend/pytest.ini`, `nextjs-frontend/playwright.config.ts` |
 | **Quick run command** | `npm --prefix nextjs-frontend run test:unit` |
-| **Full suite command** | `npm --prefix nextjs-frontend run test:unit && python -m pytest -c backend/pytest.ini backend/tests && npm --prefix nextjs-frontend run test:e2e -- --project=chromium` |
+| **Backend quick run command** | `python backend/scripts/run_backend_tests.py` |
+| **Full suite command** | `npm --prefix nextjs-frontend run test:unit && python backend/scripts/run_backend_tests.py && npm --prefix nextjs-frontend run test:e2e -- --project=chromium` |
 | **Estimated runtime** | ~45 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `npm --prefix nextjs-frontend run test:unit` or `python -m pytest -c backend/pytest.ini backend/tests` for the subsystem being changed.
-- **After every plan wave:** Run `npm --prefix nextjs-frontend run test:unit && python -m pytest -c backend/pytest.ini backend/tests`
+- **After every task commit:** Run `npm --prefix nextjs-frontend run test:unit` or `python backend/scripts/run_backend_tests.py` for the subsystem being changed.
+- **After every plan wave:** Run `npm --prefix nextjs-frontend run test:unit && python backend/scripts/run_backend_tests.py`
 - **Before `/gsd-verify-work`:** Full suite must be green
 - **Max feedback latency:** 45 seconds
 
@@ -40,8 +41,8 @@ created: 2026-03-30
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
 | 1-01-01 | 01 | 1 | TINF-01 | unit | `npm --prefix nextjs-frontend run test:unit` | ✅ | ⬜ pending |
 | 1-01-02 | 01 | 1 | TINF-01 | unit | `npm --prefix nextjs-frontend run test:unit -- src/app/home/page.test.tsx src/app/unsubscribe/page.test.tsx` | ✅ | ⬜ pending |
-| 1-02-01 | 02 | 1 | TINF-02 | unit | `python -m pytest -c backend/pytest.ini backend/tests` | ✅ | ⬜ pending |
-| 1-02-02 | 02 | 1 | TINF-02 | unit | `python -m pytest -c backend/pytest.ini backend/tests/test_ss_api.py backend/tests/test_lambda_function.py` | ✅ | ⬜ pending |
+| 1-02-01 | 02 | 1 | TINF-02 | unit | `python backend/scripts/run_backend_tests.py` | ✅ | ⬜ pending |
+| 1-02-02 | 02 | 1 | TINF-02 | unit | `python backend/scripts/run_backend_tests.py` | ✅ | ⬜ pending |
 | 1-03-01 | 03 | 2 | TINF-03 | acceptance | `npm --prefix nextjs-frontend run test:e2e -- --project=chromium` | ✅ | ⬜ pending |
 | 1-03-02 | 03 | 2 | TINF-04 | acceptance | `npm --prefix nextjs-frontend run test:e2e -- --project=chromium tests/e2e/public-smoke.spec.ts` | ✅ | ⬜ pending |
 
