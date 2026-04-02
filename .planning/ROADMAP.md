@@ -45,7 +45,12 @@ Plans:
   2. Maintainer can reuse shared helpers or components for repeated page behavior instead of copying presentation logic across public screens.
   3. Visitor can load core public pages without avoidable client-side work caused by duplicated or inefficient frontend patterns.
   4. Frontend refactors introduced in this phase are covered by unit tests around extracted UI or shared logic.
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 02-01-PLAN.md — Create shared public-data helpers, typed contracts, and deterministic background utilities.
+- [ ] 02-02-PLAN.md — Refactor the home and unsubscribe flows around shared subscription helpers and smaller client components.
+- [ ] 02-03-PLAN.md — Convert the newsletters archive into a server-backed page with a reusable archive renderer.
+- [ ] 02-04-PLAN.md — Convert the articles route into a server-backed page with a focused client search explorer.
 **UI hint**: yes
 
 ### Phase 3: Backend Quality & Safety
