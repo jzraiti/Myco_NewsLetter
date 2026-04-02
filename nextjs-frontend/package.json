@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test:unit": "node ./scripts/run-vitest.mjs --run",
-    "test:unit:watch": "vitest"
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test --project=chromium",
+    "test:e2e:headed": "playwright test --project=chromium --headed"
   },
   "gsdContracts": {
     "test:unit": "vitest --run"
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
