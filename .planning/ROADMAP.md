@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Add Vitest tooling and isolated frontend unit coverage for subscribe/unsubscribe flows.
 - [x] 01-02-PLAN.md — Add backend pytest harness and mocked unit tests for Semantic Scholar and Lambda orchestration.
-- [ ] 01-03-PLAN.md — Add Playwright acceptance tooling and mocked public smoke coverage.
+- [x] 01-03-PLAN.md — Add Playwright acceptance tooling and mocked public smoke coverage.
 **UI hint**: yes
 
 ### Phase 2: Frontend Quality & Efficiency

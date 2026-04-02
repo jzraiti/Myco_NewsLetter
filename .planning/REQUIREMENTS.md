@@ -11,7 +11,7 @@ Requirements for milestone v1.0. Each maps to roadmap phases.
 
 - [x] **TINF-01**: Maintainer can run frontend unit tests with a single project command
 - [x] **TINF-02**: Maintainer can run backend unit tests with a single project command
-- [ ] **TINF-03**: Maintainer can run acceptance tests with a single project command
+- [x] **TINF-03**: Maintainer can run acceptance tests with a single project command
 - [x] **TINF-04**: Maintainer can run automated tests without requiring live Supabase, email, or external article-service dependencies
 
 ### Acceptance Coverage
@@ -59,7 +59,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | TINF-01 | Phase 1 | Complete |
 | TINF-02 | Phase 1 | Complete |
-| TINF-03 | Phase 1 | Pending |
+| TINF-03 | Phase 1 | Complete |
 | TINF-04 | Phase 1 | Complete |
 | ACCP-01 | Phase 4 | Pending |
 | ACCP-02 | Phase 4 | Pending |
