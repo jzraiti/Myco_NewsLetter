@@ -29,11 +29,15 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Visitors can browse and search article summaries — inferred from existing codebase
 - ✓ Visitors can review JUFO publication rankings and supporting context — inferred from existing codebase
 - ✓ Backend can generate newsletter HTML, send emails, and persist newsletter records — inferred from existing codebase
+- ✓ Maintainers can run isolated frontend unit tests from a single project command — validated in Phase 1
+- ✓ Maintainers can run isolated backend unit tests from a single repo-owned command — validated in Phase 1
+- ✓ Maintainers can run isolated acceptance smoke tests from a single project command — validated in Phase 1
+- ✓ Automated test runs complete without live Supabase, email, S3, OpenAI, or Semantic Scholar dependencies — validated in Phase 1
 
 ### Active
 
-- [ ] Establish unit testing for frontend components, shared logic, and backend utilities
-- [ ] Establish acceptance coverage for the core public user journeys
+- [ ] Expand unit testing around extracted frontend and backend shared logic introduced in later refactors
+- [ ] Extend acceptance coverage from smoke paths into deeper public user journeys
 - [ ] Refactor duplicated frontend and backend logic into clearer shared modules
 - [ ] Improve frontend efficiency on data-heavy and high-visibility pages
 - [ ] Improve backend maintainability and safety in integration-heavy paths
@@ -50,7 +54,7 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - The frontend includes public flows for newsletter subscription, unsubscription, previous newsletters, article discovery, and JUFO publication lookup.
 - The backend contains a Python AWS Lambda flow for article retrieval, newsletter generation, email sending, S3 upload, and Supabase persistence.
 - Repeated patterns exist in frontend data fetching, random image selection, and Supabase client usage, which makes maintenance and optimization harder.
-- Backend utility modules are integration-heavy and currently have no visible automated unit-test safety net.
+- Backend utility modules are integration-heavy, and the codebase now has a repo-owned isolated backend test runner plus mocked unit coverage as the baseline safety net.
 
 ## Constraints
 
@@ -62,9 +66,13 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Treat this as milestone `v1.0` | No prior planning history exists in `.planning/` for this repository | — Pending |
-| Prioritize testing foundation first | Regression protection is the fastest way to support refactors and quality work safely | — Pending |
-| Include backend quality improvements with frontend work | The current milestone should improve maintainability across the whole application, not only the UI | — Pending |
+| Treat this as milestone `v1.0` | No prior planning history exists in `.planning/` for this repository | Accepted |
+| Prioritize testing foundation first | Regression protection is the fastest way to support refactors and quality work safely | Validated in Phase 1 |
+| Include backend quality improvements with frontend work | The current milestone should improve maintainability across the whole application, not only the UI | Validated in Phase 1 |
+
+## Current State
+
+Phase 1 is complete. The project now has isolated frontend unit, backend unit, and acceptance smoke commands that run without live external services. The next focus is Phase 2 frontend quality and efficiency work.
 
 ## Evolution
 
@@ -84,4 +92,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-30 after milestone v1.0 start*
+*Last updated: 2026-04-02 after Phase 1 completion*

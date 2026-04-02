@@ -12,7 +12,7 @@ This milestone strengthens the existing Myco Newsletter application without addi
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Test Foundation** - Make unit and acceptance suites runnable through simple, isolated project commands.
+- [x] **Phase 1: Test Foundation** - Make unit and acceptance suites runnable through simple, isolated project commands. Completed 2026-04-02.
 - [ ] **Phase 2: Frontend Quality & Efficiency** - Reduce repeated frontend logic and remove avoidable runtime work on key public pages.
 - [ ] **Phase 3: Backend Quality & Safety** - Refactor backend utility and newsletter paths for clearer boundaries and safer failure handling.
 - [ ] **Phase 4: Public Journey Acceptance Coverage** - Protect the highest-value public user flows with automated acceptance tests.
@@ -28,11 +28,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Maintainer can run backend unit tests with a single project command.
   3. Maintainer can run acceptance tests with a single project command.
   4. Automated test runs complete without requiring live Supabase, email, or external article-service dependencies.
-**Plans**: 3 plans
+**Plans**: 4 plans
 Plans:
 - [x] 01-01-PLAN.md — Add Vitest tooling and isolated frontend unit coverage for subscribe/unsubscribe flows.
 - [x] 01-02-PLAN.md — Add backend pytest harness and mocked unit tests for Semantic Scholar and Lambda orchestration.
 - [x] 01-03-PLAN.md — Add Playwright acceptance tooling and mocked public smoke coverage.
+- [x] 01-04-PLAN.md — Add a repo-owned backend test runner and close the phase verification gap.
 **UI hint**: yes
 
 ### Phase 2: Frontend Quality & Efficiency
@@ -77,7 +78,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Test Foundation | 0/3 | Not started | - |
+| 1. Test Foundation | 4/4 | Complete | 2026-04-02 |
 | 2. Frontend Quality & Efficiency | 0/TBD | Not started | - |
 | 3. Backend Quality & Safety | 0/TBD | Not started | - |
 | 4. Public Journey Acceptance Coverage | 0/TBD | Not started | - |
