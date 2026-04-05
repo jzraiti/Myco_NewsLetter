@@ -48,9 +48,9 @@ Plans:
 **Plans**: 4 plans
 Plans:
 - [x] 02-01-PLAN.md — Create shared public-data helpers, typed contracts, and deterministic background utilities.
-- [ ] 02-02-PLAN.md — Refactor the home and unsubscribe flows around shared subscription helpers and smaller client components.
-- [ ] 02-03-PLAN.md — Convert the newsletters archive into a server-backed page with a reusable archive renderer.
-- [ ] 02-04-PLAN.md — Convert the articles route into a server-backed page with a focused client search explorer.
+- [x] 02-02-PLAN.md — Refactor the home and unsubscribe flows around shared subscription helpers and smaller client components.
+- [x] 02-03-PLAN.md — Convert the newsletters archive into a server-backed page with a reusable archive renderer.
+- [x] 02-04-PLAN.md — Convert the articles route into a server-backed page with a focused client search explorer.
 **UI hint**: yes
 
 ### Phase 3: Backend Quality & Safety

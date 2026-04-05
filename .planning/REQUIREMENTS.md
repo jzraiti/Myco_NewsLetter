@@ -25,7 +25,7 @@ Requirements for milestone v1.0. Each maps to roadmap phases.
 
 - [x] **FEQ-01**: Maintainer can use shared frontend data-access patterns instead of repeating Supabase client and fetch logic across pages
 - [x] **FEQ-02**: Maintainer can use shared frontend helpers or components for repeated page behavior instead of duplicating presentation logic
-- [ ] **FEQ-03**: Visitor can load core public pages without avoidable client-side work introduced by duplicated or inefficient frontend patterns
+- [x] **FEQ-03**: Visitor can load core public pages without avoidable client-side work introduced by duplicated or inefficient frontend patterns
 - [x] **FEQ-04**: Frontend refactors in this milestone are protected by unit tests around extracted UI or shared logic
 
 ### Backend Quality
@@ -67,7 +67,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ACCP-04 | Phase 4 | Pending |
 | FEQ-01 | Phase 2 | Complete |
 | FEQ-02 | Phase 2 | Complete |
-| FEQ-03 | Phase 2 | Pending |
+| FEQ-03 | Phase 2 | Complete |
 | FEQ-04 | Phase 2 | Complete |
 | BEQ-01 | Phase 3 | Pending |
 | BEQ-02 | Phase 3 | Pending |
