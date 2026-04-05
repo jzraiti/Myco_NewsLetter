@@ -1,5 +1,6 @@
 import { createPublicBrowserClient, createPublicServerClient } from "@/lib/supabase/public";
 
+import { TEST_SUBSCRIBER_COUNT } from "./test-fixtures";
 import type { RecipientLookupRow, SubscriptionMutationResult } from "./types";
 
 type CountSelectResult = Promise<{ count: number | null; error: { message: string } | null }>;
@@ -32,10 +33,15 @@ type PublicSubscriptionsClient = {
 };
 
 const GENERIC_ERROR_MESSAGE = "Something went wrong. Please try again later.";
+const USE_E2E_FIXTURES = process.env.NEXT_PUBLIC_E2E_STATIC_DATA === "true";
 
 export async function fetchSubscriberCount(
   client: PublicSubscriptionsClient = createPublicServerClient(),
 ): Promise<number> {
+  if (USE_E2E_FIXTURES) {
+    return TEST_SUBSCRIBER_COUNT;
+  }
+
   const result = await client.from("recipients").select("*", { count: "exact", head: true });
   if (!("count" in result) || result.error) {
     return 0;

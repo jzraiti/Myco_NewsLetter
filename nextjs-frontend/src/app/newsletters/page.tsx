@@ -1,98 +1,14 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import Head from 'next/head';
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Layout } from "@/components/Layout";
+import { NewsletterArchive } from "@/components/newsletters/NewsletterArchive";
+import { fetchPublishedNewsletters } from "@/lib/public-data/content";
 
-const LANDSCAPE_IMAGES = [
-  "/landscape_backgrounds/abbie-parks-XA1-J2rRGVw-unsplash.jpg",
-  "/landscape_backgrounds/casper-van-battum-icWhBzRNUFw-unsplash.jpg",
-  "/landscape_backgrounds/christopher-ott-qdcRECrSppU-unsplash.jpg",
-  "/landscape_backgrounds/david-clode-8tZJG2t30fI-unsplash.jpg",
-  "/landscape_backgrounds/david-clode-iQi_QFMfBZI-unsplash.jpg",
-  "/landscape_backgrounds/david-clode-NugxTvRaQT0-unsplash.jpg",
-  "/landscape_backgrounds/emanuel-rodriguez-2hdbY4Xaihw-unsplash.jpg",
-  "/landscape_backgrounds/harshal-s-hirve-oZ0xzQFVCWY-unsplash.jpg",
-  "/landscape_backgrounds/henry-schneider-s3sJ5j2ml2o-unsplash.jpg",
-  "/landscape_backgrounds/james-wainscoat-WJ2ev0gQo4k-unsplash.jpg",
-  "/landscape_backgrounds/jason-mitrione-MLAXy8PcGNk-unsplash.jpg",
-  "/landscape_backgrounds/matt-seymour-qLvikxzTtWY-unsplash.jpg",
-  "/landscape_backgrounds/nyusha-svoboda-_AaHmPTYzig-unsplash.jpg",
-  "/landscape_backgrounds/patrick-hendry-_gHLz18DEpE-unsplash.jpg",
-  "/landscape_backgrounds/patrick-hendry-hqcxvmNyFyg-unsplash.jpg",
-  "/landscape_backgrounds/patrick-hendry-vOFzgDqPh3Y-unsplash (1).jpg",
-  "/landscape_backgrounds/peter-neumann-Uofb3of6CCQ-unsplash.jpg",
-  "/landscape_backgrounds/phoenix-han-2v_bZYAlKQ4-unsplash.jpg",
-  "/landscape_backgrounds/sandra-alekseeva-h4vXoyKX_-Y-unsplash.jpg",
-  "/landscape_backgrounds/timothy-dykes-3EUmV_AwKoA-unsplash.jpg",
-  "/landscape_backgrounds/timothy-dykes-3JrIpTJ7tkM-unsplash.jpg",
-  "/landscape_backgrounds/viktor-talashuk-0_cIDZw6rgc-unsplash.jpg",
-  "/landscape_backgrounds/wolfgang-hasselmann-PUcrsXh9V4s-unsplash.jpg",
-  "/landscape_backgrounds/zdenek-machacek-DwrVhMZmcaY-unsplash.jpg",
-] as const;
-
-const ImagePreloader = () => {
-  return (
-    <>
-      {LANDSCAPE_IMAGES.map((src) => (
-        <link 
-          key={src}
-          rel="preload"
-          as="image"
-          href={src}
-        />
-      ))}
-    </>
-  );
-};
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
-export default function PreviousNewsletters() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [newsletters, setNewsletters] = useState<any[]>([]);
-
-  const fetchNewsletters = async () => {
-    setIsLoading(true);
-    try {
-      const { data, error } = await supabase.from("newsletters").select("*");
-      if (error) throw error;
-      data.sort((a: any, b: any) => {
-        return (
-          new Date(b.created_at).getTime() -
-          new Date(a.created_at).getTime()
-        );
-      });
-      setNewsletters(data || []);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const getRandomLandscapeImage = () => {
-    const randomIndex = Math.floor(Math.random() * LANDSCAPE_IMAGES.length);
-    return LANDSCAPE_IMAGES[randomIndex];
-  };
-
-  useEffect(() => {
-    fetchNewsletters();
-  }, []);
+export default async function PreviousNewsletters() {
+  const newsletters = await fetchPublishedNewsletters();
 
   return (
     <Layout>
-      <Head>
-        <ImagePreloader />
-      </Head>
       <div className="fixed inset-0 -z-10">
         <div
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
@@ -122,46 +38,7 @@ export default function PreviousNewsletters() {
           sent out weekly and contains a curated list of top research articles.
         </p>
         <Separator className="mb-6 bg-white/20" />
-        {isLoading ? (
-          <div className="flex justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {newsletters.map((newsletter) => (
-              <Card
-                key={newsletter.id}
-                className="relative overflow-hidden group h-48"
-              >
-                <Image
-                  src={getRandomLandscapeImage()}
-                  alt="Newsletter background"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />
-                <a
-                  href={newsletter.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 h-full p-6 flex flex-col justify-between"
-                >
-                  <div>
-                    <h2 className="text-2xl font-semibold text-white mb-2">
-                      Myco Newsletter
-                    </h2>
-                    <p className="text-white/90">
-                      Released {new Date(newsletter.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300 group-hover:border-white/40">
-                    View Newsletter →
-                  </Button>
-                </a>
-              </Card>
-            ))}
-          </div>
-        )}
+        <NewsletterArchive newsletters={newsletters} />
       </div>
     </Layout>
   );

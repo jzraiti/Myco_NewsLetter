@@ -1,5 +1,6 @@
 import { createPublicBrowserClient, createPublicServerClient } from "@/lib/supabase/public";
 
+import { TEST_ARTICLES, TEST_NEWSLETTERS } from "./test-fixtures";
 import type { ArticleRow, ArticleSummary, NewsletterRow, NewsletterSummary } from "./types";
 
 type QueryResult<T> = Promise<{ data: T[] | null; error: { message: string } | null }>;
@@ -12,6 +13,8 @@ type ContentClient = {
     select: (columns?: string) => QueryResult<ArticleRow>;
   };
 };
+
+const USE_E2E_FIXTURES = process.env.NEXT_PUBLIC_E2E_STATIC_DATA === "true";
 
 function sortByNewestDate<T>(items: T[], getDate: (item: T) => string) {
   return [...items].sort(
@@ -52,6 +55,10 @@ function mapArticle(row: ArticleRow): ArticleSummary | null {
 export async function fetchPublishedNewsletters(
   client: ContentClient = createPublicServerClient(),
 ): Promise<NewsletterSummary[]> {
+  if (USE_E2E_FIXTURES) {
+    return TEST_NEWSLETTERS;
+  }
+
   const { data, error } = await client.from("newsletters").select("id, created_at, link");
 
   if (error || !data) {
@@ -64,6 +71,10 @@ export async function fetchPublishedNewsletters(
 export async function fetchPublishedArticles(
   client: ContentClient = createPublicServerClient(),
 ): Promise<ArticleSummary[]> {
+  if (USE_E2E_FIXTURES) {
+    return TEST_ARTICLES;
+  }
+
   const { data, error } = await client
     .from("ss_articles")
     .select("id, title, venue, publicationDate, Level, panels, llm_summary, url");
