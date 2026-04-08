@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Test Foundation** - Make unit and acceptance suites runnable through simple, isolated project commands. Completed 2026-04-02.
 - [x] **Phase 2: Frontend Quality & Efficiency** - Reduce repeated frontend logic and remove avoidable runtime work on key public pages. Completed 2026-04-05.
 - [x] **Phase 3: Backend Quality & Safety** - Refactor backend utility and newsletter paths for clearer boundaries and safer failure handling. Completed 2026-04-08.
-- [ ] **Phase 4: Public Journey Acceptance Coverage** - Protect the highest-value public user flows with automated acceptance tests.
+- [x] **Phase 4: Public Journey Acceptance Coverage** - Protect the highest-value public user flows with automated acceptance tests. Completed 2026-04-08.
 
 ## Phase Details
 
@@ -96,4 +96,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Test Foundation | 4/4 | Complete | 2026-04-02 |
 | 2. Frontend Quality & Efficiency | 4/4 | Complete | 2026-04-05 |
 | 3. Backend Quality & Safety | 5/5 | Complete | 2026-04-08 |
-| 4. Public Journey Acceptance Coverage | 0/3 | Not started | - |
+| 4. Public Journey Acceptance Coverage | 3/3 | Complete | 2026-04-08 |
