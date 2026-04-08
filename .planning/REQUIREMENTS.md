@@ -5,7 +5,7 @@
 
 ## v1 Requirements
 
-Requirements for milestone v1.1. Each maps to roadmap phases.
+Requirements for milestone v1.1. Each maps to roadmap phases 5-7.
 
 ### JUFO Performance
 
@@ -62,24 +62,24 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| JUFO-01 | — | Pending |
-| JUFO-02 | — | Pending |
-| ARTP-01 | — | Pending |
-| ARTP-02 | — | Pending |
-| ARTP-03 | — | Pending |
-| NEWS-01 | — | Pending |
-| NEWS-02 | — | Pending |
-| NEWS-03 | — | Pending |
-| UIP-01 | — | Pending |
-| UIP-02 | — | Pending |
-| UIP-03 | — | Pending |
-| UIP-04 | — | Pending |
+| JUFO-01 | Phase 5 | Pending |
+| JUFO-02 | Phase 5 | Pending |
+| ARTP-01 | Phase 6 | Pending |
+| ARTP-02 | Phase 6 | Pending |
+| ARTP-03 | Phase 6 | Pending |
+| NEWS-01 | Phase 6 | Pending |
+| NEWS-02 | Phase 6 | Pending |
+| NEWS-03 | Phase 6 | Pending |
+| UIP-01 | Phase 7 | Pending |
+| UIP-02 | Phase 7 | Pending |
+| UIP-03 | Phase 7 | Pending |
+| UIP-04 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12 ⚠️
+- Mapped to phases: 12
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-08*
-*Last updated: 2026-04-08 after milestone v1.1 definition*
+*Last updated: 2026-04-08 after milestone v1.1 roadmap creation*

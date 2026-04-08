@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Frontend Performance and UI Improvements
-status: Defining requirements
-stopped_at: Milestone initialization
-last_updated: "2026-04-08T04:36:14Z"
+status: Ready to plan
+stopped_at: Roadmap created; Phase 5 ready for planning
+last_updated: "2026-04-08T05:00:00Z"
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -19,19 +19,19 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-04-08)
 
 **Core value:** Readers can reliably discover and receive curated, high-quality mycology research with minimal friction.
-**Current focus:** Defining milestone v1.1 requirements
+**Current focus:** Phase 5 planning for JUFO server-backed browsing
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 5 of 7 (JUFO Server-Backed Browsing)
 Plan: -
-Status: Defining requirements
-Last activity: 2026-04-08 - Milestone v1.1 started
+Status: Ready to plan
+Last activity: 2026-04-08 — Roadmap created for milestone v1.1
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 **Velocity:**
-
 - Total plans completed: 16
 - Average duration: 0 min
 - Total execution time: 0.0 hours
@@ -46,23 +46,8 @@ Last activity: 2026-04-08 - Milestone v1.1 started
 | 04 | 3 | 0 min | 0 min |
 
 **Recent Trend:**
-
 - Last 5 plans: Phase 03 P04, Phase 03 P05, Phase 04 P01, Phase 04 P02, Phase 04 P03
 - Trend: Stable
-
-| Phase 01 P04 | 0 min | 2 tasks | 3 files |
-| Phase 02 P01 | 0 min | 2 tasks | 8 files |
-| Phase 02 P02 | 0 min | 2 tasks | 6 files |
-| Phase 02 P03 | 0 min | 1 task | 3 files |
-| Phase 02 P04 | 0 min | 1 task | 3 files |
-| Phase 03 P01 | 0 min | 2 tasks | 3 files |
-| Phase 03 P02 | 0 min | 2 tasks | 6 files |
-| Phase 03 P03 | 0 min | 2 tasks | 4 files |
-| Phase 03 P04 | 0 min | 2 tasks | 4 files |
-| Phase 03 P05 | 0 min | 1 tasks | 2 files |
-| Phase 04 P01 | 0 min | 2 tasks | 3 files |
-| Phase 04 P02 | 0 min | 2 tasks | 2 files |
-| Phase 04 P03 | 0 min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -71,9 +56,9 @@ Last activity: 2026-04-08 - Milestone v1.1 started
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- [Milestone v1.0]: Prioritize test foundation before refactors so quality work lands with regression protection.
-- [Milestone v1.0]: Keep scope focused on maintainability, efficiency, and automated coverage rather than new product features.
-- [Milestone v1.0]: Include both frontend and backend quality improvements in the same roadmap.
+- [Milestone v1.1]: Keep JUFO and archive pagination server-backed rather than fetch-all in the browser.
+- [Milestone v1.1]: Preserve the background-image identity during public UI polish.
+- [Roadmap]: Group milestone scope into JUFO performance, archive pagination, and shared UI polish phases.
 
 ### Pending Todos
 
@@ -81,10 +66,10 @@ None yet.
 
 ### Blockers/Concerns
 
-None yet.
+- Phase 5 planning should confirm the JUFO source-of-truth and normalized server-loading approach.
 
 ## Session Continuity
 
-Last session: 2026-04-08T04:36:14Z
-Stopped at: Milestone initialization
+Last session: 2026-04-08T05:00:00Z
+Stopped at: ROADMAP.md, STATE.md, and REQUIREMENTS.md updated for milestone v1.1
 Resume file: None

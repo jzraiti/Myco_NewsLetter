@@ -2,7 +2,12 @@
 
 ## Overview
 
-This milestone strengthens the existing Myco Newsletter application without adding new product surface area. The roadmap starts by making automated tests runnable and isolated, then improves frontend maintainability and efficiency, hardens backend quality in integration-heavy paths, and finishes with acceptance coverage for the most important public journeys.
+Milestone v1.0 shipped the quality, refactor, and acceptance foundations for the existing application. Milestone v1.1 now focuses on public frontend performance and presentation: move JUFO off the browser-heavy path, add real URL-driven archive pagination for articles and newsletters, and polish the touched public pages so they feel faster, clearer, and more consistent without losing the background-image identity.
+
+## Milestones
+
+- **v1.0 Code Quality and Test Foundation** - Phases 1-4 (shipped 2026-04-08)
+- **v1.1 Frontend Performance and UI Improvements** - Phases 5-7 (planned)
 
 ## Phases
 
@@ -16,6 +21,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Frontend Quality & Efficiency** - Reduce repeated frontend logic and remove avoidable runtime work on key public pages. Completed 2026-04-05.
 - [x] **Phase 3: Backend Quality & Safety** - Refactor backend utility and newsletter paths for clearer boundaries and safer failure handling. Completed 2026-04-08.
 - [x] **Phase 4: Public Journey Acceptance Coverage** - Protect the highest-value public user flows with automated acceptance tests. Completed 2026-04-08.
+- [ ] **Phase 5: JUFO Server-Backed Browsing** - Replace browser-heavy JUFO loading with a fast server-backed browsing flow.
+- [ ] **Phase 6: URL-Driven Archive Pagination** - Deliver stable, shareable pagination for article and newsletter archives.
+- [ ] **Phase 7: Public UI Clarity, Responsiveness & Accessibility** - Polish touched public pages while preserving the existing visual identity.
 
 ## Phase Details
 
@@ -86,10 +94,45 @@ Plans:
 - [x] 04-03-PLAN.md — Add focused acceptance coverage for newsletter archive browsing and article browse/search.
 **UI hint**: yes
 
+### Phase 5: JUFO Server-Backed Browsing
+**Goal**: Visitors can open and explore JUFO rankings through a fast server-backed flow instead of loading the full dataset into browser memory.
+**Depends on**: Phase 4
+**Requirements**: JUFO-01, JUFO-02
+**Success Criteria** (what must be TRUE):
+  1. Visitor can open the JUFO page without loading the full ranking dataset into browser memory.
+  2. Visitor can browse JUFO results through a fast server-backed flow instead of waiting for client-side CSV parsing.
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 6: URL-Driven Archive Pagination
+**Goal**: Visitors can browse article and newsletter archives through stable, shareable, server-backed pagination.
+**Depends on**: Phase 4
+**Requirements**: ARTP-01, ARTP-02, ARTP-03, NEWS-01, NEWS-02, NEWS-03
+**Success Criteria** (what must be TRUE):
+  1. Visitor can browse articles through numbered pages backed by paginated Supabase queries.
+  2. Visitor can refresh or share an article results URL without losing the current page and search state.
+  3. Visitor can browse newsletters through numbered pages backed by paginated Supabase queries.
+  4. Visitor can refresh or share a newsletter archive URL and keep clear current-page feedback.
+  5. Visitor sees stable ordering and clear empty-state behavior while paging or searching archive results.
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 7: Public UI Clarity, Responsiveness & Accessibility
+**Goal**: Visitors get a more polished and readable public frontend across touched pages while preserving the background-image-driven visual identity.
+**Depends on**: Phase 5 and Phase 6
+**Requirements**: UIP-01, UIP-02, UIP-03, UIP-04
+**Success Criteria** (what must be TRUE):
+  1. Visitor gets clearer hierarchy, spacing, and navigation flow across the touched public pages.
+  2. Visitor sees more polished cards, tables, forms, and interaction states without losing the existing background-image identity.
+  3. Visitor can use the touched public pages effectively on mobile-sized screens.
+  4. Visitor can use pagination, search, and page interactions with improved focus visibility, semantics, and accessibility cues.
+**Plans**: TBD
+**UI hint**: yes
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -97,3 +140,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 2. Frontend Quality & Efficiency | 4/4 | Complete | 2026-04-05 |
 | 3. Backend Quality & Safety | 5/5 | Complete | 2026-04-08 |
 | 4. Public Journey Acceptance Coverage | 3/3 | Complete | 2026-04-08 |
+| 5. JUFO Server-Backed Browsing | 0/TBD | Not started | - |
+| 6. URL-Driven Archive Pagination | 0/TBD | Not started | - |
+| 7. Public UI Clarity, Responsiveness & Accessibility | 0/TBD | Not started | - |
