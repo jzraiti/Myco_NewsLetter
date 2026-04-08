@@ -44,10 +44,11 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Team can verify the unsubscribe flow with an automated acceptance test — validated in Phase 4
 - ✓ Team can verify newsletter archive browsing with an automated acceptance test — validated in Phase 4
 - ✓ Team can verify article browsing and search with an automated acceptance test — validated in Phase 4
+- ✓ Visitors can open and browse JUFO quickly without loading the full ranking dataset into browser memory — validated in Phase 5
+- ✓ Visitors can browse JUFO results through a fast server-backed flow instead of client-side CSV parsing — validated in Phase 5
 
 ### Active
 
-- [ ] Visitors can open and browse JUFO quickly without loading the full ranking dataset into browser memory
 - [ ] Visitors can browse articles through numbered, URL-driven pages while search stays in sync with pagination
 - [ ] Visitors can browse newsletters through numbered, URL-driven pages backed by Supabase queries
 - [ ] Visitors get a more polished and readable public frontend across touched pages without losing the existing background-image identity
@@ -87,12 +88,12 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 | Use explicit workflow step results for backend newsletter orchestration | Predictable result objects make partial delivery and integration failure handling testable without relying on implicit side effects | Validated in Phase 3 |
 | Split public acceptance coverage by journey while keeping a lightweight smoke canary | Focused specs make browser failures easier to localize without losing a fast all-routes check | Validated in Phase 4 |
 | Treat the next milestone as `v1.1` | The new work extends the product with targeted frontend improvements rather than resetting scope or direction | Accepted |
-| Keep JUFO and pagination improvements server-backed | Client-side CSV parsing and fetch-all pagination are the main causes of poor performance and memory usage | Pending |
+| Keep JUFO and pagination improvements server-backed | Client-side CSV parsing and fetch-all pagination are the main causes of poor performance and memory usage | Validated in Phase 5 |
 | Preserve background images during UI polish | The user wants a stronger UI without losing the site's existing visual identity | Pending |
 
 ## Current State
 
-Milestone `v1.0` is complete. The project now has isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, and article search/browsing. The next milestone shifts focus to frontend performance and presentation, especially JUFO data handling plus paginated archive browsing.
+Milestone `v1.0` is complete. Milestone `v1.1` is in progress. The project now has a normalized server-backed JUFO data path, a server-rendered `/jufo` route with URL-driven browse/search behavior, isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, article search/browsing, and JUFO browsing.
 
 ## Evolution
 
@@ -112,4 +113,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 after milestone v1.1 start*
+*Last updated: 2026-04-08 after Phase 5 completion*
