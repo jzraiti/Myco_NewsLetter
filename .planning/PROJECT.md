@@ -33,14 +33,18 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Maintainers can run isolated backend unit tests from a single repo-owned command — validated in Phase 1
 - ✓ Maintainers can run isolated acceptance smoke tests from a single project command — validated in Phase 1
 - ✓ Automated test runs complete without live Supabase, email, S3, OpenAI, or Semantic Scholar dependencies — validated in Phase 1
+- ✓ Maintainers can use shared frontend data-access patterns instead of repeating page-level Supabase or fetch logic — validated in Phase 2
+- ✓ Maintainers can reuse shared frontend helpers and components across public screens instead of duplicating presentation logic — validated in Phase 2
+- ✓ Visitors can load core public pages through server-backed routes with less avoidable client-side work — validated in Phase 2
+- ✓ Frontend refactors in this milestone are protected by unit tests around extracted UI and shared logic — validated in Phase 2
+- ✓ Maintainers can test backend newsletter and utility logic through isolated unit tests with injected service seams — validated in Phase 3
+- ✓ Maintainers can work with backend utilities that separate formatting, persistence, delivery, and orchestration responsibilities more clearly — validated in Phase 3
+- ✓ Maintainers can handle backend integration failures through predictable workflow result paths instead of uncaught fetch/select/render/upload behavior — validated in Phase 3
+- ✓ Backend refactors in Supabase, email, upload, and workflow helper logic are protected by dedicated unit tests — validated in Phase 3
 
 ### Active
 
-- [ ] Expand unit testing around extracted frontend and backend shared logic introduced in later refactors
 - [ ] Extend acceptance coverage from smoke paths into deeper public user journeys
-- [ ] Refactor duplicated frontend and backend logic into clearer shared modules
-- [ ] Improve frontend efficiency on data-heavy and high-visibility pages
-- [ ] Improve backend maintainability and safety in integration-heavy paths
 
 ### Out of Scope
 
@@ -52,7 +56,9 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 
 - The codebase contains a `Next.js` app in `nextjs-frontend/` using the app router, React, Tailwind, Supabase client access, and reusable UI components.
 - The frontend includes public flows for newsletter subscription, unsubscription, previous newsletters, article discovery, and JUFO publication lookup.
+- The frontend now has a shared public-data layer, deterministic background helpers, and server-backed wrappers for the core public pages, reducing repeated client-side setup.
 - The backend contains a Python AWS Lambda flow for article retrieval, newsletter generation, email sending, S3 upload, and Supabase persistence.
+- The backend now has extracted summary, venue, article-selection, delivery, upload, and workflow modules plus explicit result contracts for newsletter orchestration.
 - Repeated patterns exist in frontend data fetching, random image selection, and Supabase client usage, which makes maintenance and optimization harder.
 - Backend utility modules are integration-heavy, and the codebase now has a repo-owned isolated backend test runner plus mocked unit coverage as the baseline safety net.
 
@@ -69,10 +75,12 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 | Treat this as milestone `v1.0` | No prior planning history exists in `.planning/` for this repository | Accepted |
 | Prioritize testing foundation first | Regression protection is the fastest way to support refactors and quality work safely | Validated in Phase 1 |
 | Include backend quality improvements with frontend work | The current milestone should improve maintainability across the whole application, not only the UI | Validated in Phase 1 |
+| Use fixture-backed server data in E2E mode for server-rendered public pages | Browser route mocks no longer intercept initial server fetches after the Phase 2 server-component refactor | Validated in Phase 2 |
+| Use explicit workflow step results for backend newsletter orchestration | Predictable result objects make partial delivery and integration failure handling testable without relying on implicit side effects | Validated in Phase 3 |
 
 ## Current State
 
-Phase 1 is complete. The project now has isolated frontend unit, backend unit, and acceptance smoke commands that run without live external services. The next focus is Phase 2 frontend quality and efficiency work.
+Phases 1, 2, and 3 are complete. The project now has isolated frontend, backend, and smoke test commands, a shared frontend data layer, and a backend newsletter workflow with extracted service modules plus explicit result-based failure handling. The next focus is Phase 4 public journey acceptance coverage.
 
 ## Evolution
 
@@ -92,4 +100,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-02 after Phase 1 completion*
+*Last updated: 2026-04-08 after Phase 3 completion*
