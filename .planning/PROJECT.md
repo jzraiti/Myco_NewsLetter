@@ -8,16 +8,15 @@ Myco Newsletter is a web application for discovering and distributing mycology-f
 
 Readers can reliably discover and receive curated, high-quality mycology research with minimal friction.
 
-## Current Milestone: v1.0 Code Quality and Test Foundation
+## Current Milestone: v1.1 Frontend Performance and UI Improvements
 
-**Goal:** Improve maintainability and efficiency across both the frontend and backend while establishing reliable automated test coverage for the app's core user journeys and shared logic.
+**Goal:** Improve the public frontend experience by fixing JUFO's heavy client-side loading, adding server-backed pagination for article and newsletter browsing, and delivering a broader UI polish pass without changing the background-image concept.
 
 **Target features:**
-- Set up unit test infrastructure for frontend and backend code
-- Add acceptance tests for subscribe, unsubscribe, newsletter archive, and article browse/search flows
-- Reduce duplication in repeated app logic and shared data-access patterns across frontend and backend
-- Improve frontend rendering/runtime efficiency in the most visible pages
-- Improve backend code quality in utility modules and integration-heavy paths
+- Fix the JUFO page so visitors can open and browse it without the current browser memory spike from client-side CSV loading
+- Add numbered, server-backed pagination for `articles` and `newsletters`
+- Keep article search aligned with pagination and URL state
+- Improve shared public-page UI clarity, navigation flow, responsiveness, and accessibility while preserving background imagery
 
 ## Requirements
 
@@ -48,13 +47,16 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 
 ### Active
 
-None.
+- [ ] Visitors can open and browse JUFO quickly without loading the full ranking dataset into browser memory
+- [ ] Visitors can browse articles through numbered, URL-driven pages while search stays in sync with pagination
+- [ ] Visitors can browse newsletters through numbered, URL-driven pages backed by Supabase queries
+- [ ] Visitors get a more polished and readable public frontend across touched pages without losing the existing background-image identity
 
 ### Out of Scope
 
-- New end-user product features unrelated to code quality or test coverage — this milestone is focused on quality, efficiency, and regression protection
-- Major redesign of the public site — visual changes are not required to deliver this milestone's core value
-- Infrastructure migration or provider replacement — not necessary for the current quality-focused scope
+- New end-user product features outside JUFO performance, archive pagination, or public UI polish — this milestone is focused on targeted frontend improvements
+- Replacing the public background-image concept — the visual direction should improve the existing identity rather than discard it
+- Major backend or infrastructure migration — not necessary to deliver this milestone's frontend-focused goals
 
 ## Context
 
@@ -63,14 +65,16 @@ None.
 - The frontend now has a shared public-data layer, deterministic background helpers, and server-backed wrappers for the core public pages, reducing repeated client-side setup.
 - The backend contains a Python AWS Lambda flow for article retrieval, newsletter generation, email sending, S3 upload, and Supabase persistence.
 - The backend now has extracted summary, venue, article-selection, delivery, upload, and workflow modules plus explicit result contracts for newsletter orchestration.
-- Repeated patterns exist in frontend data fetching, random image selection, and Supabase client usage, which makes maintenance and optimization harder.
-- Backend utility modules are integration-heavy, and the codebase now has a repo-owned isolated backend test runner plus mocked unit coverage as the baseline safety net.
+- The current `jufo` route still loads and parses CSV data in the browser, and the user reports roughly 2 GB RAM usage when opening that page.
+- The current `articles` and `newsletters` routes render full result sets instead of URL-driven Supabase pagination.
+- This milestone should use the existing frontend stack and frontend-design quality bar to improve clarity, editorial feel, interaction polish, and mobile/accessibility behavior on public pages.
 
 ## Constraints
 
-- **Tech stack**: Keep the existing Next.js frontend and Python/AWS backend structure — this milestone improves the current system rather than replacing it.
-- **Scope**: Focus on quality, testing, and efficiency work — prevents feature creep during milestone setup.
-- **Data integrations**: Supabase, email delivery, and external article sources need safe test boundaries — direct live dependencies would make automated tests brittle.
+- **Tech stack**: Keep the existing Next.js frontend, Supabase integration, and public-page architecture — this milestone should improve the current stack rather than introduce a new platform.
+- **Scope**: Focus on JUFO performance, archive pagination, and frontend UI polish — prevents unrelated feature creep.
+- **Visual identity**: Preserve the background-image-driven look and feel — polish should refine the current concept rather than replace it.
+- **Performance**: Pagination and JUFO fixes must reduce client memory and avoid fake pagination over full datasets — otherwise the milestone misses its main value.
 
 ## Key Decisions
 
@@ -82,10 +86,13 @@ None.
 | Use fixture-backed server data in E2E mode for server-rendered public pages | Browser route mocks no longer intercept initial server fetches after the Phase 2 server-component refactor | Validated in Phase 2 |
 | Use explicit workflow step results for backend newsletter orchestration | Predictable result objects make partial delivery and integration failure handling testable without relying on implicit side effects | Validated in Phase 3 |
 | Split public acceptance coverage by journey while keeping a lightweight smoke canary | Focused specs make browser failures easier to localize without losing a fast all-routes check | Validated in Phase 4 |
+| Treat the next milestone as `v1.1` | The new work extends the product with targeted frontend improvements rather than resetting scope or direction | Accepted |
+| Keep JUFO and pagination improvements server-backed | Client-side CSV parsing and fetch-all pagination are the main causes of poor performance and memory usage | Pending |
+| Preserve background images during UI polish | The user wants a stronger UI without losing the site's existing visual identity | Pending |
 
 ## Current State
 
-Phases 1 through 4 are complete. The project now has isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, and article search/browsing.
+Milestone `v1.0` is complete. The project now has isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, and article search/browsing. The next milestone shifts focus to frontend performance and presentation, especially JUFO data handling plus paginated archive browsing.
 
 ## Evolution
 
@@ -105,4 +112,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 after Phase 4 completion*
+*Last updated: 2026-04-08 after milestone v1.1 start*
