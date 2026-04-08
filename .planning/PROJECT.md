@@ -46,11 +46,11 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Team can verify article browsing and search with an automated acceptance test — validated in Phase 4
 - ✓ Visitors can open and browse JUFO quickly without loading the full ranking dataset into browser memory — validated in Phase 5
 - ✓ Visitors can browse JUFO results through a fast server-backed flow instead of client-side CSV parsing — validated in Phase 5
+- ✓ Visitors can browse articles through numbered, URL-driven pages while search stays in sync with pagination — validated in Phase 6
+- ✓ Visitors can browse newsletters through numbered, URL-driven pages backed by Supabase queries — validated in Phase 6
 
 ### Active
 
-- [ ] Visitors can browse articles through numbered, URL-driven pages while search stays in sync with pagination
-- [ ] Visitors can browse newsletters through numbered, URL-driven pages backed by Supabase queries
 - [ ] Visitors get a more polished and readable public frontend across touched pages without losing the existing background-image identity
 
 ### Out of Scope
@@ -66,8 +66,7 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - The frontend now has a shared public-data layer, deterministic background helpers, and server-backed wrappers for the core public pages, reducing repeated client-side setup.
 - The backend contains a Python AWS Lambda flow for article retrieval, newsletter generation, email sending, S3 upload, and Supabase persistence.
 - The backend now has extracted summary, venue, article-selection, delivery, upload, and workflow modules plus explicit result contracts for newsletter orchestration.
-- The current `jufo` route still loads and parses CSV data in the browser, and the user reports roughly 2 GB RAM usage when opening that page.
-- The current `articles` and `newsletters` routes render full result sets instead of URL-driven Supabase pagination.
+- The public `jufo`, `articles`, and `newsletters` routes now use server-backed data access with canonical URL state instead of browser-heavy fetch-all behavior.
 - This milestone should use the existing frontend stack and frontend-design quality bar to improve clarity, editorial feel, interaction polish, and mobile/accessibility behavior on public pages.
 
 ## Constraints
@@ -89,11 +88,12 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 | Split public acceptance coverage by journey while keeping a lightweight smoke canary | Focused specs make browser failures easier to localize without losing a fast all-routes check | Validated in Phase 4 |
 | Treat the next milestone as `v1.1` | The new work extends the product with targeted frontend improvements rather than resetting scope or direction | Accepted |
 | Keep JUFO and pagination improvements server-backed | Client-side CSV parsing and fetch-all pagination are the main causes of poor performance and memory usage | Validated in Phase 5 |
+| Standardize archive pagination on canonical URL-driven server pages | Shareable archive state and invalid-page recovery are easier to verify when both archives normalize through the route layer | Validated in Phase 6 |
 | Preserve background images during UI polish | The user wants a stronger UI without losing the site's existing visual identity | Pending |
 
 ## Current State
 
-Milestone `v1.0` is complete. Milestone `v1.1` is in progress. The project now has a normalized server-backed JUFO data path, a server-rendered `/jufo` route with URL-driven browse/search behavior, isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, article search/browsing, and JUFO browsing.
+Milestone `v1.0` is complete. Milestone `v1.1` is in progress. The project now has a normalized server-backed JUFO data path, server-rendered `/jufo`, `/articles`, and `/newsletters` routes with canonical URL-driven browse/search pagination behavior, isolated frontend and backend test commands, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, article browsing/search, and JUFO browsing.
 
 ## Evolution
 
@@ -113,4 +113,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 after Phase 5 completion*
+*Last updated: 2026-04-08 after Phase 6 completion*
