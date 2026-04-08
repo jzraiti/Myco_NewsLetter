@@ -65,7 +65,7 @@ Plans:
 **Plans**: 4 plans
 Plans:
 - [x] 03-01-PLAN.md — Add workflow result contracts and a lazy Supabase adapter seam.
-- [ ] 03-02-PLAN.md — Extract article selection, summary, and venue helpers out of `other_utils.py`.
+- [x] 03-02-PLAN.md — Extract article selection, summary, and venue helpers out of `other_utils.py`.
 - [ ] 03-03-PLAN.md — Refactor email and S3 helpers around explicit success, partial, and failure outcomes.
 - [ ] 03-04-PLAN.md — Rewire the Lambda newsletter workflow to named step results and partial-delivery continuation.
 
