@@ -19,18 +19,18 @@ created: 2026-04-08
 |----------|-------|
 | **Framework** | Vitest 4.1.2 + Playwright 1.59.1 |
 | **Config file** | `nextjs-frontend/vitest.config.ts`, `nextjs-frontend/playwright.config.ts` |
-| **Quick run command** | `npm --prefix nextjs-frontend run test:unit -- src/lib/public-data/jufo.test.ts src/components/jufo/JufoExplorer.test.tsx` |
+| **Quick run command** | `npm --prefix nextjs-frontend run test:unit -- src/lib/public-data/jufo.test.ts` |
 | **Full suite command** | `npm --prefix nextjs-frontend run test:unit && npm --prefix nextjs-frontend run test:e2e -- tests/e2e/jufo.spec.ts` |
-| **Estimated runtime** | ~45 seconds |
+| **Estimated runtime** | ~20 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `npm --prefix nextjs-frontend run test:unit -- src/lib/public-data/jufo.test.ts src/components/jufo/JufoExplorer.test.tsx`
+- **After every task commit:** Run the task-local `<automated>` command; keep unit feedback on `jufo.test.ts` or `JufoExplorer.test.tsx` under ~20 seconds, and reserve `tests/e2e/jufo.spec.ts` for the route-wiring task.
 - **After every plan wave:** Run `npm --prefix nextjs-frontend run test:e2e -- tests/e2e/jufo.spec.ts`
 - **Before `/gsd-verify-work`:** Full suite must be green
-- **Max feedback latency:** 45 seconds
+- **Max feedback latency:** 20 seconds
 
 ---
 
@@ -68,7 +68,7 @@ All phase behaviors have automated verification.
 - [ ] Sampling continuity: no 3 consecutive tasks without automated verify
 - [ ] Wave 0 covers all MISSING references
 - [ ] No watch-mode flags
-- [ ] Feedback latency < 45s
+- [ ] Feedback latency < 20s
 - [ ] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
