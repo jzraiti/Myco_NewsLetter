@@ -1,11 +1,36 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
+
 import { Separator } from "@/components/ui/separator";
 import { Layout } from "@/components/Layout";
 import { NewsletterArchive } from "@/components/newsletters/NewsletterArchive";
-import { fetchPublishedNewsletters } from "@/lib/public-data/content";
+import { fetchPaginatedNewsletters } from "@/lib/public-data/content";
 
-export default async function PreviousNewsletters() {
-  const newsletters = await fetchPublishedNewsletters();
+type NewslettersPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function getSingleValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function buildCanonicalNewslettersHref(page: number) {
+  return page > 1 ? `/newsletters?page=${page}` : "/newsletters";
+}
+
+export default async function PreviousNewsletters({ searchParams }: NewslettersPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const rawPageValue = getSingleValue(resolvedSearchParams.page);
+  const rawPage = rawPageValue ?? "1";
+  const hasValidPageParam = rawPageValue == null || /^(?:[1-9]\d*)$/.test(rawPageValue);
+  const parsedPage = Number.parseInt(rawPage, 10);
+  const requestedPage = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const pageResult = await fetchPaginatedNewsletters({ page: requestedPage });
+  const canonicalHref = buildCanonicalNewslettersHref(pageResult.page);
+
+  if (!hasValidPageParam || requestedPage !== pageResult.page) {
+    redirect(canonicalHref);
+  }
 
   return (
     <Layout>
@@ -34,11 +59,11 @@ export default async function PreviousNewsletters() {
           Previous Newsletters
         </h1>
         <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
-          Browse through our archive of past newsletters. Each newsletter is
-          sent out weekly and contains a curated list of top research articles.
+          Browse through our archive of past newsletters. Each newsletter is sent out weekly and contains
+          a curated list of top research articles.
         </p>
         <Separator className="mb-6 bg-white/20" />
-        <NewsletterArchive newsletters={newsletters} />
+        <NewsletterArchive pageResult={pageResult} />
       </div>
     </Layout>
   );
