@@ -2,11 +2,6 @@ import os
 import dotenv
 import pandas as pd
 import logging
-from openai import OpenAI
-from jinja2 import Environment, FileSystemLoader
-import requests
-from urllib.parse import urljoin, urlparse
-from bs4 import BeautifulSoup
 
 from utils.supabase_utils import (
     supabase_articles_GET,
@@ -18,42 +13,13 @@ from utils.supabase_utils import (
 )
 
 from utils.ss_api import fetch_bulk_articles, fetch_paper_details
+from utils.summary_service import generate_gpt_paper_summary
+from utils.venue_service import extract_favicon, fetch_venue_info
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(message)s")
 dotenv.load_dotenv()
 
 NUMBER_OF_ARTICLES = 4
-
-
-def generate_gpt_paper_summary(title: str, content: str) -> str:
-    """Generates a summary of a research paper using GPT-4o-mini.
-
-    Args:
-        title (str): The title of the research paper.
-        content (str): The abstract of the research paper.
-        other_summaries (str): Other summaries generated for redundancy check.
-    """
-
-    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    completion = client.chat.completions.create(
-        model="gpt-4o",
-        temperature=1,
-        messages=[
-            {
-                "role": "system",
-                "content": "You are an expert in mycology and fungi, skilled at crafting professional, concise, and clear summaries for mycology research articles. Your task is to create newsletter-style previews that present key findings from global researchers in a straightforward, academic manner, focusing on surprising or significant results.",
-            },
-            {
-                "role": "user",
-                "content": f"Write a concise, informational sneak peek for a research paper titled '{title}' based on this abstract: {content}. Begin with a sentence defining key terms for context. Tailor it for a mycology research audience. Use formal, human-like language without excessive embellishment. Keep it under 400 characters.",
-            },
-        ],
-    )
-
-    return completion.choices[0].message.content
-
-
 def generate_summary(article: dict) -> str:
     """HELPER METHOD - Generates a summary of the given article using GPT-4o-mini."""
     logging.info(f"Generating summary for article: {article['paperId']}")
@@ -62,60 +28,6 @@ def generate_summary(article: dict) -> str:
         title=article["title"], content=article["abstract"]
     )
     return generated_content
-
-
-def extract_favicon(url: str) -> str:
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
-        }
-
-        # Fetch the webpage
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-
-        # Parse HTML
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        # Look for favicon in different possible locations
-        favicon_link = soup.find("link", rel=["icon", "shortcut icon"])
-        if favicon_link and favicon_link.get("href"):
-            # Construct the full favicon URL
-            favicon_url = urljoin(url, favicon_link["href"])
-            return favicon_url
-        else:
-            logging.info(f"No favicon found for: {url}")
-            return None
-
-    except Exception as e:
-        logging.error(f"Error extracting favicon: {e}")
-        return None
-
-
-def fetch_venue_info(article: dict) -> str:
-    """Parses through the Semantic Scholar webpage and fetches the journal link and favicon."""
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        }
-        external_ids = article.get("externalIds", {}) or {}
-        doi = external_ids.get("DOI")
-        if not doi:
-            logging.info("No DOI present for article; skipping venue info fetch.")
-            return None, None
-        doi_url = f"https://doi.org/{doi}"
-        doi_response = requests.get(doi_url, headers=headers, allow_redirects=True, timeout=15)
-        journal_url = doi_response.url
-        parsed_url = urlparse(journal_url)
-        base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
-        favicon_url = extract_favicon(base_url)
-        logging.info(
-            f"Successfully fetched venue info for article: {article.get('paperId')}"
-        )
-        return journal_url, favicon_url
-    except Exception as e:
-        logging.error(f"Error fetching venue info for article: {str(e)}")
-        return None, None
 
 
 def article_selection(data: list) -> dict:
