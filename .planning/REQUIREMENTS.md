@@ -9,8 +9,8 @@ Requirements for milestone v1.1. Each maps to roadmap phases 5-7.
 
 ### JUFO Performance
 
-- [ ] **JUFO-01**: Visitor can open the JUFO page without loading the full ranking dataset into browser memory
-- [ ] **JUFO-02**: Visitor can browse JUFO results through a fast server-backed flow instead of client-side CSV parsing
+- [x] **JUFO-01**: Visitor can open the JUFO page without loading the full ranking dataset into browser memory
+- [x] **JUFO-02**: Visitor can browse JUFO results through a fast server-backed flow instead of client-side CSV parsing
 
 ### Articles Pagination
 
@@ -62,8 +62,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| JUFO-01 | Phase 5 | Pending |
-| JUFO-02 | Phase 5 | Pending |
+| JUFO-01 | Phase 5 | Complete |
+| JUFO-02 | Phase 5 | Complete |
 | ARTP-01 | Phase 6 | Pending |
 | ARTP-02 | Phase 6 | Pending |
 | ARTP-03 | Phase 6 | Pending |
