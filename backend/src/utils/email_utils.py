@@ -1,9 +1,9 @@
-from email.mime.text import MIMEText
 import os
 import logging
 from jinja2 import Environment, FileSystemLoader
 
 from utils.supabase_utils import supabase_recipients_GET
+from utils.workflow_results import DeliveryRecipientResult, DeliveryResult
 
 
 def render_template(articles: list[dict]) -> str:
@@ -12,31 +12,56 @@ def render_template(articles: list[dict]) -> str:
     return template.render(articles=articles)
 
 
-def resend_send_email(html_content: str):
+def send_newsletter_email(
+    html_content: str,
+    recipients: list[str] | None = None,
+    recipient_loader=supabase_recipients_GET,
+    resend_client=None,
+    now=None,
+) -> DeliveryResult:
     import resend
     from datetime import datetime
-    import time
 
-    resend.api_key = os.getenv("RESEND_API_KEY")
+    current_time = now or datetime.now()
+    active_resend = resend_client or resend
+    if resend_client is None:
+        resend.api_key = os.getenv("RESEND_API_KEY")
 
-    receiver_email_list = supabase_recipients_GET()
-    receiver_email_list = [
-        receiver["email"]
-        for receiver in receiver_email_list.data
-        if receiver["is_subscribed"]
-    ]
+    receiver_email_list = recipients
+    if receiver_email_list is None:
+        loaded = recipient_loader()
+        receiver_email_list = [
+            receiver["email"] for receiver in loaded.data if receiver["is_subscribed"]
+        ]
+
+    sent: list[DeliveryRecipientResult] = []
+    failed: list[DeliveryRecipientResult] = []
 
     for receiver in receiver_email_list:
         try:
-            r = resend.Emails.send(
+            response = active_resend.Emails.send(
                 {
                     "from": "MycoWeekly Newsletter <myconewsletter@mycoweekly.org>",
                     "to": receiver,
-                    "subject": f"Weekly Digest {datetime.now().strftime('%m/%d')}",
+                    "subject": f"Weekly Digest {current_time.strftime('%m/%d')}",
                     "html": html_content,
                 }
             )
-            print(f"Email sent successfully to {receiver}")
+            provider_id = response.get("id") if isinstance(response, dict) else None
+            sent.append(DeliveryRecipientResult(email=receiver, status="sent", provider_id=provider_id))
+            logging.info(f"Email sent successfully to {receiver}")
         except Exception as e:
-            print(f"Failed to send email to {receiver}: {e}")
-        time.sleep(0.5)
+            failed.append(DeliveryRecipientResult(email=receiver, status="failed", error=str(e)))
+            logging.error(f"Failed to send email to {receiver}: {e}")
+
+    status = "failed"
+    if sent and failed:
+        status = "partial"
+    elif sent:
+        status = "success"
+
+    return DeliveryResult(status=status, sent=sent, failed=failed)
+
+
+def resend_send_email(html_content: str):
+    return send_newsletter_email(html_content)
