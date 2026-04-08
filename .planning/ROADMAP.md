@@ -104,7 +104,7 @@ Plans:
 **Plans**: 2 plans
 Plans:
 - [x] 05-01-PLAN.md — Normalize the canonical JUFO dataset and add a tested server paging adapter.
-- [ ] 05-02-PLAN.md — Rebuild `/jufo` around the server adapter with URL-driven controls and end-to-end coverage.
+- [x] 05-02-PLAN.md — Rebuild `/jufo` around the server adapter with URL-driven controls and end-to-end coverage.
 **UI hint**: yes
 
 ### Phase 6: URL-Driven Archive Pagination
