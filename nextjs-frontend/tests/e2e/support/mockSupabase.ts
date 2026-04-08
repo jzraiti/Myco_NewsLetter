@@ -1,45 +1,56 @@
 import { Page, Route } from "@playwright/test";
 
+import { TEST_ARTICLES, TEST_NEWSLETTERS, TEST_SUBSCRIBER_COUNT } from "@/lib/public-data/test-fixtures";
+
 type Subscriber = {
   email: string;
   is_subscribed: boolean;
 };
 
-const subscribers = new Map<string, Subscriber>([
+const defaultSubscribers = [
   ["existing@example.com", { email: "existing@example.com", is_subscribed: true }],
   ["archived@example.com", { email: "archived@example.com", is_subscribed: false }],
-]);
+] as const satisfies ReadonlyArray<readonly [string, Subscriber]>;
 
-const newsletters = [
-  {
-    id: 1,
-    created_at: "2026-03-20T12:00:00.000Z",
-    link: "https://example.com/newsletters/2026-03-20",
-  },
-];
+const defaultNewsletters = TEST_NEWSLETTERS.map((newsletter) => ({
+  id: newsletter.id,
+  created_at: newsletter.createdAt,
+  link: newsletter.link,
+}));
 
-const articles = [
-  {
-    id: 1,
-    title: "Mycorrhiza strengthen drought resilience",
-    llm_summary: "Mycorrhiza partnerships help plants tolerate dry conditions.",
-    venue: "Nature Ecology",
-    publicationDate: "2026-03-12",
-    Level: 2,
-    panels: 1,
-    url: "https://example.com/article-1",
-  },
-  {
-    id: 2,
-    title: "Fungal decomposition accelerates carbon cycling",
-    llm_summary: "Wood decay fungi rapidly recycle forest carbon stores.",
-    venue: "Fungal Biology",
-    publicationDate: "2026-03-08",
-    Level: 1,
-    panels: 2,
-    url: "https://example.com/article-2",
-  },
-];
+const defaultArticles = TEST_ARTICLES.map((article) => ({
+  id: article.id,
+  title: article.title,
+  llm_summary: article.summary,
+  venue: article.venue,
+  publicationDate: article.publicationDate,
+  Level: article.level,
+  panels: article.panels,
+  url: article.url,
+}));
+
+function createSubscribers() {
+  return new Map<string, Subscriber>(defaultSubscribers);
+}
+
+function createNewsletters() {
+  return defaultNewsletters.map((newsletter) => ({ ...newsletter }));
+}
+
+function createArticles() {
+  return defaultArticles.map((article) => ({ ...article }));
+}
+
+export const PUBLIC_JOURNEY_TEST_DATA = {
+  subscriberCount: TEST_SUBSCRIBER_COUNT,
+  existingSubscriberEmail: "existing@example.com",
+  archivedSubscriberEmail: "archived@example.com",
+  newsletterLink: "https://example.com/newsletters/2026-03-20",
+  articleTitles: [
+    "Mycorrhiza strengthen drought resilience",
+    "Fungal decomposition accelerates carbon cycling",
+  ],
+} as const;
 
 async function fulfillJson(route: Route, payload: unknown, extraHeaders: Record<string, string> = {}) {
   await route.fulfill({
@@ -54,13 +65,19 @@ async function fulfillJson(route: Route, payload: unknown, extraHeaders: Record<
 }
 
 export async function mockSupabase(page: Page) {
+  const subscribers = createSubscribers();
+  const newsletters = createNewsletters();
+  const articles = createArticles();
+
   await page.route("**/rest/v1/recipients*", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
     const method = request.method();
 
     if (method === "GET" && request.headers()["prefer"]?.includes("count=exact")) {
-      await fulfillJson(route, null, { "content-range": `0-0/${subscribers.size}` });
+      await fulfillJson(route, null, {
+        "content-range": `0-0/${PUBLIC_JOURNEY_TEST_DATA.subscriberCount}`,
+      });
       return;
     }
 
