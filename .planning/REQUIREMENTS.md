@@ -16,10 +16,10 @@ Requirements for milestone v1.0. Each maps to roadmap phases.
 
 ### Acceptance Coverage
 
-- [ ] **ACCP-01**: Team can verify the newsletter subscribe flow with an automated acceptance test
-- [ ] **ACCP-02**: Team can verify the unsubscribe flow with an automated acceptance test
-- [ ] **ACCP-03**: Team can verify newsletter archive browsing with an automated acceptance test
-- [ ] **ACCP-04**: Team can verify article browsing and search with an automated acceptance test
+- [x] **ACCP-01**: Team can verify the newsletter subscribe flow with an automated acceptance test
+- [x] **ACCP-02**: Team can verify the unsubscribe flow with an automated acceptance test
+- [x] **ACCP-03**: Team can verify newsletter archive browsing with an automated acceptance test
+- [x] **ACCP-04**: Team can verify article browsing and search with an automated acceptance test
 
 ### Frontend Quality
 
@@ -61,10 +61,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TINF-02 | Phase 1 | Complete |
 | TINF-03 | Phase 1 | Complete |
 | TINF-04 | Phase 1 | Complete |
-| ACCP-01 | Phase 4 | Pending |
-| ACCP-02 | Phase 4 | Pending |
-| ACCP-03 | Phase 4 | Pending |
-| ACCP-04 | Phase 4 | Pending |
+| ACCP-01 | Phase 4 | Complete |
+| ACCP-02 | Phase 4 | Complete |
+| ACCP-03 | Phase 4 | Complete |
+| ACCP-04 | Phase 4 | Complete |
 | FEQ-01 | Phase 2 | Complete |
 | FEQ-02 | Phase 2 | Complete |
 | FEQ-03 | Phase 2 | Complete |

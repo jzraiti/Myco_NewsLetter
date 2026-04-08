@@ -81,7 +81,7 @@ Plans:
   4. Team can run an automated acceptance test that verifies visitors can browse and search article summaries.
 **Plans**: 3 plans
 Plans:
-- [ ] 04-01-PLAN.md — Prepare resettable Playwright public-journey fixtures and slim the umbrella smoke canary.
+- [x] 04-01-PLAN.md — Prepare resettable Playwright public-journey fixtures and slim the umbrella smoke canary.
 - [ ] 04-02-PLAN.md — Add focused acceptance coverage for the subscribe and unsubscribe public journeys.
 - [ ] 04-03-PLAN.md — Add focused acceptance coverage for newsletter archive browsing and article browse/search.
 **UI hint**: yes
