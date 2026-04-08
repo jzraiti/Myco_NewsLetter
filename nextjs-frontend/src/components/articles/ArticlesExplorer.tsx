@@ -1,45 +1,163 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { Fragment } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { LANDSCAPE_BACKGROUND_IMAGES, pickDeterministicBackground } from "@/lib/public-data/backgrounds";
-import { filterArticlesByQuery } from "@/lib/public-data/content";
-import type { ArticleSummary } from "@/lib/public-data/types";
+import type { ArticleSummary, PaginatedArchiveResult } from "@/lib/public-data/types";
 
 type ArticlesExplorerProps = {
-  articles: ArticleSummary[];
+  pageResult: PaginatedArchiveResult<ArticleSummary>;
 };
 
-export function ArticlesExplorer({ articles }: ArticlesExplorerProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+function buildArticlesHref(pathname: string, searchParams: URLSearchParams, page: number, query: string) {
+  const params = new URLSearchParams(searchParams.toString());
 
-  const filteredArticles = useMemo(
-    () => filterArticlesByQuery(articles, searchQuery),
-    [articles, searchQuery],
-  );
+  if (page > 1 || query) {
+    params.set("page", String(page));
+  } else {
+    params.delete("page");
+  }
+
+  if (query) {
+    params.set("q", query);
+  } else {
+    params.delete("q");
+  }
+
+  const queryString = params.toString();
+  return queryString ? `${pathname}?${queryString}` : pathname;
+}
+
+function buildPaginationModel(currentPage: number, totalPages: number) {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  const pages = new Set([1, totalPages, currentPage - 1, currentPage, currentPage + 1]);
+  return Array.from(pages)
+    .filter((page) => page >= 1 && page <= totalPages)
+    .sort((left, right) => left - right);
+}
+
+function renderPaginationLinks(
+  pathname: string,
+  searchParams: URLSearchParams,
+  pageResult: PaginatedArchiveResult<ArticleSummary>,
+  currentQuery: string,
+) {
+  const pages = buildPaginationModel(pageResult.page, pageResult.totalPages);
+
+  return pages.map((pageNumber, index) => {
+    const previousPage = pages[index - 1];
+    const shouldRenderGap = previousPage != null && pageNumber - previousPage > 1;
+
+    return (
+      <Fragment key={pageNumber}>
+        {shouldRenderGap ? <span className="text-white/50">...</span> : null}
+        <Link
+          href={buildArticlesHref(pathname, searchParams, pageNumber, currentQuery)}
+          aria-current={pageNumber === pageResult.page ? "page" : undefined}
+          className={
+            pageNumber === pageResult.page
+              ? "rounded-md border border-white/40 bg-white/20 px-3 py-1 text-white"
+              : "rounded-md border border-white/20 bg-white/10 px-3 py-1 text-white/80 hover:text-white"
+          }
+        >
+          {pageNumber}
+        </Link>
+      </Fragment>
+    );
+  });
+}
+
+export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentQuery = searchParams.get("q") ?? pageResult.query;
+  const previousPage = Math.max(1, pageResult.page - 1);
+  const nextPage = Math.min(pageResult.totalPages, pageResult.page + 1);
+  const start = pageResult.totalCount === 0 ? 0 : (pageResult.page - 1) * pageResult.pageSize + 1;
+  const end = start === 0 ? 0 : start + pageResult.items.length - 1;
 
   return (
     <>
-      <div className="mb-6">
-        <Input
-          type="search"
-          placeholder="Search articles..."
-          className="max-w-xl mx-auto bg-white/10 border-white/20 text-white placeholder:text-white/50"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-        />
+      <div className="mb-6 space-y-4">
+        <div className="flex justify-center">
+          <Input
+            type="search"
+            placeholder="Search articles..."
+            className="max-w-xl mx-auto bg-white/10 border-white/20 text-white placeholder:text-white/50"
+            defaultValue={currentQuery}
+            onChange={(event) => {
+              const params = new URLSearchParams(searchParams.toString());
+              const nextQuery = event.target.value.trim();
+
+              if (nextQuery) {
+                params.set("q", nextQuery);
+              } else {
+                params.delete("q");
+              }
+
+              params.set("page", "1");
+
+              router.replace(buildArticlesHref(pathname, params, 1, nextQuery), { scroll: false });
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col gap-3 text-sm text-white/80 md:flex-row md:items-center md:justify-between">
+          <p>Showing {start}-{end} of {pageResult.totalCount} articles</p>
+          <span>Page {pageResult.page} of {pageResult.totalPages}</span>
+        </div>
+
+        {pageResult.totalPages > 1 ? (
+          <div className="flex flex-wrap items-center justify-between gap-4 text-white/80">
+            <Link
+              href={buildArticlesHref(pathname, new URLSearchParams(searchParams.toString()), previousPage, currentQuery)}
+              aria-disabled={pageResult.page <= 1}
+              className={pageResult.page <= 1 ? "pointer-events-none opacity-40" : "hover:text-white"}
+            >
+              Previous
+            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {renderPaginationLinks(
+                pathname,
+                new URLSearchParams(searchParams.toString()),
+                pageResult,
+                currentQuery,
+              )}
+            </div>
+            <Link
+              href={buildArticlesHref(pathname, new URLSearchParams(searchParams.toString()), nextPage, currentQuery)}
+              aria-disabled={pageResult.page >= pageResult.totalPages}
+              className={
+                pageResult.page >= pageResult.totalPages ? "pointer-events-none opacity-40" : "hover:text-white"
+              }
+            >
+              Next
+            </Link>
+          </div>
+        ) : null}
       </div>
 
       <div className="space-y-6 mb-6">
-        {filteredArticles.length === 0 ? (
-          <p className="text-center text-white/80">No articles found matching your search.</p>
+        {pageResult.items.length === 0 ? (
+          <div className="space-y-3 text-center text-white/80">
+            <p>No articles found for "{pageResult.query}".</p>
+            <Link href="/articles" className="inline-flex text-white underline underline-offset-4 hover:text-white/80">
+              Clear search
+            </Link>
+          </div>
         ) : (
-          filteredArticles.map((article, index) => (
+          pageResult.items.map((article, index) => (
             <Card key={article.id ?? index} className="relative overflow-hidden group min-h-[300px]">
               <Image
                 src={pickDeterministicBackground(article.id ?? index, LANDSCAPE_BACKGROUND_IMAGES)}

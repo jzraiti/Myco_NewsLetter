@@ -1,12 +1,51 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 import { ArticlesExplorer } from "@/components/articles/ArticlesExplorer";
 import { Layout } from "@/components/Layout";
 import { Separator } from "@/components/ui/separator";
-import { fetchPublishedArticles } from "@/lib/public-data/content";
+import { fetchPaginatedArticles } from "@/lib/public-data/content";
 
-export default async function Articles() {
-  const articles = await fetchPublishedArticles();
+type ArticlesPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function getSingleValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function buildCanonicalArticlesHref(page: number, query: string) {
+  const params = new URLSearchParams();
+
+  if (query) {
+    params.set("q", query);
+  }
+
+  if (page > 1) {
+    params.set("page", String(page));
+  }
+
+  const queryString = params.toString();
+  return queryString ? `/articles?${queryString}` : "/articles";
+}
+
+export default async function Articles({ searchParams }: ArticlesPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const rawQueryValue = getSingleValue(resolvedSearchParams.q);
+  const rawQuery = rawQueryValue ?? "";
+  const trimmedQuery = rawQuery.trim();
+  const rawPageValue = getSingleValue(resolvedSearchParams.page);
+  const rawPage = rawPageValue ?? "1";
+  const hasValidPageParam = rawPageValue == null || /^(?:[1-9]\d*)$/.test(rawPageValue);
+  const parsedPage = Number.parseInt(rawPage, 10);
+  const requestedPage = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const pageResult = await fetchPaginatedArticles({ query: trimmedQuery, page: requestedPage });
+  const canonicalHref = buildCanonicalArticlesHref(pageResult.page, pageResult.query);
+  const queryNeedsNormalization = rawQueryValue != null && rawQueryValue !== trimmedQuery;
+
+  if (!hasValidPageParam || queryNeedsNormalization || requestedPage !== pageResult.page) {
+    redirect(canonicalHref);
+  }
 
   return (
     <Layout>
@@ -37,12 +76,12 @@ export default async function Articles() {
               Research Articles
             </h1>
             <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
-              Explore our collection of curated mycology research articles. Each
-              article is summarized and analyzed to highlight key findings.
+              Explore our collection of curated mycology research articles. Each article is summarized and
+              analyzed to highlight key findings.
             </p>
             <Separator className="mb-6 bg-white/20" />
 
-            <ArticlesExplorer articles={articles} />
+            <ArticlesExplorer pageResult={pageResult} />
           </div>
         </div>
       </div>

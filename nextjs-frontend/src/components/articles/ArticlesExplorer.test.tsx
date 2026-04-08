@@ -1,55 +1,123 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import type { PaginatedArchiveResult } from "@/lib/public-data/types";
 
 import { ArticlesExplorer } from "./ArticlesExplorer";
 
-const articles = [
-  {
-    id: 1,
-    title: "Mycorrhiza strengthen drought resilience",
-    venue: "Nature Ecology",
-    publicationDate: "2026-03-12",
-    level: 2,
-    panels: 1,
-    summary: "Mycorrhiza partnerships help plants tolerate dry conditions.",
-    url: "https://example.com/article-1",
-  },
-  {
-    id: 2,
-    title: "Fungal decomposition accelerates carbon cycling",
-    venue: "Fungal Biology",
-    publicationDate: "2026-03-08",
-    level: 1,
-    panels: 2,
-    summary: "Wood decay fungi rapidly recycle forest carbon stores.",
-    url: "https://example.com/article-2",
-  },
-];
+const replace = vi.fn();
+
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/articles",
+  useRouter: () => ({ replace }),
+  useSearchParams: () =>
+    new URLSearchParams({
+      page: "2",
+      q: "Mycorrhiza",
+    }),
+}));
+
+const pageResult: PaginatedArchiveResult<{
+  id: number;
+  title: string;
+  venue: string | null;
+  publicationDate: string;
+  level: number | string | null;
+  panels: number | string | null;
+  summary: string;
+  url: string;
+}> = {
+  items: [
+    {
+      id: 13,
+      title: "Fungal biocrusts improve desert retention",
+      venue: "Arid Land Research",
+      publicationDate: "2026-02-25",
+      level: 1,
+      panels: 2,
+      summary: "Surface fungal mats help soils retain water after rare rainfall.",
+      url: "https://example.com/article-13",
+    },
+    {
+      id: 14,
+      title: "Mycorrhiza rebalance phosphorus allocation",
+      venue: "Nature Ecology",
+      publicationDate: "2026-02-24",
+      level: 2,
+      panels: 2,
+      summary: "Mycorrhiza alter phosphorus routing across competing plants.",
+      url: "https://example.com/article-14",
+    },
+    {
+      id: 15,
+      title: "Fixture Article 15",
+      venue: "Fungal Ecology",
+      publicationDate: "2026-02-23",
+      level: 1,
+      panels: 1,
+      summary: "A deterministic archive row reserved for page-two coverage.",
+      url: "https://example.com/article-15",
+    },
+  ],
+  page: 2,
+  totalPages: 2,
+  totalCount: 15,
+  pageSize: 12,
+  query: "Mycorrhiza",
+};
 
 describe("ArticlesExplorer", () => {
-  it("filters results by title, summary, and venue using filterArticlesByQuery", async () => {
-    render(<ArticlesExplorer articles={articles} />);
-
-    await userEvent.type(screen.getByPlaceholderText("Search articles..."), "Nature Ecology");
-
-    expect(screen.getByText("Mycorrhiza strengthen drought resilience")).toBeInTheDocument();
-    expect(screen.queryByText("Fungal decomposition accelerates carbon cycling")).not.toBeInTheDocument();
+  beforeEach(() => {
+    replace.mockReset();
   });
 
-  it("shows the empty-state copy when no articles match", async () => {
-    render(<ArticlesExplorer articles={articles} />);
+  it("renders only the current page slice with pagination feedback", () => {
+    render(<ArticlesExplorer pageResult={pageResult} />);
 
-    await userEvent.type(screen.getByPlaceholderText("Search articles..."), "Nope");
+    expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
+    expect(screen.getByText("Fungal biocrusts improve desert retention")).toBeInTheDocument();
+    expect(screen.queryByText("Mycorrhiza strengthen drought resilience")).not.toBeInTheDocument();
+  });
 
-    expect(screen.getByText("No articles found matching your search.")).toBeInTheDocument();
+  it("preserves q in paging links and resets search to /articles?page=1&q=...", async () => {
+    render(<ArticlesExplorer pageResult={pageResult} />);
+
+    expect(screen.getByRole("link", { name: "Previous" })).toHaveAttribute(
+      "href",
+      "/articles?page=1&q=Mycorrhiza",
+    );
+
+    const searchInput = screen.getByPlaceholderText("Search articles...");
+    await userEvent.clear(searchInput);
+    await userEvent.type(searchInput, "fungal");
+
+    expect(replace).toHaveBeenLastCalledWith("/articles?page=1&q=fungal", { scroll: false });
+  });
+
+  it("shows the clear-search empty state", () => {
+    render(
+      <ArticlesExplorer
+        pageResult={{
+          ...pageResult,
+          items: [],
+          page: 1,
+          totalPages: 1,
+          totalCount: 0,
+          query: "Nope",
+        }}
+      />,
+    );
+
+    expect(screen.getByText('No articles found for "Nope".')).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Clear search" })).toHaveAttribute("href", "/articles");
   });
 
   it("keeps deterministic backgrounds and the Read More CTA", () => {
-    render(<ArticlesExplorer articles={articles} />);
+    render(<ArticlesExplorer pageResult={pageResult} />);
 
     const articleImages = screen.getAllByAltText("Article background");
     expect(articleImages[0]).toHaveAttribute("src");
-    expect(screen.getAllByRole("link", { name: /read more/i })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: /read more/i })).toHaveLength(3);
   });
 });
