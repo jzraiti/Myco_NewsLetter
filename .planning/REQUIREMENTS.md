@@ -30,10 +30,10 @@ Requirements for milestone v1.0. Each maps to roadmap phases.
 
 ### Backend Quality
 
-- [ ] **BEQ-01**: Maintainer can test backend newsletter and utility logic through isolated unit tests
-- [ ] **BEQ-02**: Maintainer can work with backend utilities that have clearer separation between formatting, persistence, and delivery responsibilities
+- [x] **BEQ-01**: Maintainer can test backend newsletter and utility logic through isolated unit tests
+- [x] **BEQ-02**: Maintainer can work with backend utilities that have clearer separation between formatting, persistence, and delivery responsibilities
 - [ ] **BEQ-03**: Maintainer can handle backend integration failures through predictable error-handling paths
-- [ ] **BEQ-04**: Backend refactors in this milestone are protected by unit tests around Supabase, email, or newsletter helper logic
+- [x] **BEQ-04**: Backend refactors in this milestone are protected by unit tests around Supabase, email, or newsletter helper logic
 
 ## v2 Requirements
 
@@ -69,10 +69,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FEQ-02 | Phase 2 | Complete |
 | FEQ-03 | Phase 2 | Complete |
 | FEQ-04 | Phase 2 | Complete |
-| BEQ-01 | Phase 3 | Pending |
-| BEQ-02 | Phase 3 | Pending |
+| BEQ-01 | Phase 3 | Complete |
+| BEQ-02 | Phase 3 | Complete |
 | BEQ-03 | Phase 3 | Pending |
-| BEQ-04 | Phase 3 | Pending |
+| BEQ-04 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 16 total
@@ -81,4 +81,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after roadmap creation*
+*Last updated: 2026-04-06 after Phase 2 completion*
