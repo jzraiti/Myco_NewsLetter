@@ -67,6 +67,35 @@ def test_run_newsletter_workflow_skips_after_empty_selection():
     assert result["steps"]["persist"].status == "skipped"
 
 
+def test_run_newsletter_workflow_marks_select_failed_when_fetch_articles_raises():
+    result = run_newsletter_workflow(
+        fetch_articles=lambda: (_ for _ in ()).throw(RuntimeError("fetch boom")),
+    )
+
+    assert result["overall_status"] == "failed"
+    assert result["steps"]["select"].status == "failed"
+    assert result["steps"]["select"].error == "fetch boom"
+    assert result["steps"]["render"].status == "skipped"
+    assert result["steps"]["deliver"].status == "skipped"
+    assert result["steps"]["upload"].status == "skipped"
+    assert result["steps"]["persist"].status == "skipped"
+
+
+def test_run_newsletter_workflow_marks_select_failed_when_select_articles_raises():
+    result = run_newsletter_workflow(
+        fetch_articles=lambda: [{"paperId": "paper-1"}],
+        select_articles=lambda articles: (_ for _ in ()).throw(RuntimeError("select boom")),
+    )
+
+    assert result["overall_status"] == "failed"
+    assert result["steps"]["select"].status == "failed"
+    assert result["steps"]["select"].error == "select boom"
+    assert result["steps"]["render"].status == "skipped"
+    assert result["steps"]["deliver"].status == "skipped"
+    assert result["steps"]["upload"].status == "skipped"
+    assert result["steps"]["persist"].status == "skipped"
+
+
 def test_run_newsletter_workflow_stops_after_render_failure():
     result = run_newsletter_workflow(
         fetch_articles=lambda: [{"paperId": "paper-1"}],

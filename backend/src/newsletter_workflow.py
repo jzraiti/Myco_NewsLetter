@@ -42,8 +42,15 @@ def run_newsletter_workflow(
 ):
     steps = {}
 
-    selected_articles = select_articles(fetch_articles())
-    steps["select"] = WorkflowStepResult(step="select", status="success", payload=selected_articles)
+    try:
+        fetched_articles = fetch_articles()
+        selected_articles = select_articles(fetched_articles)
+        steps["select"] = WorkflowStepResult(step="select", status="success", payload=selected_articles)
+    except Exception as e:
+        steps["select"] = WorkflowStepResult(step="select", status="failed", error=str(e))
+        for step in ["render", "deliver", "upload", "persist"]:
+            steps[step] = WorkflowStepResult(step=step, status="skipped")
+        return {"steps": steps, "overall_status": "failed"}
 
     if not selected_articles:
         for step in ["render", "deliver", "upload", "persist"]:
