@@ -1,4 +1,5 @@
 from newsletter_workflow import run_newsletter_workflow
+from utils.email_utils import render_template
 from utils.summary_service import generate_gpt_paper_summary
 
 
