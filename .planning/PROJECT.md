@@ -41,10 +41,14 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Maintainers can work with backend utilities that separate formatting, persistence, delivery, and orchestration responsibilities more clearly — validated in Phase 3
 - ✓ Maintainers can handle backend integration failures through predictable workflow result paths instead of uncaught fetch/select/render/upload behavior — validated in Phase 3
 - ✓ Backend refactors in Supabase, email, upload, and workflow helper logic are protected by dedicated unit tests — validated in Phase 3
+- ✓ Team can verify the newsletter subscribe flow with an automated acceptance test — validated in Phase 4
+- ✓ Team can verify the unsubscribe flow with an automated acceptance test — validated in Phase 4
+- ✓ Team can verify newsletter archive browsing with an automated acceptance test — validated in Phase 4
+- ✓ Team can verify article browsing and search with an automated acceptance test — validated in Phase 4
 
 ### Active
 
-- [ ] Extend acceptance coverage from smoke paths into deeper public user journeys
+None.
 
 ### Out of Scope
 
@@ -77,10 +81,11 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 | Include backend quality improvements with frontend work | The current milestone should improve maintainability across the whole application, not only the UI | Validated in Phase 1 |
 | Use fixture-backed server data in E2E mode for server-rendered public pages | Browser route mocks no longer intercept initial server fetches after the Phase 2 server-component refactor | Validated in Phase 2 |
 | Use explicit workflow step results for backend newsletter orchestration | Predictable result objects make partial delivery and integration failure handling testable without relying on implicit side effects | Validated in Phase 3 |
+| Split public acceptance coverage by journey while keeping a lightweight smoke canary | Focused specs make browser failures easier to localize without losing a fast all-routes check | Validated in Phase 4 |
 
 ## Current State
 
-Phases 1, 2, and 3 are complete. The project now has isolated frontend, backend, and smoke test commands, a shared frontend data layer, and a backend newsletter workflow with extracted service modules plus explicit result-based failure handling. The next focus is Phase 4 public journey acceptance coverage.
+Phases 1 through 4 are complete. The project now has isolated frontend and backend test commands, server-backed public page refactors, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, and article search/browsing.
 
 ## Evolution
 
@@ -100,4 +105,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 after Phase 3 completion*
+*Last updated: 2026-04-08 after Phase 4 completion*
