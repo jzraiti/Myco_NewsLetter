@@ -40,3 +40,30 @@ export interface ArticleRow {
   llm_summary: string | null;
   url: string;
 }
+
+export interface JufoRow {
+  id: number | string;
+  name: string;
+  publisher: string;
+  level: number | string | null;
+  website: string;
+  country: string;
+  language: string;
+  yearStart: number | null;
+  panels: number | string | null;
+  searchText: string;
+}
+
+export interface JufoQuery {
+  query: string;
+  page: number;
+}
+
+export interface PaginatedJufoResult {
+  items: JufoRow[];
+  page: number;
+  totalPages: number;
+  totalCount: number;
+  pageSize: number;
+  query: string;
+}
