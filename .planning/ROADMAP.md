@@ -62,12 +62,13 @@ Plans:
   2. Maintainer can work with backend utilities that separate formatting, persistence, and delivery responsibilities more clearly.
   3. Backend integration failures follow predictable error-handling paths instead of producing ambiguous behavior.
   4. Backend refactors in Supabase, email, or newsletter helper logic are protected by unit tests.
-**Plans**: 4 plans
+**Plans**: 5 plans
 Plans:
 - [x] 03-01-PLAN.md — Add workflow result contracts and a lazy Supabase adapter seam.
 - [x] 03-02-PLAN.md — Extract article selection, summary, and venue helpers out of `other_utils.py`.
 - [x] 03-03-PLAN.md — Refactor email and S3 helpers around explicit success, partial, and failure outcomes.
 - [x] 03-04-PLAN.md — Rewire the Lambda newsletter workflow to named step results and partial-delivery continuation.
+- [ ] 03-05-PLAN.md — Normalize fetch/select failures into explicit `select`-step workflow results and regression tests.
 
 ### Phase 4: Public Journey Acceptance Coverage
 **Goal**: The most important public user journeys are protected by automated acceptance coverage.
@@ -90,5 +91,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Test Foundation | 4/4 | Complete | 2026-04-02 |
 | 2. Frontend Quality & Efficiency | 4/4 | Complete | 2026-04-05 |
-| 3. Backend Quality & Safety | 0/TBD | Not started | - |
+| 3. Backend Quality & Safety | 4/5 | In progress | - |
 | 4. Public Journey Acceptance Coverage | 0/TBD | Not started | - |
