@@ -20,6 +20,20 @@ export interface ArticleSummary {
   url: string;
 }
 
+export interface ArchiveQuery {
+  page: number;
+  query: string;
+}
+
+export interface PaginatedArchiveResult<T> {
+  items: T[];
+  page: number;
+  totalPages: number;
+  totalCount: number;
+  pageSize: number;
+  query: string;
+}
+
 export interface RecipientLookupRow {
   is_subscribed: boolean;
 }
