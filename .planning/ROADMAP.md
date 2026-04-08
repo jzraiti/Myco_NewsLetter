@@ -79,7 +79,11 @@ Plans:
   2. Team can run an automated acceptance test that verifies a visitor can unsubscribe from the public site.
   3. Team can run an automated acceptance test that verifies visitors can browse the newsletter archive.
   4. Team can run an automated acceptance test that verifies visitors can browse and search article summaries.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 04-01-PLAN.md — Prepare resettable Playwright public-journey fixtures and slim the umbrella smoke canary.
+- [ ] 04-02-PLAN.md — Add focused acceptance coverage for the subscribe and unsubscribe public journeys.
+- [ ] 04-03-PLAN.md — Add focused acceptance coverage for newsletter archive browsing and article browse/search.
 **UI hint**: yes
 
 ## Progress
@@ -92,4 +96,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Test Foundation | 4/4 | Complete | 2026-04-02 |
 | 2. Frontend Quality & Efficiency | 4/4 | Complete | 2026-04-05 |
 | 3. Backend Quality & Safety | 5/5 | Complete | 2026-04-08 |
-| 4. Public Journey Acceptance Coverage | 0/TBD | Not started | - |
+| 4. Public Journey Acceptance Coverage | 0/3 | Not started | - |
