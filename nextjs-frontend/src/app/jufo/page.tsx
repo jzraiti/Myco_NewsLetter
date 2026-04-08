@@ -1,106 +1,23 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
 import { Layout } from "@/components/Layout";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { JufoExplorer } from "@/components/jufo/JufoExplorer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { fetchJufoPage } from "@/lib/public-data/jufo";
 
-type Publication = {
-  Name: string;
-  Website: string;
-  Country: string;
-  Publisher: string;
-  Language: string;
-  Year_Start: number;
-  panels: string;
-  Level: string | number;
+type JufoPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default function JufoPage() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [publications, setPublications] = useState<Publication[]>([]);
-  const [loading, setLoading] = useState(true);
+function getSingleSearchParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+}
 
-  useEffect(() => {
-    async function loadPublications() {
-      try {
-        const response = await fetch("/jfp-export2025.csv");
-        const data = await response.text();
-        const rows = data.split("\n");
-
-        const parsedPublications: Publication[] = [];
-
-        // Skip header row
-        for (let i = 1; i < rows.length; i++) {
-          const row = rows[i].trim();
-          if (row === "") continue; // Skip empty rows
-
-          // Handle CSV parsing more robustly to account for quoted fields with commas
-          const parsedRow = parseCSVRow(row);
-
-          if (parsedRow.length >= 8) {
-            parsedPublications.push({
-              Name: parsedRow[0] || "",
-              panels: parsedRow[1] || "",
-              Level: parsedRow[2] || "",
-              Website: parsedRow[3] || "",
-              Country: parsedRow[4] || "",
-              Publisher: parsedRow[5] || "",
-              Language: parsedRow[6] || "",
-              Year_Start: Number(parsedRow[7]) || 0,
-            });
-          }
-        }
-
-        setPublications(parsedPublications);
-      } catch (error) {
-        console.error("Error loading publications:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadPublications();
-  }, []);
-
-  // Function to parse CSV properly, handling quoted fields with commas
-  function parseCSVRow(row: string): string[] {
-    const result = [];
-    let insideQuotes = false;
-    let currentField = "";
-
-    for (let i = 0; i < row.length; i++) {
-      const char = row[i];
-
-      if (char === '"') {
-        insideQuotes = !insideQuotes;
-      } else if (char === "," && !insideQuotes) {
-        result.push(currentField.trim());
-        currentField = "";
-      } else {
-        currentField += char;
-      }
-    }
-
-    // Don't forget to push the last field
-    result.push(currentField.trim());
-
-    return result;
-  }
-
-  const filteredPublications = publications.filter(
-    (pub) =>
-      pub.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      pub.Publisher.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+export default async function JufoPage(props: JufoPageProps) {
+  const resolvedSearchParams = await props.searchParams;
+  const query = getSingleSearchParam(resolvedSearchParams.q);
+  const rawPage = Number(getSingleSearchParam(resolvedSearchParams.page));
+  const page = Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1;
+  const pageResult = await fetchJufoPage({ query, page });
 
   return (
     <Layout>
@@ -108,7 +25,7 @@ export default function JufoPage() {
         <div
           className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url('/backgrounds/diana-parkhouse-5prKIX4JLO0-unsplash.jpg')`,
+            backgroundImage: "url('/backgrounds/diana-parkhouse-5prKIX4JLO0-unsplash.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -127,7 +44,7 @@ export default function JufoPage() {
             <Card className="bg-white/10 border-white/20 mb-8 mx-auto">
               <CardContent className="pt-6">
                 <p className="text-white/80 mb-4">
-                  Mycoweekly adheres to the JUFO ranking system. The team at 
+                  Mycoweekly adheres to the JUFO ranking system. The team at
                   mycoweekly has decided to move away from traditional indices
                   of importance such as impact factor or citation counts, due to concerns surrounding
                   the accuracy and reliability of these metrics and the proliferation of predatory journals.
@@ -166,74 +83,7 @@ export default function JufoPage() {
 
             <Separator className="mb-6 bg-white/20" />
 
-            <div className="flex justify-center mb-6">
-              <Input
-                placeholder="Search publications..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="max-w-sm bg-white/10 border-white/20 text-white placeholder:text-white/50"
-              />
-            </div>
-
-            <Card className="bg-white/10 border-white/20">
-              {loading ? (
-                <div className="p-8 text-center text-white/80">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="border-white/20">
-                        <TableHead className="text-white/80">Publication Name</TableHead>
-                        <TableHead className="text-white/80">Website</TableHead>
-                        <TableHead className="text-white/80">Country</TableHead>
-                        <TableHead className="text-white/80">Publisher</TableHead>
-                        <TableHead className="text-white/80">Language</TableHead>
-                        <TableHead className="text-white/80">Started</TableHead>
-                        <TableHead className="text-white/80">Panel</TableHead>
-                        <TableHead className="text-white/80 text-center">JUFO Level</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredPublications.length > 0 ? (
-                        filteredPublications.map((pub, index) => (
-                          <TableRow key={index} className="border-white/10">
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.Name}</TableCell>
-                            <TableCell className="whitespace-nowrap">
-                              {pub.Website && pub.Website !== "http://" ? (
-                                <a
-                                  href={pub.Website}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-blue-400 hover:text-blue-300 transition-colors"
-                                >
-                                  Link
-                                </a>
-                              ) : (
-                                ""
-                              )}
-                            </TableCell>
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.Country}</TableCell>
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.Publisher}</TableCell>
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.Language}</TableCell>
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.Year_Start}</TableCell>
-                            <TableCell className="text-white/80 whitespace-nowrap">{pub.panels}</TableCell>
-                            <TableCell className="text-white/80 text-center whitespace-nowrap">{pub.Level}</TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell colSpan={8} className="text-center py-8 text-white/80">
-                            No publications found matching your search.
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-              )}
-            </Card>
+            <JufoExplorer pageResult={pageResult} />
           </div>
         </div>
       </div>
