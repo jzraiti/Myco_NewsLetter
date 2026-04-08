@@ -22,7 +22,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Backend Quality & Safety** - Refactor backend utility and newsletter paths for clearer boundaries and safer failure handling. Completed 2026-04-08.
 - [x] **Phase 4: Public Journey Acceptance Coverage** - Protect the highest-value public user flows with automated acceptance tests. Completed 2026-04-08.
 - [ ] **Phase 5: JUFO Server-Backed Browsing** - Replace browser-heavy JUFO loading with a fast server-backed browsing flow.
-- [ ] **Phase 6: URL-Driven Archive Pagination** - Deliver stable, shareable pagination for article and newsletter archives.
+- [x] **Phase 6: URL-Driven Archive Pagination** - Deliver stable, shareable pagination for article and newsletter archives. Completed 2026-04-08.
 - [ ] **Phase 7: Public UI Clarity, Responsiveness & Accessibility** - Polish touched public pages while preserving the existing visual identity.
 
 ## Phase Details
@@ -117,7 +117,11 @@ Plans:
   3. Visitor can browse newsletters through numbered pages backed by paginated Supabase queries.
   4. Visitor can refresh or share a newsletter archive URL and keep clear current-page feedback.
   5. Visitor sees stable ordering and clear empty-state behavior while paging or searching archive results.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [x] 06-01-PLAN.md — Create the shared paginated archive data helpers, contracts, and deterministic multi-page fixtures.
+- [x] 06-02-PLAN.md — Rewire `/articles` to server-backed URL pagination with search-state persistence and acceptance coverage.
+- [x] 06-03-PLAN.md — Rewire `/newsletters` to server-backed numbered pagination with shareable page URLs and acceptance coverage.
 **UI hint**: yes
 
 ### Phase 7: Public UI Clarity, Responsiveness & Accessibility
@@ -144,5 +148,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Backend Quality & Safety | 5/5 | Complete | 2026-04-08 |
 | 4. Public Journey Acceptance Coverage | 3/3 | Complete | 2026-04-08 |
 | 5. JUFO Server-Backed Browsing | 0/TBD | Not started | - |
-| 6. URL-Driven Archive Pagination | 0/TBD | Not started | - |
+| 6. URL-Driven Archive Pagination | 3/3 | Complete | 2026-04-08 |
 | 7. Public UI Clarity, Responsiveness & Accessibility | 0/TBD | Not started | - |

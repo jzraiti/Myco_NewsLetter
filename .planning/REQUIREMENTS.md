@@ -14,15 +14,15 @@ Requirements for milestone v1.1. Each maps to roadmap phases 5-7.
 
 ### Articles Pagination
 
-- [ ] **ARTP-01**: Visitor can browse articles through numbered pages backed by paginated Supabase queries
-- [ ] **ARTP-02**: Visitor can share or refresh an article results URL without losing the current page and search state
-- [ ] **ARTP-03**: Visitor sees stable article ordering and clear empty-state behavior while paging or searching
+- [x] **ARTP-01**: Visitor can browse articles through numbered pages backed by paginated Supabase queries
+- [x] **ARTP-02**: Visitor can share or refresh an article results URL without losing the current page and search state
+- [x] **ARTP-03**: Visitor sees stable article ordering and clear empty-state behavior while paging or searching
 
 ### Newsletters Pagination
 
-- [ ] **NEWS-01**: Visitor can browse newsletters through numbered pages backed by paginated Supabase queries
-- [ ] **NEWS-02**: Visitor can navigate newsletter pages through shareable URL state with clear current-page feedback
-- [ ] **NEWS-03**: Visitor sees stable newsletter ordering and clear empty-state behavior while paging
+- [x] **NEWS-01**: Visitor can browse newsletters through numbered pages backed by paginated Supabase queries
+- [x] **NEWS-02**: Visitor can navigate newsletter pages through shareable URL state with clear current-page feedback
+- [x] **NEWS-03**: Visitor sees stable newsletter ordering and clear empty-state behavior while paging
 
 ### Public UI Polish
 
@@ -64,12 +64,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | JUFO-01 | Phase 5 | Complete |
 | JUFO-02 | Phase 5 | Complete |
-| ARTP-01 | Phase 6 | Pending |
-| ARTP-02 | Phase 6 | Pending |
-| ARTP-03 | Phase 6 | Pending |
-| NEWS-01 | Phase 6 | Pending |
-| NEWS-02 | Phase 6 | Pending |
-| NEWS-03 | Phase 6 | Pending |
+| ARTP-01 | Phase 6 | Complete |
+| ARTP-02 | Phase 6 | Complete |
+| ARTP-03 | Phase 6 | Complete |
+| NEWS-01 | Phase 6 | Complete |
+| NEWS-02 | Phase 6 | Complete |
+| NEWS-03 | Phase 6 | Complete |
 | UIP-01 | Phase 7 | Pending |
 | UIP-02 | Phase 7 | Pending |
 | UIP-03 | Phase 7 | Pending |
@@ -82,4 +82,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-04-08*
-*Last updated: 2026-04-08 after milestone v1.1 roadmap creation*
+*Last updated: 2026-04-08 after Phase 6 completion*

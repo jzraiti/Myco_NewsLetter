@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-stopped_at: Completed 05-02-PLAN.md
-last_updated: "2026-04-08T20:46:06.518Z"
+stopped_at: Completed 06-VERIFICATION.md
+last_updated: "2026-04-08T21:49:00.908Z"
 progress:
   total_phases: 7
-  completed_phases: 5
-  total_plans: 18
-  completed_plans: 18
+  completed_phases: 6
+  total_plans: 21
+  completed_plans: 21
 ---
 
 # Project State
@@ -19,11 +19,11 @@ progress:
 See: `.planning/PROJECT.md` (updated 2026-04-08)
 
 **Core value:** Readers can reliably discover and receive curated, high-quality mycology research with minimal friction.
-**Current focus:** Phase 05 — jufo-server-backed-browsing
+**Current focus:** Phase 07 — public-ui-clarity-responsiveness-and-accessibility
 
 ## Current Position
 
-Phase: 6
+Phase: 7
 Plan: Not started
 
 ## Performance Metrics
@@ -50,6 +50,7 @@ Plan: Not started
 
 | Phase 05 P01 | 4 min | 2 tasks | 10 files |
 | Phase 05 P02 | 4 min | 2 tasks | 5 files |
+| Phase 06 P01-03 | 8 | 6 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -61,6 +62,8 @@ Recent decisions affecting current work:
 - [Milestone v1.1]: Keep JUFO and archive pagination server-backed rather than fetch-all in the browser.
 - [Milestone v1.1]: Preserve the background-image identity during public UI polish.
 - [Roadmap]: Group milestone scope into JUFO performance, archive pagination, and shared UI polish phases.
+- [Phase 06]: Phase 6 standardized articles and newsletters on one 12-item paginated archive contract with canonical URL normalization.
+- [Phase 06]: Phase 6 uses server-route redirects for invalid archive page params so shared and refreshed URLs always resolve to canonical archive state.
 
 ### Pending Todos
 
@@ -72,6 +75,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08T20:40:29.310Z
-Stopped at: Completed 05-02-PLAN.md
+Last session: 2026-04-08T21:49:00.908Z
+Stopped at: Completed 06-VERIFICATION.md
 Resume file: None
