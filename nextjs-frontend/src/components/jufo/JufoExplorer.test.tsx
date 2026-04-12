@@ -67,7 +67,7 @@ describe("JufoExplorer", () => {
       />,
     );
 
-    expect(screen.getByText("No publications found matching your search.")).toBeInTheDocument();
+    expect(screen.getByText("No publications match this search.")).toBeInTheDocument();
   });
 
   it("preserves the query in paging links and resets page to 1 on search", async () => {
@@ -81,12 +81,21 @@ describe("JufoExplorer", () => {
       "/jufo?page=1&q=Fixture+Publication",
     );
 
-    const searchInput = screen.getByPlaceholderText("Search publications...");
+    const searchInput = screen.getByLabelText("Search publications");
     await userEvent.clear(searchInput);
     await userEvent.type(searchInput, "Fixture Publication 11");
 
     expect(replace).toHaveBeenLastCalledWith("/jufo?page=1&q=Fixture+Publication+11", {
       scroll: false,
     });
+  });
+
+  it("renders a mobile-friendly result presentation alongside the desktop table", () => {
+    render(<JufoExplorer pageResult={pageResult} />);
+
+    expect(screen.getAllByText("Publisher").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Country").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Language").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("JUFO Level").length).toBeGreaterThan(0);
   });
 });
