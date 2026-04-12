@@ -48,9 +48,6 @@ export default async function JufoPage(props: JufoPageProps) {
                     <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.34em] text-white/58">
                       Editorial context
                     </p>
-                    <p className="font-[family-name:var(--font-figtree)] text-base leading-7 text-white/84 sm:text-lg">
-                      Understand the JUFO ranking system, then browse the server-backed publication list with the same URL-driven controls introduced in Phase 5.
-                    </p>
                   </div>
 
                   <p className="text-white/80 mb-4 leading-7">

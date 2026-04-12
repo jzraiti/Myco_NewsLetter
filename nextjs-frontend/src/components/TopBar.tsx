@@ -33,9 +33,6 @@ export function TopBar() {
                 className="h-10 w-10 rounded-full border border-white/20 object-cover shadow-md"
               />
               <span className="flex flex-col leading-tight">
-                <span className="font-[family-name:var(--font-space)] text-sm uppercase tracking-[0.28em] text-white/65">
-                  Mycology Digest
-                </span>
                 <span className="font-[family-name:var(--font-figtree)] text-lg font-semibold text-white">
                   MycoWeekly
                 </span>

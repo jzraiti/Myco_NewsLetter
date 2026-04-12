@@ -80,9 +80,6 @@ export default async function Articles({ searchParams }: ArticlesPageProps) {
                 <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.34em] text-white/58">
                   Curated archive
                 </p>
-                <p className="font-[family-name:var(--font-figtree)] text-base leading-7 text-white/84 sm:text-lg">
-                  Search concise summaries from the archive without leaving the shareable, server-backed article URL flow introduced in Phase 6.
-                </p>
               </div>
             </section>
 

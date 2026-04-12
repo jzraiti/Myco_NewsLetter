@@ -45,7 +45,7 @@ export interface NewsletterRow {
 }
 
 export interface ArticleRow {
-  id: number | string;
+  paperId: string;
   title: string | null;
   venue: string | null;
   publicationDate: string;
