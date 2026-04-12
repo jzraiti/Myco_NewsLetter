@@ -22,6 +22,18 @@ function createDeferred<T>() {
 }
 
 describe("UnsubscribePanel", () => {
+  it("requires a confirmation step before unsubscribe runs", async () => {
+    render(<UnsubscribePanel />);
+
+    await userEvent.type(screen.getByLabelText("Email address"), "user@example.com");
+    await userEvent.click(screen.getByRole("button", { name: "Review unsubscribe" }));
+
+    expect(screen.getByText("Confirm unsubscribe for user@example.com?")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Keep subscription" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Confirm unsubscribe" })).toBeInTheDocument();
+    expect(unsubscribeRecipient).not.toHaveBeenCalled();
+  });
+
   it("preserves the not-found message", async () => {
     unsubscribeRecipient.mockResolvedValueOnce({
       status: "not-found",
@@ -30,8 +42,9 @@ describe("UnsubscribePanel", () => {
 
     render(<UnsubscribePanel />);
 
-    await userEvent.type(screen.getByPlaceholderText(/enter your email/i), "missing@example.com");
-    await userEvent.click(screen.getByRole("button", { name: /unsubscribe/i }));
+    await userEvent.type(screen.getByLabelText("Email address"), "missing@example.com");
+    await userEvent.click(screen.getByRole("button", { name: "Review unsubscribe" }));
+    await userEvent.click(screen.getByRole("button", { name: "Confirm unsubscribe" }));
 
     expect(await screen.findByText("Email not found")).toBeInTheDocument();
   });
@@ -42,13 +55,25 @@ describe("UnsubscribePanel", () => {
 
     render(<UnsubscribePanel />);
 
-    const input = screen.getByPlaceholderText(/enter your email/i);
+    const input = screen.getByLabelText("Email address");
     await userEvent.type(input, "user@example.com");
-    await userEvent.click(screen.getByRole("button", { name: /unsubscribe/i }));
+    await userEvent.click(screen.getByRole("button", { name: "Review unsubscribe" }));
+    await userEvent.click(screen.getByRole("button", { name: "Confirm unsubscribe" }));
 
     expect(screen.getByRole("button", { name: /unsubscribing/i })).toBeDisabled();
     deferred.resolve({ status: "unsubscribed", message: "Unsubscribed successfully!" });
     expect(await screen.findByText("Unsubscribed successfully!")).toBeInTheDocument();
     await waitFor(() => expect(input).toHaveValue(""));
+  });
+
+  it("returns to the editable state without a network call", async () => {
+    render(<UnsubscribePanel />);
+
+    await userEvent.type(screen.getByLabelText("Email address"), "user@example.com");
+    await userEvent.click(screen.getByRole("button", { name: "Review unsubscribe" }));
+    await userEvent.click(screen.getByRole("button", { name: "Keep subscription" }));
+
+    expect(screen.getByRole("button", { name: "Review unsubscribe" })).toBeInTheDocument();
+    expect(unsubscribeRecipient).not.toHaveBeenCalled();
   });
 });
