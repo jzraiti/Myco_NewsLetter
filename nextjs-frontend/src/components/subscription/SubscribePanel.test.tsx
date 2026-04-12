@@ -32,6 +32,20 @@ function createDeferred<T>() {
 }
 
 describe("SubscribePanel", () => {
+  it("uses the updated CTA copy and accessible email label", () => {
+    render(
+      <SubscribePanel
+        initialSubscriberCount={128}
+        backgroundImage="/backgrounds/example.jpg"
+        preloadImages={["/backgrounds/example.jpg"]}
+      />,
+    );
+
+    expect(screen.getByLabelText("Email address")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Subscribe Free" })).toBeInTheDocument();
+    expect(screen.getByText("Free weekly roundup. No spam. Unsubscribe anytime.")).toBeInTheDocument();
+  });
+
   it("preserves the already-subscribed message", async () => {
     subscribeRecipient.mockResolvedValueOnce({
       status: "already-subscribed",
@@ -46,8 +60,8 @@ describe("SubscribePanel", () => {
       />,
     );
 
-    await userEvent.type(screen.getByPlaceholderText(/enter your email/i), "user@example.com");
-    await userEvent.click(screen.getByRole("button", { name: /subscribe/i }));
+    await userEvent.type(screen.getByLabelText("Email address"), "user@example.com");
+    await userEvent.click(screen.getByRole("button", { name: /subscribe free/i }));
 
     expect(await screen.findByText("You are already subscribed!")).toBeInTheDocument();
   });
@@ -64,9 +78,9 @@ describe("SubscribePanel", () => {
       />,
     );
 
-    const input = screen.getByPlaceholderText(/enter your email/i);
+    const input = screen.getByLabelText("Email address");
     await userEvent.type(input, "fresh@example.com");
-    await userEvent.click(screen.getByRole("button", { name: /subscribe/i }));
+    await userEvent.click(screen.getByRole("button", { name: /subscribe free/i }));
 
     expect(screen.getByRole("button", { name: /subscribing/i })).toBeDisabled();
     deferred.resolve({ status: "subscribed", message: "Thanks for subscribing!" });
