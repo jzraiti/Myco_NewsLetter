@@ -24,16 +24,16 @@ type QueryBuilder<T> = {
   or: (filter: string) => QueryBuilder<T>;
 };
 
-type ContentClient = {
-  from: (table: "newsletters") => {
-    select: (columns?: string) => QueryResult<NewsletterRow>;
-    select: (columns: string, options: { count: "exact" }) => QueryBuilder<NewsletterRow>;
+interface ContentClient {
+  from(table: "newsletters"): {
+    select(columns?: string): QueryResult<NewsletterRow>;
+    select(columns: string, options: { count: "exact" }): QueryBuilder<NewsletterRow>;
   };
-  from: (table: "ss_articles") => {
-    select: (columns?: string) => QueryResult<ArticleRow>;
-    select: (columns: string, options: { count: "exact" }) => QueryBuilder<ArticleRow>;
+  from(table: "ss_articles"): {
+    select(columns?: string): QueryResult<ArticleRow>;
+    select(columns: string, options: { count: "exact" }): QueryBuilder<ArticleRow>;
   };
-};
+}
 
 export const ARCHIVE_PAGE_SIZE = 12;
 
@@ -175,7 +175,7 @@ export async function fetchPublishedNewsletters(
     return TEST_NEWSLETTERS;
   }
 
-  const resolvedClient = client ?? createPublicServerClient();
+  const resolvedClient = (client ?? createPublicServerClient()) as ContentClient;
   const { data, error } = await resolvedClient.from("newsletters").select("id, created_at, link");
 
   if (error || !data) {
@@ -192,7 +192,7 @@ export async function fetchPublishedArticles(
     return TEST_ARTICLES;
   }
 
-  const resolvedClient = client ?? createPublicServerClient();
+  const resolvedClient = (client ?? createPublicServerClient()) as ContentClient;
   const { data, error } = await resolvedClient
     .from("ss_articles")
     .select("id, title, venue, publicationDate, Level, panels, llm_summary, url");
@@ -218,7 +218,7 @@ export async function fetchPaginatedNewsletters(
     });
   }
 
-  const resolvedClient = client ?? createPublicServerClient();
+  const resolvedClient = (client ?? createPublicServerClient()) as ContentClient;
   const requestedPage = Math.max(1, Math.trunc(page) || 1);
   const createQuery = () =>
     resolvedClient
@@ -290,7 +290,7 @@ export async function fetchPaginatedArticles(
     });
   }
 
-  const resolvedClient = client ?? createPublicServerClient();
+  const resolvedClient = (client ?? createPublicServerClient()) as ContentClient;
   const requestedPage = Math.max(1, Math.trunc(page) || 1);
   const createQuery = () =>
     resolvedClient
