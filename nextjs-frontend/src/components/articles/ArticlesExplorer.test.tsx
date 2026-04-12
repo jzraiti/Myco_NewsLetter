@@ -75,6 +75,7 @@ describe("ArticlesExplorer", () => {
   it("renders only the current page slice with pagination feedback", () => {
     render(<ArticlesExplorer pageResult={pageResult} />);
 
+    expect(screen.getByText("Showing 13-15 of 15 articles")).toBeInTheDocument();
     expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
     expect(screen.getByText("Fungal biocrusts improve desert retention")).toBeInTheDocument();
     expect(screen.queryByText("Mycorrhiza strengthen drought resilience")).not.toBeInTheDocument();
@@ -109,8 +110,17 @@ describe("ArticlesExplorer", () => {
       />,
     );
 
-    expect(screen.getByText('No articles found for "Nope".')).toBeInTheDocument();
+    expect(screen.getByText("No articles match this search.")).toBeInTheDocument();
+    expect(
+      screen.getByText("Try a broader search or clear the current query to keep browsing the archive."),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Clear search" })).toHaveAttribute("href", "/articles");
+  });
+
+  it("keeps current-page semantics on numbered pagination links", () => {
+    render(<ArticlesExplorer pageResult={pageResult} />);
+
+    expect(screen.getByRole("link", { name: "2" })).toHaveAttribute("aria-current", "page");
   });
 
   it("keeps deterministic backgrounds and the Read More CTA", () => {
