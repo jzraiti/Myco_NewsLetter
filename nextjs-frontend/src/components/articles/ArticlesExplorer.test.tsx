@@ -75,7 +75,7 @@ describe("ArticlesExplorer", () => {
   it("renders only the current page slice with pagination feedback", () => {
     render(<ArticlesExplorer pageResult={pageResult} />);
 
-    expect(screen.getByText("Showing 13-15 of 15 articles")).toBeInTheDocument();
+    expect(screen.getAllByText("Showing 13-15 of 15 articles")).toHaveLength(2);
     expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
     expect(screen.getByText("Fungal biocrusts improve desert retention")).toBeInTheDocument();
     expect(screen.queryByText("Mycorrhiza strengthen drought resilience")).not.toBeInTheDocument();

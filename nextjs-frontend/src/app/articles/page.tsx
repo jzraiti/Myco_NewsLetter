@@ -62,10 +62,11 @@ export default async function Articles({ searchParams }: ArticlesPageProps) {
         </div>
       </div>
 
-      <div className="flex flex-col min-h-0 flex-1">
+      <div className="flex min-h-0 flex-1 flex-col">
         <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col p-6 max-w-5xl mx-auto">
-            <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg font-display">
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+            <section className="rounded-[2rem] border border-white/15 bg-slate-950/38 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8">
+              <h1 className="mb-6 flex items-center justify-center gap-4 text-center font-[family-name:var(--font-space)] text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl">
               <Image
                 src="/android-chrome-512x512.png"
                 alt="Mushroom Logo"
@@ -73,13 +74,19 @@ export default async function Articles({ searchParams }: ArticlesPageProps) {
                 height={48}
                 className="w-12 h-12 rounded-full shadow-lg"
               />
-              Research Articles
-            </h1>
-            <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
-              Explore our collection of curated mycology research articles. Each article is summarized and
-              analyzed to highlight key findings.
-            </p>
-            <Separator className="mb-6 bg-white/20" />
+                Research Articles
+              </h1>
+              <div className="mx-auto max-w-3xl space-y-3 text-center">
+                <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.34em] text-white/58">
+                  Curated archive
+                </p>
+                <p className="font-[family-name:var(--font-figtree)] text-base leading-7 text-white/84 sm:text-lg">
+                  Search concise summaries from the archive without leaving the shareable, server-backed article URL flow introduced in Phase 6.
+                </p>
+              </div>
+            </section>
+
+            <Separator className="bg-white/20" />
 
             <ArticlesExplorer pageResult={pageResult} />
           </div>

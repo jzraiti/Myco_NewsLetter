@@ -89,12 +89,32 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
 
   return (
     <>
-      <div className="mb-6 space-y-4">
+      <div className="mb-6 space-y-5 rounded-[1.75rem] border border-white/15 bg-slate-950/34 p-5 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-6">
+        <div className="space-y-3 text-white">
+          <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.3em] text-white/58">
+            Archive tools
+          </p>
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl space-y-2">
+              <h2 className="font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">
+                Search and browse the archive
+              </h2>
+              <p className="text-sm leading-6 text-white/76 sm:text-base">
+                Use search to refine article topics, then move between numbered pages without losing the current query.
+              </p>
+            </div>
+            <div className="rounded-full border border-white/12 bg-white/10 px-4 py-3 text-sm text-white/82 shadow-lg shadow-black/15">
+              Showing {start}-{end} of {pageResult.totalCount} articles
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-center">
           <Input
             type="search"
             placeholder="Search articles..."
-            className="max-w-xl mx-auto bg-white/10 border-white/20 text-white placeholder:text-white/50"
+            aria-label="Search articles"
+            className="mx-auto min-h-12 max-w-xl border-white/15 bg-white/92 text-slate-950 placeholder:text-slate-500"
             defaultValue={currentQuery}
             onChange={(event) => {
               const params = new URLSearchParams(searchParams.toString());
@@ -113,9 +133,11 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
           />
         </div>
 
-        <div className="flex flex-col gap-3 text-sm text-white/80 md:flex-row md:items-center md:justify-between">
-          <p>Showing {start}-{end} of {pageResult.totalCount} articles</p>
-          <span>Page {pageResult.page} of {pageResult.totalPages}</span>
+        <div className="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/8 px-4 py-4 text-sm text-white/82 md:flex-row md:items-center md:justify-between">
+          <p className="leading-6">Showing {start}-{end} of {pageResult.totalCount} articles</p>
+          <span className="inline-flex min-h-11 items-center rounded-full border border-[#8FAF6B]/35 bg-[#8FAF6B]/14 px-4 font-semibold text-white">
+            Page {pageResult.page} of {pageResult.totalPages}
+          </span>
         </div>
 
         {pageResult.totalPages > 1 ? (
@@ -123,7 +145,11 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
             <Link
               href={buildArticlesHref(pathname, new URLSearchParams(searchParams.toString()), previousPage, currentQuery)}
               aria-disabled={pageResult.page <= 1}
-              className={pageResult.page <= 1 ? "pointer-events-none opacity-40" : "hover:text-white"}
+              className={
+                pageResult.page <= 1
+                  ? "pointer-events-none inline-flex min-h-11 items-center rounded-full border border-white/10 px-4 opacity-40"
+                  : "inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/10 px-4 hover:border-white/20 hover:text-white"
+              }
             >
               Previous
             </Link>
@@ -139,7 +165,9 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
               href={buildArticlesHref(pathname, new URLSearchParams(searchParams.toString()), nextPage, currentQuery)}
               aria-disabled={pageResult.page >= pageResult.totalPages}
               className={
-                pageResult.page >= pageResult.totalPages ? "pointer-events-none opacity-40" : "hover:text-white"
+                pageResult.page >= pageResult.totalPages
+                  ? "pointer-events-none inline-flex min-h-11 items-center rounded-full border border-white/10 px-4 opacity-40"
+                  : "inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/10 px-4 hover:border-white/20 hover:text-white"
               }
             >
               Next
@@ -148,48 +176,55 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
         ) : null}
       </div>
 
-      <div className="space-y-6 mb-6">
+      <div className="mb-6 space-y-6">
         {pageResult.items.length === 0 ? (
-          <div className="space-y-3 text-center text-white/80">
-            <p>No articles found for "{pageResult.query}".</p>
-            <Link href="/articles" className="inline-flex text-white underline underline-offset-4 hover:text-white/80">
+          <div className="space-y-4 rounded-[1.75rem] border border-white/15 bg-slate-950/36 px-6 py-10 text-center text-white/82 shadow-xl shadow-black/20 backdrop-blur-xl">
+            <p className="font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">
+              No articles match this search.
+            </p>
+            <p className="mx-auto max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
+              Try a broader search or clear the current query to keep browsing the archive.
+            </p>
+            <Link href="/articles" className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/10 px-4 text-white hover:bg-white/16">
               Clear search
             </Link>
           </div>
         ) : (
           pageResult.items.map((article, index) => (
-            <Card key={article.id ?? index} className="relative overflow-hidden group min-h-[300px]">
+            <Card key={article.id ?? index} className="group relative min-h-[320px] overflow-hidden rounded-[1.75rem] border-white/12 shadow-xl shadow-black/25">
               <Image
                 src={pickDeterministicBackground(article.id ?? index, LANDSCAPE_BACKGROUND_IMAGES)}
                 alt="Article background"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/55 group-hover:bg-black/85 transition-colors duration-300" />
-              <div className="relative z-10 h-full p-6 flex flex-col justify-between">
+              <div className="absolute inset-0 bg-black/65 transition-colors duration-300 group-hover:bg-black/78" />
+              <div className="relative z-10 flex h-full flex-col justify-between p-6 sm:p-7">
                 <div>
-                  <h2 className="text-xl font-semibold text-white mb-3 font-display">{article.title}</h2>
-                  <p className="text-white/80 text-sm mb-4 font-body">
+                  <p className="mb-3 font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.26em] text-white/58">
                     {article.venue ? article.venue : "Journal Unknown"}
-                    {article.level ? ` • Level ${article.level}` : " • Not Graded"}{" "}
-                    ({article.panels ? article.panels + " panels" : ""})
+                  </p>
+                  <h2 className="mb-4 font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">{article.title}</h2>
+                  <p className="mb-4 text-sm text-white/82 font-body">
+                    {article.level ? `JUFO Level ${article.level}` : "JUFO level unavailable"}
+                    {article.panels ? ` • ${article.panels} panels` : ""}
                   </p>
                   <div
                     className={
                       article.summary
-                        ? "backdrop-blur-sm text-white/100 text-sm leading-relaxed bg-white/10 p-4 rounded-lg prose prose-invert prose-sm max-w-none font-body"
+                        ? "prose prose-invert prose-sm max-w-none rounded-2xl bg-white/10 p-4 text-sm leading-relaxed text-white/98 backdrop-blur-sm font-body"
                         : ""
                     }
                   >
                     <ReactMarkdown>{article.summary || ""}</ReactMarkdown>
                   </div>
                 </div>
-                <div className="flex justify-between items-center pt-6 border-t border-white/20 mt-6">
-                  <span className="text-md text-white/80 flex items-center gap-2">
+                <div className="mt-6 flex flex-col gap-4 border-t border-white/20 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-sm text-white/80">
                     Published {article.publicationDate}
                   </span>
                   <a href={article.url} target="_blank" rel="noopener noreferrer">
-                    <Button className="w-fit bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all duration-300">
+                    <Button className="min-h-11 w-fit rounded-full border border-white/20 bg-white/12 px-5 text-white transition-all duration-300 hover:bg-white/22">
                       Read More →
                     </Button>
                   </a>
