@@ -36,7 +36,7 @@ describe("public shell", () => {
     const skipLink = screen.getByRole("link", { name: "Skip to main content" });
 
     expect(skipLink).toHaveAttribute("href", "#main-content");
-    expect(container.firstElementChild).toBe(skipLink);
+    expect(container.firstElementChild?.firstElementChild).toBe(skipLink);
     expect(document.getElementById("main-content")).toBeInTheDocument();
   });
 

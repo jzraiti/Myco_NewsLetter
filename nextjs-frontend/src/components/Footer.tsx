@@ -3,13 +3,39 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-white/10 backdrop-blur-md bg-white/10 mt-auto">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 p-4 text-sm text-white/80">
-        <span className="drop-shadow-sm">© 2024 MycoWeekly. All rights reserved.</span>
-        <div className="flex items-center gap-6">
+    <footer className="mt-auto w-full border-t border-white/12 bg-slate-950/35 backdrop-blur-xl">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-white/78 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8">
+        <div className="space-y-3">
+          <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.3em] text-white/55">
+            MycoWeekly
+          </p>
+          <p className="max-w-md font-[family-name:var(--font-figtree)] text-base leading-7 text-white/88">
+            A calmer way to keep up with recent mycology research, archive reading, and publication context.
+          </p>
+          <span className="block text-sm text-white/60">© 2024 MycoWeekly. All rights reserved.</span>
+        </div>
+
+        <div className="space-y-3">
+          <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.3em] text-white/55">
+            App
+          </p>
+          <div className="flex flex-col items-start gap-2">
+            <Link href="/ourteam" className="inline-flex min-h-11 items-center rounded-full px-3 text-white/82 transition hover:text-white focus:outline-none focus:ring-4 focus:ring-ring/70">
+              Our Team
+            </Link>
+            <Link href="/unsubscribe" className="inline-flex min-h-11 items-center rounded-full px-3 text-white/82 transition hover:text-white focus:outline-none focus:ring-4 focus:ring-ring/70">
+              Unsubscribe
+            </Link>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.3em] text-white/55">
+            Support
+          </p>
           <Link
             href="https://github.com/jzraiti/Myco_NewsLetter"
-            className="hover:text-white transition-colors duration-200 inline-flex items-center gap-2 drop-shadow-sm"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full px-3 text-white/82 transition hover:text-white focus:outline-none focus:ring-4 focus:ring-ring/70"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -18,21 +44,9 @@ export function Footer() {
               alt="GitHub"
               width={16}
               height={16}
-              className="w-4 h-4 invert opacity-80 group-hover:opacity-100"
+              className="h-4 w-4 invert opacity-80"
             />
             <span>GitHub</span>
-          </Link>
-          <Link 
-            href="/ourteam" 
-            className="hover:text-white transition-colors duration-200 drop-shadow-sm"
-          >
-            Our Team
-          </Link>
-          <Link 
-            href="/unsubscribe" 
-            className="hover:text-white transition-colors duration-200 drop-shadow-sm"
-          >
-            Unsubscribe
           </Link>
         </div>
       </div>
