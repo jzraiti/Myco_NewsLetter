@@ -14,6 +14,17 @@ test("visitor can browse the newsletter archive with paginated URLs", async ({ p
   );
 });
 
+test("newsletter archive stays clear on a mobile viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/newsletters?page=2");
+
+  await expect(page.getByRole("heading", { name: /previous newsletters/i })).toBeVisible();
+  await expect(page.getByText("Page 2 of 2")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Previous" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /view newsletter/i }).first()).toBeVisible();
+});
+
 test("visitor gets a valid newsletter page when the URL page is out of range", async ({ page }) => {
   await page.goto("/newsletters?page=999");
 
