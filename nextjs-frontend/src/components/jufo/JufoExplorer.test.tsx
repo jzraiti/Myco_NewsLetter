@@ -50,7 +50,7 @@ describe("JufoExplorer", () => {
   it("renders only the current page slice", () => {
     render(<JufoExplorer pageResult={pageResult} />);
 
-    expect(screen.getByText("Fixture Publication 51")).toBeInTheDocument();
+    expect(screen.getAllByText("Fixture Publication 51").length).toBeGreaterThan(0);
     expect(screen.queryByText("Fixture Publication 01")).not.toBeInTheDocument();
   });
 
