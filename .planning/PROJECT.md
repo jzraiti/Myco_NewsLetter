@@ -48,10 +48,11 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 - ✓ Visitors can browse JUFO results through a fast server-backed flow instead of client-side CSV parsing — validated in Phase 5
 - ✓ Visitors can browse articles through numbered, URL-driven pages while search stays in sync with pagination — validated in Phase 6
 - ✓ Visitors can browse newsletters through numbered, URL-driven pages backed by Supabase queries — validated in Phase 6
+- ✓ Visitors get a more polished and readable public frontend across touched pages without losing the existing background-image identity — validated in Phase 7
 
 ### Active
 
-- [ ] Visitors get a more polished and readable public frontend across touched pages without losing the existing background-image identity
+- None currently.
 
 ### Out of Scope
 
@@ -89,11 +90,12 @@ Readers can reliably discover and receive curated, high-quality mycology researc
 | Treat the next milestone as `v1.1` | The new work extends the product with targeted frontend improvements rather than resetting scope or direction | Accepted |
 | Keep JUFO and pagination improvements server-backed | Client-side CSV parsing and fetch-all pagination are the main causes of poor performance and memory usage | Validated in Phase 5 |
 | Standardize archive pagination on canonical URL-driven server pages | Shareable archive state and invalid-page recovery are easier to verify when both archives normalize through the route layer | Validated in Phase 6 |
-| Preserve background images during UI polish | The user wants a stronger UI without losing the site's existing visual identity | Pending |
+| Preserve background images during UI polish | The user wants a stronger UI without losing the site's existing visual identity | Validated in Phase 7 |
+| Use route-aware shared navigation and skip-link semantics as the public shell baseline | Shared orientation and accessibility cues needed to land before page-specific polish | Validated in Phase 7 |
 
 ## Current State
 
-Milestone `v1.0` is complete. Milestone `v1.1` is in progress. The project now has a normalized server-backed JUFO data path, server-rendered `/jufo`, `/articles`, and `/newsletters` routes with canonical URL-driven browse/search pagination behavior, isolated frontend and backend test commands, explicit backend workflow seams, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, article browsing/search, and JUFO browsing.
+Milestone `v1.0` is complete. Milestone `v1.1` is complete. The project now has a normalized server-backed JUFO data path, server-rendered `/jufo`, `/articles`, and `/newsletters` routes with canonical URL-driven browse/search pagination behavior, a polished shared public shell with skip navigation and active-route cues, editorially framed subscribe/unsubscribe/archive/JUFO surfaces, mobile-friendly JUFO cards, and focused Playwright acceptance coverage for subscribe, unsubscribe, newsletter archive browsing, article browsing/search, and JUFO browsing.
 
 ## Evolution
 
@@ -113,4 +115,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 after Phase 6 completion*
+*Last updated: 2026-04-12 after Phase 7 completion*
