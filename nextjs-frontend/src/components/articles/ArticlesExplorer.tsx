@@ -179,15 +179,23 @@ export function ArticlesExplorer({ pageResult }: ArticlesExplorerProps) {
       <div className="mb-6 space-y-6">
         {pageResult.items.length === 0 ? (
           <div className="space-y-4 rounded-[1.75rem] border border-white/15 bg-slate-950/36 px-6 py-10 text-center text-white/82 shadow-xl shadow-black/20 backdrop-blur-xl">
-            <p className="font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">
-              No articles match this search.
-            </p>
-            <p className="mx-auto max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
-              Try a broader search or clear the current query to keep browsing the archive.
-            </p>
-            <Link href="/articles" className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/10 px-4 text-white hover:bg-white/16">
-              Clear search
-            </Link>
+            {currentQuery ? (
+              <>
+                <p className="font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">
+                  No articles match this search.
+                </p>
+                <p className="mx-auto max-w-2xl text-sm leading-7 text-white/72 sm:text-base">
+                  Try a broader search or clear the current query to keep browsing the archive.
+                </p>
+                <Link href="/articles" className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/10 px-4 text-white hover:bg-white/16">
+                  Clear search
+                </Link>
+              </>
+            ) : (
+              <p className="font-[family-name:var(--font-figtree)] text-2xl font-semibold text-white">
+                No articles available yet.
+              </p>
+            )}
           </div>
         ) : (
           pageResult.items.map((article, index) => (

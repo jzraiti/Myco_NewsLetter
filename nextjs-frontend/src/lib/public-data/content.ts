@@ -22,6 +22,7 @@ type QueryBuilder<T> = {
   order: (column: string, options?: { ascending?: boolean }) => QueryBuilder<T>;
   range: (from: number, to: number) => CountQueryResult<T>;
   or: (filter: string) => QueryBuilder<T>;
+  not: (column: string, operator: string, value: unknown) => QueryBuilder<T>;
 };
 
 interface ContentClient {
@@ -152,7 +153,7 @@ function mapNewsletter(row: NewsletterRow): NewsletterSummary {
 }
 
 function mapArticle(row: ArticleRow): ArticleSummary | null {
-  if (row.Level == null) {
+  if (row.Level == null || !row.llm_summary?.trim()) {
     return null;
   }
 
@@ -297,7 +298,8 @@ export async function fetchPaginatedArticles(
       .from("ss_articles")
       .select("paperId, title, venue, publicationDate, Level, panels, llm_summary, url", { count: "exact" })
       .order("publicationDate", { ascending: false })
-      .order("paperId", { ascending: false });
+      .order("paperId", { ascending: false })
+      .not("llm_summary", "is", null);
   let queryBuilder = createQuery();
 
   if (trimmedQuery) {

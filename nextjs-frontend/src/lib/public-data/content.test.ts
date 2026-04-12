@@ -111,6 +111,14 @@ function createArticlesQuery(rows: ArticleRecord[]) {
 
       return this;
     },
+    not(column: string, operator: string, value: unknown) {
+      if (operator === "is" && value === null) {
+        const col = column as keyof ArticleRecord;
+        state.rows = state.rows.filter((row) => row[col] != null && row[col] !== "");
+        state.count = state.rows.length;
+      }
+      return this;
+    },
     async range(from: number, to: number) {
       const orderedRows = applyOrdering(state.rows, state);
       return {
