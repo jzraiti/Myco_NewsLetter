@@ -157,7 +157,7 @@ function mapArticle(row: ArticleRow): ArticleSummary | null {
   }
 
   return {
-    id: row.id,
+    id: row.paperId,
     title: normalizeText(row.title),
     venue: normalizeText(row.venue) || null,
     publicationDate: row.publicationDate,
@@ -195,7 +195,7 @@ export async function fetchPublishedArticles(
   const resolvedClient = (client ?? createPublicServerClient()) as ContentClient;
   const { data, error } = await resolvedClient
     .from("ss_articles")
-    .select("id, title, venue, publicationDate, Level, panels, llm_summary, url");
+    .select("paperId, title, venue, publicationDate, Level, panels, llm_summary, url");
 
   if (error || !data) {
     return [];
@@ -295,9 +295,9 @@ export async function fetchPaginatedArticles(
   const createQuery = () =>
     resolvedClient
       .from("ss_articles")
-      .select("id, title, venue, publicationDate, Level, panels, llm_summary, url", { count: "exact" })
+      .select("paperId, title, venue, publicationDate, Level, panels, llm_summary, url", { count: "exact" })
       .order("publicationDate", { ascending: false })
-      .order("id", { ascending: false });
+      .order("paperId", { ascending: false });
   let queryBuilder = createQuery();
 
   if (trimmedQuery) {

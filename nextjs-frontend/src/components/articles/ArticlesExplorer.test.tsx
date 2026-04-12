@@ -19,7 +19,7 @@ vi.mock("next/navigation", () => ({
 }));
 
 const pageResult: PaginatedArchiveResult<{
-  id: number;
+  id: string;
   title: string;
   venue: string | null;
   publicationDate: string;
@@ -30,7 +30,7 @@ const pageResult: PaginatedArchiveResult<{
 }> = {
   items: [
     {
-      id: 13,
+      id: "13",
       title: "Fungal biocrusts improve desert retention",
       venue: "Arid Land Research",
       publicationDate: "2026-02-25",
@@ -40,7 +40,7 @@ const pageResult: PaginatedArchiveResult<{
       url: "https://example.com/article-13",
     },
     {
-      id: 14,
+      id: "14",
       title: "Mycorrhiza rebalance phosphorus allocation",
       venue: "Nature Ecology",
       publicationDate: "2026-02-24",
@@ -50,7 +50,7 @@ const pageResult: PaginatedArchiveResult<{
       url: "https://example.com/article-14",
     },
     {
-      id: 15,
+      id: "15",
       title: "Fixture Article 15",
       venue: "Fungal Ecology",
       publicationDate: "2026-02-23",

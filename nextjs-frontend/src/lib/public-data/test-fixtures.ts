@@ -82,7 +82,7 @@ export const TEST_NEWSLETTERS: NewsletterSummary[] = [
 
 export const TEST_ARTICLES: ArticleSummary[] = [
   {
-    id: 1,
+    id: "1",
     title: "Mycorrhiza strengthen drought resilience",
     venue: "Nature Ecology",
     publicationDate: "2026-03-12",
@@ -92,7 +92,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-1",
   },
   {
-    id: 2,
+    id: "2",
     title: "Fungal decomposition accelerates carbon cycling",
     venue: "Fungal Biology",
     publicationDate: "2026-03-08",
@@ -102,7 +102,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-2",
   },
   {
-    id: 3,
+    id: "3",
     title: "Fungal networks improve seedling survival",
     venue: "Mycological Progress",
     publicationDate: "2026-03-07",
@@ -112,7 +112,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-3",
   },
   {
-    id: 4,
+    id: "4",
     title: "Lichen partnerships stabilize alpine soils",
     venue: "Ecology Letters",
     publicationDate: "2026-03-06",
@@ -122,7 +122,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-4",
   },
   {
-    id: 5,
+    id: "5",
     title: "Soil fungi reshape nutrient exchange",
     venue: "Soil Systems",
     publicationDate: "2026-03-05",
@@ -132,7 +132,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-5",
   },
   {
-    id: 6,
+    id: "6",
     title: "Mushroom metabolites deter crop pathogens",
     venue: "Plant Pathology",
     publicationDate: "2026-03-04",
@@ -142,7 +142,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-6",
   },
   {
-    id: 7,
+    id: "7",
     title: "Endophytes improve wheat recovery after heat shock",
     venue: "Agronomy",
     publicationDate: "2026-03-03",
@@ -152,7 +152,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-7",
   },
   {
-    id: 8,
+    id: "8",
     title: "Marine fungi reveal new enzyme diversity",
     venue: "Applied Microbiology",
     publicationDate: "2026-03-02",
@@ -162,7 +162,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-8",
   },
   {
-    id: 9,
+    id: "9",
     title: "Compost fungi speed lignin turnover",
     venue: "Bioresource Technology",
     publicationDate: "2026-03-01",
@@ -172,7 +172,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-9",
   },
   {
-    id: 10,
+    id: "10",
     title: "Forest fungi coordinate nutrient hotspots",
     venue: "New Phytologist",
     publicationDate: "2026-02-28",
@@ -182,7 +182,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-10",
   },
   {
-    id: 11,
+    id: "11",
     title: "Fungal pigments improve UV resilience",
     venue: "Environmental Microbiology",
     publicationDate: "2026-02-27",
@@ -192,7 +192,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-11",
   },
   {
-    id: 12,
+    id: "12",
     title: "Root-associated fungi reduce salinity stress",
     venue: "Plant and Soil",
     publicationDate: "2026-02-26",
@@ -202,7 +202,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-12",
   },
   {
-    id: 13,
+    id: "13",
     title: "Fungal biocrusts improve desert retention",
     venue: "Arid Land Research",
     publicationDate: "2026-02-25",
@@ -212,7 +212,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-13",
   },
   {
-    id: 14,
+    id: "14",
     title: "Mycorrhiza rebalance phosphorus allocation",
     venue: "Nature Ecology",
     publicationDate: "2026-02-24",
@@ -222,7 +222,7 @@ export const TEST_ARTICLES: ArticleSummary[] = [
     url: "https://example.com/article-14",
   },
   {
-    id: 15,
+    id: "15",
     title: "Fixture Article 15",
     venue: "Fungal Ecology",
     publicationDate: "2026-02-23",

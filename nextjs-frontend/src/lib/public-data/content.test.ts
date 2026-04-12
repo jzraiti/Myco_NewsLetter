@@ -11,7 +11,7 @@ import {
 
 type NewsletterRecord = { id: number | string; created_at: string; link: string };
 type ArticleRecord = {
-  id: number | string;
+  paperId: string;
   title: string | null;
   venue: string | null;
   publicationDate: string;
@@ -28,7 +28,7 @@ type QueryState<T> = {
   searchTerm: string;
 };
 
-function applyOrdering<T extends { id: number | string }>(rows: T[], state: QueryState<T>) {
+function applyOrdering<T extends Record<string, unknown>>(rows: T[], state: QueryState<T>) {
   return [...rows].sort((left, right) => {
     for (const order of state.orders) {
       const leftValue = left[order.column as keyof T];
@@ -184,7 +184,7 @@ describe("content helpers", () => {
       ],
       articles: [
         {
-          id: 1,
+          paperId: "1",
           title: "Older article",
           venue: "Fungal Biology",
           publicationDate: "2026-03-01",
@@ -194,7 +194,7 @@ describe("content helpers", () => {
           url: "https://example.com/older",
         },
         {
-          id: 2,
+          paperId: "2",
           title: "Newer article",
           venue: "Nature Ecology",
           publicationDate: "2026-03-08",
@@ -210,14 +210,14 @@ describe("content helpers", () => {
     const articles = await fetchPublishedArticles(client as any);
 
     expect(newsletters.map((newsletter) => newsletter.id)).toEqual([2, 1]);
-    expect(articles.map((article) => article.id)).toEqual([2, 1]);
+    expect(articles.map((article) => article.id)).toEqual(["2", "1"]);
   });
 
   it("drops null Level rows and normalizes summary/venue strings without using any", async () => {
     const client = createContentClient({
       articles: [
         {
-          id: 1,
+          paperId: "1",
           title: "Keep me",
           venue: "  Nature Ecology  ",
           publicationDate: "2026-03-08",
@@ -227,7 +227,7 @@ describe("content helpers", () => {
           url: "https://example.com/keep",
         },
         {
-          id: 2,
+          paperId: "2",
           title: "Drop me",
           venue: null,
           publicationDate: "2026-03-01",
@@ -243,7 +243,7 @@ describe("content helpers", () => {
 
     expect(articles).toEqual([
       {
-        id: 1,
+        id: "1",
         title: "Keep me",
         venue: "Nature Ecology",
         publicationDate: "2026-03-08",
@@ -258,7 +258,7 @@ describe("content helpers", () => {
   it("matches title, summary, and venue case-insensitively", () => {
     const articles = [
       {
-        id: 1,
+        id: "1",
         title: "Mycorrhiza strengthen drought resilience",
         venue: "Nature Ecology",
         publicationDate: "2026-03-08",
@@ -268,7 +268,7 @@ describe("content helpers", () => {
         url: "https://example.com/1",
       },
       {
-        id: 2,
+        id: "2",
         title: "Forest decay study",
         venue: "Fungal Biology",
         publicationDate: "2026-03-01",
@@ -287,7 +287,7 @@ describe("content helpers", () => {
   it("returns the original ordered dataset when the query is blank", () => {
     const articles = [
       {
-        id: 1,
+        id: "1",
         title: "First",
         venue: null,
         publicationDate: "2026-03-08",
@@ -297,7 +297,7 @@ describe("content helpers", () => {
         url: "https://example.com/1",
       },
       {
-        id: 2,
+        id: "2",
         title: "Second",
         venue: null,
         publicationDate: "2026-03-01",
@@ -381,7 +381,7 @@ describe("content helpers", () => {
     const client = createContentClient({
       articles: [
         {
-          id: 11,
+          paperId: "11",
           title: "Fungal resilience trial",
           venue: "Nature Ecology",
           publicationDate: "2026-03-11",
@@ -397,13 +397,13 @@ describe("content helpers", () => {
 
     expect(client.selectCalls).toContainEqual({
       table: "ss_articles",
-      columns: "id, title, venue, publicationDate, Level, panels, llm_summary, url",
+      columns: "paperId, title, venue, publicationDate, Level, panels, llm_summary, url",
       count: "exact",
     });
     expect(client.articleQueries).toHaveLength(1);
     expect(client.articleQueries[0]?.state.orders).toEqual([
       { column: "publicationDate", ascending: false },
-      { column: "id", ascending: false },
+      { column: "paperId", ascending: false },
     ]);
     expect(client.articleQueries[0]?.state.searchTerm).toBe("fungal");
     expect(result.page).toBe(1);

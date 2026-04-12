@@ -10,7 +10,7 @@ export interface NewsletterSummary {
 }
 
 export interface ArticleSummary {
-  id: number | string;
+  id: string;
   title: string;
   venue: string | null;
   publicationDate: string;
