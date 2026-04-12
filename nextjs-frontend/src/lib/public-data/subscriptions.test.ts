@@ -42,7 +42,7 @@ describe("subscription helpers", () => {
   it("returns already-subscribed with the existing message", async () => {
     const client = createRecipientsClient({ existingUser: { is_subscribed: true } });
 
-    await expect(subscribeRecipient("user@example.com", client)).resolves.toEqual({
+    await expect(subscribeRecipient("user@example.com", client as any)).resolves.toEqual({
       status: "already-subscribed",
       message: "You are already subscribed!",
     });
@@ -51,7 +51,7 @@ describe("subscription helpers", () => {
   it("returns subscribed for new recipients", async () => {
     const client = createRecipientsClient({ existingUser: null });
 
-    await expect(subscribeRecipient("fresh@example.com", client)).resolves.toEqual({
+    await expect(subscribeRecipient("fresh@example.com", client as any)).resolves.toEqual({
       status: "subscribed",
       message: "Thanks for subscribing!",
     });
@@ -60,7 +60,7 @@ describe("subscription helpers", () => {
   it("returns unsubscribed for successful unsubscribe updates", async () => {
     const client = createRecipientsClient({ unsubscribeRows: [{ email: "user@example.com" }] });
 
-    await expect(unsubscribeRecipient("user@example.com", client)).resolves.toEqual({
+    await expect(unsubscribeRecipient("user@example.com", client as any)).resolves.toEqual({
       status: "unsubscribed",
       message: "Unsubscribed successfully!",
     });
@@ -69,7 +69,7 @@ describe("subscription helpers", () => {
   it("returns not-found when unsubscribe updates no rows", async () => {
     const client = createRecipientsClient({ unsubscribeRows: [] });
 
-    await expect(unsubscribeRecipient("missing@example.com", client)).resolves.toEqual({
+    await expect(unsubscribeRecipient("missing@example.com", client as any)).resolves.toEqual({
       status: "not-found",
       message: "Email not found",
     });

@@ -206,8 +206,8 @@ describe("content helpers", () => {
       ],
     });
 
-    const newsletters = await fetchPublishedNewsletters(client);
-    const articles = await fetchPublishedArticles(client);
+    const newsletters = await fetchPublishedNewsletters(client as any);
+    const articles = await fetchPublishedArticles(client as any);
 
     expect(newsletters.map((newsletter) => newsletter.id)).toEqual([2, 1]);
     expect(articles.map((article) => article.id)).toEqual([2, 1]);
@@ -239,7 +239,7 @@ describe("content helpers", () => {
       ],
     });
 
-    const articles = await fetchPublishedArticles(client);
+    const articles = await fetchPublishedArticles(client as any);
 
     expect(articles).toEqual([
       {
@@ -368,7 +368,7 @@ describe("content helpers", () => {
     }));
     const client = createContentClient({ newsletters });
 
-    const result = await fetchPaginatedNewsletters({ page: 999 }, client);
+    const result = await fetchPaginatedNewsletters({ page: 999 }, client as any);
 
     expect(result.page).toBe(2);
     expect(result.totalPages).toBe(2);
@@ -393,7 +393,7 @@ describe("content helpers", () => {
       ],
     });
 
-    const result = await fetchPaginatedArticles({ query: " fungal ", page: 1 }, client);
+    const result = await fetchPaginatedArticles({ query: " fungal ", page: 1 }, client as any);
 
     expect(client.selectCalls).toContainEqual({
       table: "ss_articles",
