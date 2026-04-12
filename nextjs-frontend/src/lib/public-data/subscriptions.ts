@@ -14,29 +14,28 @@ type UpdateSelectResult = Promise<{
   error: { message: string } | null;
 }>;
 
-type RecipientsTable = {
-  select: (columns?: string, config?: { count?: "exact"; head?: boolean }) =>
-    | CountSelectResult
-    | {
-        eq: (field: string, value: string) => {
-          single: () => SingleLookupResult;
-        };
-      };
-  insert: (rows: Array<{ email: string; is_subscribed: boolean }>) => MutationResult;
-  update: (values: { is_subscribed: boolean }) => {
+interface RecipientsTable {
+  select(columns: string, config: { count: "exact"; head: boolean }): CountSelectResult;
+  select(columns?: string): {
+    eq: (field: string, value: string) => {
+      single: () => SingleLookupResult;
+    };
+  };
+  insert(rows: Array<{ email: string; is_subscribed: boolean }>): MutationResult;
+  update(values: { is_subscribed: boolean }): {
     eq: (field: string, value: string) => MutationResult | { select: () => UpdateSelectResult };
   };
-};
+}
 
-type PublicSubscriptionsClient = {
-  from: (table: "recipients") => RecipientsTable;
-};
+interface PublicSubscriptionsClient {
+  from(table: "recipients"): RecipientsTable;
+}
 
 const GENERIC_ERROR_MESSAGE = "Something went wrong. Please try again later.";
 const USE_E2E_FIXTURES = process.env.NEXT_PUBLIC_E2E_STATIC_DATA === "true";
 
 export async function fetchSubscriberCount(
-  client: PublicSubscriptionsClient = createPublicServerClient(),
+  client: PublicSubscriptionsClient = createPublicServerClient() as unknown as PublicSubscriptionsClient,
 ): Promise<number> {
   if (USE_E2E_FIXTURES) {
     return TEST_SUBSCRIBER_COUNT;
@@ -52,7 +51,7 @@ export async function fetchSubscriberCount(
 
 export async function subscribeRecipient(
   email: string,
-  client: PublicSubscriptionsClient = createPublicBrowserClient(),
+  client: PublicSubscriptionsClient = createPublicBrowserClient() as unknown as PublicSubscriptionsClient,
 ): Promise<SubscriptionMutationResult> {
   try {
     const lookup = client.from("recipients").select("is_subscribed");
@@ -72,7 +71,7 @@ export async function subscribeRecipient(
       }
 
       const updateResult = client.from("recipients").update({ is_subscribed: true }).eq("email", email);
-      const { error: updateError } = "error" in updateResult ? await updateResult : await updateResult.select();
+      const { error: updateError } = "select" in updateResult ? await updateResult.select() : await updateResult;
       if (updateError) {
         throw new Error(updateError.message);
       }
@@ -96,7 +95,7 @@ export async function subscribeRecipient(
 
 export async function unsubscribeRecipient(
   email: string,
-  client: PublicSubscriptionsClient = createPublicBrowserClient(),
+  client: PublicSubscriptionsClient = createPublicBrowserClient() as unknown as PublicSubscriptionsClient,
 ): Promise<SubscriptionMutationResult> {
   try {
     const updateResult = client
@@ -110,7 +109,7 @@ export async function unsubscribeRecipient(
       throw new Error(response.error.message);
     }
 
-    if (!("data" in response) || !response.data || response.data.length === 0) {
+    if (!("data" in response) || !response.data || !Array.isArray(response.data) || response.data.length === 0) {
       return { status: "not-found", message: "Email not found" };
     }
 

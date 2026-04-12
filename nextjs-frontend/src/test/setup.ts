@@ -17,7 +17,7 @@ Object.defineProperty(window, "scrollTo", {
 
 vi.mock("next/image", () => ({
   default: ({ alt, src, fill: _fill, ...props }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean }) => {
-    const resolvedSrc = typeof src === "string" ? src : src?.toString() ?? "";
+    const resolvedSrc = typeof src === "string" ? src : "";
     return React.createElement("img", { alt: alt ?? "", src: resolvedSrc, ...props });
   },
 }));
