@@ -133,7 +133,13 @@ Plans:
   2. Visitor sees more polished cards, tables, forms, and interaction states without losing the existing background-image identity.
   3. Visitor can use the touched public pages effectively on mobile-sized screens.
   4. Visitor can use pagination, search, and page interactions with improved focus visibility, semantics, and accessibility cues.
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 07-01-PLAN.md — Establish shared public-shell styling, navigation cues, and accessibility foundations.
+- [ ] 07-02-PLAN.md — Polish the home subscribe and unsubscribe flows with stronger hierarchy and clearer destructive-state handling.
+- [ ] 07-03-PLAN.md — Refresh the articles archive framing, cards, and mobile/search accessibility without changing Phase 6 behavior.
+- [ ] 07-04-PLAN.md — Refresh the newsletters archive framing, cards, and responsive pagination clarity.
+- [ ] 07-05-PLAN.md — Reframe JUFO browse/search surfaces for readable tables, mobile usability, and accessible state feedback.
 **UI hint**: yes
 
 ## Progress
@@ -149,4 +155,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Public Journey Acceptance Coverage | 3/3 | Complete | 2026-04-08 |
 | 5. JUFO Server-Backed Browsing | 0/TBD | Not started | - |
 | 6. URL-Driven Archive Pagination | 3/3 | Complete | 2026-04-08 |
-| 7. Public UI Clarity, Responsiveness & Accessibility | 0/TBD | Not started | - |
+| 7. Public UI Clarity, Responsiveness & Accessibility | 0/5 | Not started | - |
