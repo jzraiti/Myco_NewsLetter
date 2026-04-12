@@ -135,11 +135,11 @@ Plans:
   4. Visitor can use pagination, search, and page interactions with improved focus visibility, semantics, and accessibility cues.
 **Plans**: 5 plans
 Plans:
-- [ ] 07-01-PLAN.md — Establish shared public-shell styling, navigation cues, and accessibility foundations.
-- [ ] 07-02-PLAN.md — Polish the home subscribe and unsubscribe flows with stronger hierarchy and clearer destructive-state handling.
-- [ ] 07-03-PLAN.md — Refresh the articles archive framing, cards, and mobile/search accessibility without changing Phase 6 behavior.
-- [ ] 07-04-PLAN.md — Refresh the newsletters archive framing, cards, and responsive pagination clarity.
-- [ ] 07-05-PLAN.md — Reframe JUFO browse/search surfaces for readable tables, mobile usability, and accessible state feedback.
+- [x] 07-01-PLAN.md — Establish shared public-shell styling, navigation cues, and accessibility foundations.
+- [x] 07-02-PLAN.md — Polish the home subscribe and unsubscribe flows with stronger hierarchy and clearer destructive-state handling.
+- [x] 07-03-PLAN.md — Refresh the articles archive framing, cards, and mobile/search accessibility without changing Phase 6 behavior.
+- [x] 07-04-PLAN.md — Refresh the newsletters archive framing, cards, and responsive pagination clarity.
+- [x] 07-05-PLAN.md — Reframe JUFO browse/search surfaces for readable tables, mobile usability, and accessible state feedback.
 **UI hint**: yes
 
 ## Progress

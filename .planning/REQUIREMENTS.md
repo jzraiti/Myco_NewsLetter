@@ -26,10 +26,10 @@ Requirements for milestone v1.1. Each maps to roadmap phases 5-7.
 
 ### Public UI Polish
 
-- [ ] **UIP-01**: Visitor gets clearer public-page hierarchy, spacing, and navigation flow across the touched frontend pages
-- [ ] **UIP-02**: Visitor sees more polished cards, tables, forms, and interaction states while the background-image identity remains intact
-- [ ] **UIP-03**: Visitor can use the touched public pages more effectively on mobile-sized screens
-- [ ] **UIP-04**: Visitor can use pagination, search, and page interactions with improved focus, semantics, and accessibility cues
+- [x] **UIP-01**: Visitor gets clearer public-page hierarchy, spacing, and navigation flow across the touched frontend pages
+- [x] **UIP-02**: Visitor sees more polished cards, tables, forms, and interaction states while the background-image identity remains intact
+- [x] **UIP-03**: Visitor can use the touched public pages more effectively on mobile-sized screens
+- [x] **UIP-04**: Visitor can use pagination, search, and page interactions with improved focus, semantics, and accessibility cues
 
 ## v2 Requirements
 
@@ -70,10 +70,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | NEWS-01 | Phase 6 | Complete |
 | NEWS-02 | Phase 6 | Complete |
 | NEWS-03 | Phase 6 | Complete |
-| UIP-01 | Phase 7 | Pending |
-| UIP-02 | Phase 7 | Pending |
-| UIP-03 | Phase 7 | Pending |
-| UIP-04 | Phase 7 | Pending |
+| UIP-01 | Phase 7 | Complete |
+| UIP-02 | Phase 7 | Complete |
+| UIP-03 | Phase 7 | Complete |
+| UIP-04 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 12 total
