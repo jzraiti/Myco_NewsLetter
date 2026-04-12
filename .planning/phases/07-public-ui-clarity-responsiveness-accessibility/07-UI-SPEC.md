@@ -75,15 +75,27 @@ Source: existing neutral token system from `globals.css` plus Phase 7 context de
 
 ---
 
+## Visual Hierarchy
+
+- Home: logo and display headline first, email capture second, trust/supporting feature cards third, subscriber-count proof last.
+- Articles and newsletters: page title and intro first, search or page summary second, results container third, pagination controls last.
+- JUFO: page title and explanatory framing first, search and result summary second, table container third, page navigation last.
+- Shared nav/footer: keep route orientation and supporting links visually quieter than page content; active route gets the strongest nav cue.
+- If any icon-only action is introduced in this phase, it must keep a 44px minimum hit area, an explicit `aria-label`, visible focus state, and either adjacent text or screen-reader-only text that names the action.
+
+Source: `07-CONTEXT.md` decisions D-04, D-05, D-07, D-10, D-11.
+
+---
+
 ## Copywriting Contract
 
 | Element | Copy |
 |---------|------|
 | Primary CTA | Subscribe Free |
-| Empty state heading | No results found |
+| Empty state heading | Articles: No articles match this search. Newsletters: No newsletters available yet. JUFO: No publications match this search. |
 | Empty state body | Try a broader search or clear the current query to keep browsing the archive. |
 | Error state | We couldn’t load this page right now. Refresh to try again, or return to the home page and retry in a moment. |
-| Destructive confirmation | Unsubscribe from newsletter: Confirm unsubscribe for {email}? Buttons: Cancel / Confirm unsubscribe |
+| Destructive confirmation | Unsubscribe from newsletter: Confirm unsubscribe for {email}? Buttons: Keep subscription / Confirm unsubscribe |
 
 Source: CTA and state copy defaulted for this phase from current public flows plus `REQUIREMENTS.md` UIP-01 through UIP-04 and `07-CONTEXT.md` decisions D-05, D-08, D-09, D-11.
 

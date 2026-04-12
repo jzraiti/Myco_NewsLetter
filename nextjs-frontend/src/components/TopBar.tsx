@@ -81,10 +81,6 @@ export function TopBar() {
             })}
           </div>
         </div>
-
-        <p className="max-w-3xl pl-1 font-[family-name:var(--font-figtree)] text-sm leading-6 text-white/72">
-          Clear weekly access to mycology research, previous newsletters, and publication rankings.
-        </p>
       </nav>
     </div>
   );

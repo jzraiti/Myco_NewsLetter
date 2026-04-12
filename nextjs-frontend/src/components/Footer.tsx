@@ -9,10 +9,7 @@ export function Footer() {
           <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.3em] text-white/55">
             MycoWeekly
           </p>
-          <p className="max-w-md font-[family-name:var(--font-figtree)] text-base leading-7 text-white/88">
-            A calmer way to keep up with recent mycology research, archive reading, and publication context.
-          </p>
-          <span className="block text-sm text-white/60">© 2024 MycoWeekly. All rights reserved.</span>
+          <span className="block text-sm text-white/60">© 2026 MycoWeekly. All rights reserved.</span>
         </div>
 
         <div className="space-y-3">
