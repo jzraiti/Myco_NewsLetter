@@ -39,7 +39,8 @@ describe("NewsletterArchive", () => {
     render(<NewsletterArchive pageResult={pageResult} />);
 
     expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
-    expect(screen.getByText("Showing 13-15 of 15 newsletters")).toBeInTheDocument();
+    expect(screen.getAllByText("Showing 13-15 of 15 newsletters")).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: /view newsletter/i })).toHaveLength(3);
     expect(screen.getAllByText(/Released/i)).toHaveLength(3);
   });
 
@@ -92,5 +93,21 @@ describe("NewsletterArchive", () => {
     );
 
     expect(screen.getByRole("link", { name: "Next" })).toHaveAttribute("aria-disabled", "true");
+  });
+
+  it("keeps the newsletter empty-state copy", () => {
+    render(
+      <NewsletterArchive
+        pageResult={{
+          ...pageResult,
+          items: [],
+          totalCount: 0,
+          totalPages: 1,
+          page: 1,
+        }}
+      />,
+    );
+
+    expect(screen.getByText("No newsletters available yet.")).toBeInTheDocument();
   });
 });

@@ -47,22 +47,28 @@ export default async function PreviousNewsletters({ searchParams }: NewslettersP
         </div>
       </div>
 
-      <div className="flex flex-col p-6 max-w-5xl mx-auto flex-1">
-        <h1 className="text-4xl font-bold text-center mt-10 mb-8 flex items-center justify-center gap-4 text-white drop-shadow-lg">
-          <Image
-            src="/android-chrome-512x512.png"
-            alt="Mushroom Logo"
-            width={48}
-            height={48}
-            className="w-12 h-12 rounded-full shadow-lg"
-          />
-          Previous Newsletters
-        </h1>
-        <p className="text-center text-white/90 mb-4 drop-shadow-sm font-body">
-          Browse through our archive of past newsletters. Each newsletter is sent out weekly and contains
-          a curated list of top research articles.
-        </p>
-        <Separator className="mb-6 bg-white/20" />
+      <div className="mx-auto flex max-w-6xl flex-1 flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+        <section className="rounded-[2rem] border border-white/15 bg-slate-950/38 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8">
+          <h1 className="mb-6 flex items-center justify-center gap-4 text-center font-[family-name:var(--font-space)] text-4xl font-semibold text-white drop-shadow-lg sm:text-5xl">
+            <Image
+              src="/android-chrome-512x512.png"
+              alt="Mushroom Logo"
+              width={48}
+              height={48}
+              className="w-12 h-12 rounded-full shadow-lg"
+            />
+            Previous Newsletters
+          </h1>
+          <div className="mx-auto max-w-3xl space-y-3 text-center">
+            <p className="font-[family-name:var(--font-space)] text-xs uppercase tracking-[0.34em] text-white/58">
+              Weekly archive
+            </p>
+            <p className="font-[family-name:var(--font-figtree)] text-base leading-7 text-white/84 sm:text-lg">
+              Review past issues through the same shareable server-backed page URLs, now framed as a calmer reading archive.
+            </p>
+          </div>
+        </section>
+        <Separator className="bg-white/20" />
         <NewsletterArchive pageResult={pageResult} />
       </div>
     </Layout>
