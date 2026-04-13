@@ -72,6 +72,8 @@ Resources:
             Name: MycoNewsletterWeekly
             Description: Weekly Myco newsletter generation
             Enabled: true
+            RetryPolicy:
+              MaximumRetryAttempts: 0
 
   MycoNewsletterLayer:
     Type: AWS::Serverless::LayerVersion

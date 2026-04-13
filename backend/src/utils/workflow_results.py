@@ -10,6 +10,14 @@ class WorkflowStepResult:
     error: str | None = None
     details: dict[str, Any] = field(default_factory=dict)
 
+    def to_dict(self) -> dict:
+        return {
+            "step": self.step,
+            "status": self.status,
+            "error": self.error,
+            "details": self.details,
+        }
+
 
 @dataclass
 class DeliveryRecipientResult:

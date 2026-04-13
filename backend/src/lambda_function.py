@@ -20,7 +20,11 @@ def test_summaries():
 
 def script(event, context):
     """Main script to run the newsletter generation and email sending process."""
-    return run_newsletter_workflow()
+    result = run_newsletter_workflow()
+    return {
+        "overall_status": result.get("overall_status"),
+        "steps": {k: v.to_dict() for k, v in result.get("steps", {}).items()},
+    }
 
 
 def test_email_template():
